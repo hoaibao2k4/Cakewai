@@ -1,51 +1,75 @@
 function Header() {
   return (
-    <header className="mx-auto max-w-screen-lg px-9 py-6 text-base">
-      <nav className="flex flex-row items-center justify-between">
-        <div className="basis-1/6 cursor-pointer text-xl font-semibold">
-          Coffee Style.
-        </div>
-        <ul className="flex basis-4/6 items-center justify-end gap-8 text-sm font-medium uppercase text-gray-500">
+    <header className="h-16 max-w-screen-xl bg-[#664545]">
+      <div className="mx-20 flex h-full items-center justify-between text-white">
+        <h2 className="font-semi text-2xl tracking-widest">Cakewai</h2>
+        <ul className="flex gap-16 text-base uppercase">
           <li className="menu-navbar">
             <a href="/">Home</a>
           </li>
           <li className="menu-navbar">
-            <a href="/products">Our Products</a>
+            <a href="/category">
+              <span>Categories</span>
+              <i>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-5 inline-block mx-1"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </i>
+            </a>
           </li>
           <li className="menu-navbar">
-            <a href="/blog">Blog</a>
+            <a href="/discount">Discount</a>
           </li>
           <li className="menu-navbar">
-            <a href="/about">About</a>
+            <a href="/generator">AI</a>
           </li>
           <li className="menu-navbar">
-            <a href="/contact">Contact</a>
-          </li>
-          <li className="menu-navbar">
-            <a href="/guide">StyleGuild</a>
+            <a href="/about">About us</a>
           </li>
         </ul>
-        <div className="basis-1/6 text-center text-sm font-medium uppercase text-gray-500">
-          <a href="#">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="h-6 w-6 inline-block"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-              />
-            </svg>
-            <span className=" mx-2">Cart</span>
-            <span className="bg-orange-700 rounded-full text-black">10</span>
-          </a>
+        <div className="flex gap-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+            />
+          </svg>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+            />
+          </svg>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

@@ -1,9 +1,9 @@
 import Home from "../pages/Home";
-import Contact from "../pages/Contact";
+import GenImage from "../pages/Image Generator";
 
 const publicRoute = [
   { path: "/", component: Home },
-  { path: "/contact", component: Contact },
+  { path: "/generator", component: GenImage },
 ];
 
 const privateRoute = [];
