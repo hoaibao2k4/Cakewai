@@ -7,9 +7,9 @@ function Header() {
           <li className="menu-navbar">
             <a href="/">Home</a>
           </li>
-          <li className="menu-navbar">
-            <a href="/category">
-              <span>Categories</span>
+          <li className="menu-navbar group">
+            <a href="/category" className="relative">
+              Categories
               <i>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@ function Header() {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-5 inline-block mx-1"
+                  class="icon mx-0.5 inline-block size-5"
                 >
                   <path
                     stroke-linecap="round"
@@ -27,6 +27,28 @@ function Header() {
                 </svg>
               </i>
             </a>
+            <ul className="absolute top-8 hidden w-max bg-[#78574CD1] text-sm normal-case group-hover:block">
+              <li className="px-2 py-2 hover:bg-[#664545]">
+                <a href="/" className="hover:text-white">
+                  Birthday Cake
+                </a>
+              </li>
+              <li className="px-2 py-2 hover:bg-[#664545]">
+                <a href="/" className="hover:text-white">
+                  Traditional Cake
+                </a>
+              </li>
+              <li className="px-2 py-2 hover:bg-[#664545]">
+                <a href="/" className="hover:text-white">
+                  Cookie & Mini cake
+                </a>
+              </li>
+              <li className="px-2 py-2 hover:bg-[#664545]">
+                <a href="/" className="hover:text-white">
+                  Bread & others
+                </a>
+              </li>
+            </ul>
           </li>
           <li className="menu-navbar">
             <a href="/discount">Discount</a>
