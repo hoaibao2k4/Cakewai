@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <header className="h-16 max-w-screen-xl bg-[#664545]">
+    <header className="fixed left-1/2 top-0 z-10 h-16 w-full max-w-screen-xl -translate-x-1/2 transform bg-primary">
       <div className="mx-20 flex h-full items-center justify-between text-white">
         <h2 className="font-semi text-2xl tracking-widest">Cakewai</h2>
         <ul className="flex gap-16 text-base uppercase">
@@ -27,24 +27,25 @@ function Header() {
                 </svg>
               </i>
             </a>
-            <ul className="absolute top-8 hidden w-max bg-[#78574CD1] text-sm normal-case group-hover:block">
-              <li className="px-2 py-2 hover:bg-[#664545]">
-                <a href="/" className="hover:text-white">
+            <div class="absolute left-0 top-full h-4 w-full cursor-default bg-transparent"></div>
+            <ul className="absolute left-0 top-11 z-10 hidden w-max rounded-lg bg-[#fefefdd1] text-sm normal-case group-hover:block">
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
                   Birthday Cake
                 </a>
               </li>
-              <li className="px-2 py-2 hover:bg-[#664545]">
-                <a href="/" className="hover:text-white">
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
                   Traditional Cake
                 </a>
               </li>
-              <li className="px-2 py-2 hover:bg-[#664545]">
-                <a href="/" className="hover:text-white">
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
                   Cookie & Mini cake
                 </a>
               </li>
-              <li className="px-2 py-2 hover:bg-[#664545]">
-                <a href="/" className="hover:text-white">
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
                   Bread & others
                 </a>
               </li>

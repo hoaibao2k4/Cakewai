@@ -1,15 +1,19 @@
 function Footer() {
   return (
-    <footer className="fixed flex h-[540px] w-full justify-evenly bg-[#664545] text-white">
-      <div className=" my-20">
-        <img src="./src/assets/images/baker.jpg" alt="Cake with AI" className=" rounded-lg"/>
+    <footer className="mx-auto flex h-[540px] w-full max-w-screen-xl justify-evenly bg-primary text-white">
+      <div className="my-20">
+        <img
+          src="./src/assets/images/baker.jpg"
+          alt="Cake with AI"
+          className="rounded-lg"
+        />
         <div className="mt-5">
           <h2>INFO TEXT</h2>
           <address>Address: UIT</address>
           <span>Tel: 0939666666</span>
         </div>
       </div>
-      <div className="my-32 ">
+      <div className="my-32">
         <h3 className="text-lg font-semibold">Thông tin cửa hàng</h3>
         <ul className="mt-4 space-y-2">
           <li>Menu con</li>
