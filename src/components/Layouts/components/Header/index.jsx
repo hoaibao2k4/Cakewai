@@ -1,15 +1,15 @@
 function Header() {
   return (
-    <header className="h-16 max-w-screen-xl bg-[#664545]">
+    <header className="fixed left-1/2 top-0 z-10 h-16 w-full max-w-screen-xl -translate-x-1/2 transform bg-primary">
       <div className="mx-20 flex h-full items-center justify-between text-white">
         <h2 className="font-semi text-2xl tracking-widest">Cakewai</h2>
         <ul className="flex gap-16 text-base uppercase">
           <li className="menu-navbar">
             <a href="/">Home</a>
           </li>
-          <li className="menu-navbar">
-            <a href="/category">
-              <span>Categories</span>
+          <li className="menu-navbar group">
+            <a href="/category" className="relative">
+              Categories
               <i>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@ function Header() {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-5 inline-block mx-1"
+                  class="icon mx-0.5 inline-block size-5"
                 >
                   <path
                     stroke-linecap="round"
@@ -27,6 +27,29 @@ function Header() {
                 </svg>
               </i>
             </a>
+            <div class="absolute left-0 top-full h-4 w-full cursor-default bg-transparent"></div>
+            <ul className="absolute left-0 top-11 z-10 hidden w-max rounded-lg bg-[#fefefdd1] text-sm normal-case group-hover:block">
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
+                  Birthday Cake
+                </a>
+              </li>
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
+                  Traditional Cake
+                </a>
+              </li>
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
+                  Cookie & Mini cake
+                </a>
+              </li>
+              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
+                <a href="/" className="">
+                  Bread & others
+                </a>
+              </li>
+            </ul>
           </li>
           <li className="menu-navbar">
             <a href="/discount">Discount</a>

@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.menu-navbar {
-  @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-slate-950 after:transition-all after:duration-300 after:ease-in-out hover:text-black hover:after:w-full;
+@layer components {
+  .menu-navbar {
+    @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-slate-200 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
+  }
+  .icon {
+    @apply transition-transform duration-300 ease-in-out; /* Thiết lập hiệu ứng chuyển đổi */
+  }
+
+  .menu-navbar:hover .icon {
+    @apply rotate-180; /* Xoay biểu tượng 180 độ khi hover */
+  }
 }
