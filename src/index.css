@@ -13,4 +13,7 @@
   .menu-navbar:hover .icon {
     @apply rotate-180; /* Xoay biểu tượng 180 độ khi hover */
   }
+  .img-scale {
+    @apply transform transition duration-500 hover:scale-105
+  }
 }
