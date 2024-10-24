@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 function Header() {
-  
   const navigator = useNavigate();
   const handleLogin = () => {
     navigator("/auth?mode=signin");
