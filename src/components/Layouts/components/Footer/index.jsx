@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="mx-auto flex h-[540px] w-full max-w-screen-xl justify-evenly bg-primary text-white">
+    <footer className="flex h-[540px] w-full max-w-screen-2xl justify-evenly bg-primary text-white">
       <div className="my-20">
         <img
           src="./src/assets/images/baker.jpg"

@@ -38,7 +38,7 @@ function Slider() {
     setSlider(index);
   };
   return (
-    <div className="slider relative w-full max-w-screen-xl">
+    <div className="slider relative container w-full max-w-screen-2xl">
       <div
         style={{ backgroundImage: `url(${sliders[slider]})` }}
         className="mt-16 flex h-full w-full items-center bg-cover bg-center pt-[50%] duration-500"
