@@ -7,7 +7,7 @@ function Header() {
   };
 
   return (
-    <header className="fixed left-1/2 top-0 z-10 h-16 w-full max-w-screen-xl -translate-x-1/2 transform bg-primary">
+    <header className="container fixed top-0 z-10 h-16 max-w-screen-2xl bg-primary">
       <div className="mx-20 flex h-full items-center justify-between text-white">
         <h2 className="font-semi text-2xl tracking-widest">Cakewai</h2>
         <ul className="flex gap-16 text-base uppercase">
@@ -92,7 +92,7 @@ function Header() {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="size-6 cursor-pointer"
+            class="size-6 cursor-pointer hover:shadow-lg"
             onClick={() => handleLogin()}
           >
             <path
