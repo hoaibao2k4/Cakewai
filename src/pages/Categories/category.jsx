@@ -1,5 +1,7 @@
+import Birthday from "~/components/Layouts/components/Categories/Birthday";
+
 function Category() {
-  return <h1>Category</h1>;
+  return <Birthday/>
 }
 
 export default Category;
