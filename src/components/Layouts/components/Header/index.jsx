@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigator = useNavigate();
   const handleLogin = () => {
-    navigator("/auth?mode=signin");
+    navigator('/auth?mode=signin');
   };
 
   return (
-    <header className="container fixed top-0 z-10 h-16 max-w-screen-2xl bg-primary">
+    <header className="fixed top-0 z-10 h-16 w-full bg-primary">
       <div className="mx-20 flex h-full items-center justify-between text-white">
         <h2 className="font-semi text-2xl tracking-widest">Cakewai</h2>
         <ul className="flex gap-16 text-base uppercase">
@@ -26,11 +26,7 @@ function Header() {
                   stroke="currentColor"
                   class="icon mx-0.5 inline-block size-5"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                  />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                 </svg>
               </i>
             </a>

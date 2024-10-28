@@ -1,10 +1,10 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 function DefaultLayout({ children }) {
   return (
-    <div className="wrapper">
+    <div className="wrapper w-screen">
       <Header />
-      <div className="container">{children}</div>
+      <div className="">{children}</div>
       <Footer />
     </div>
   );

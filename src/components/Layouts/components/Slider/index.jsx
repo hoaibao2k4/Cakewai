@@ -1,14 +1,14 @@
-import cake1 from "~/assets/images/Slidecake/cake1.jpg";
-import cake2 from "~/assets/images/Slidecake/cake2.jpg";
-import cake3 from "~/assets/images/Slidecake/cake3.jpg";
-import cake4 from "~/assets/images/Slidecake/cake4.jpg";
-import cake5 from "~/assets/images/Slidecake/cake5.jpg";
-import cake6 from "~/assets/images/Slidecake/cake6.jpg";
-import cake7 from "~/assets/images/Slidecake/cake7.png";
+import cake1 from '~/assets/images/Slidecake/cake1.jpg';
+import cake2 from '~/assets/images/Slidecake/cake2.jpg';
+import cake3 from '~/assets/images/Slidecake/cake3.jpg';
+import cake4 from '~/assets/images/Slidecake/cake4.jpg';
+import cake5 from '~/assets/images/Slidecake/cake5.jpg';
+import cake6 from '~/assets/images/Slidecake/cake6.jpg';
+import cake7 from '~/assets/images/Slidecake/cake7.png';
 
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { RxDotFilled } from "react-icons/rx";
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
+import { RxDotFilled } from 'react-icons/rx';
 
 function Slider() {
   const sliders = [cake1, cake2, cake3, cake4, cake5, cake6, cake7];
@@ -38,7 +38,7 @@ function Slider() {
     setSlider(index);
   };
   return (
-    <div className="slider relative container w-full max-w-screen-2xl">
+    <div className="slider relative w-full">
       <div
         style={{ backgroundImage: `url(${sliders[slider]})` }}
         className="mt-16 flex h-full w-full items-center bg-cover bg-center pt-[50%] duration-500"
@@ -48,8 +48,7 @@ function Slider() {
         through a piece of cake
       </h2>
       <p className="absolute bottom-[18rem] left-28 text-xl font-medium text-slate-100">
-        Reach out to us to place an order or ask about our many menu options.{" "}
-        <br />
+        Reach out to us to place an order or ask about our many menu options. <br />
         We'd love to help you create a memorable dessert experience
       </p>
       <button className="absolute bottom-48 left-28 h-12 w-40 rounded-lg bg-slate-200 text-xl font-medium text-primary">
