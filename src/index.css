@@ -4,7 +4,10 @@
 
 @layer components {
   .menu-navbar {
-    @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-slate-200 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
+    @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
+  }
+  .menu-active {
+      @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5  after:bg-primary after:w-full;
   }
   .icon {
     @apply transition-transform duration-300 ease-in-out; /* Thiết lập hiệu ứng chuyển đổi */
