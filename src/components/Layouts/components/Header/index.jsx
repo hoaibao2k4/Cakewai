@@ -1,22 +1,25 @@
-import { useNavigate } from 'react-router-dom';
-
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 function Header() {
   const navigator = useNavigate();
   const handleLogin = () => {
     navigator('/auth?mode=signin');
   };
-
+  const location = useLocation();
+  const urls = ['/category', '/birthday-cake', '/tradition-cake', '/cookie', '/bread'];
   return (
-    <header className="fixed top-0 z-10 h-16 w-full bg-primary">
-      <div className="mx-20 flex h-full items-center justify-between text-white">
-        <h2 className="font-semi text-2xl tracking-widest">Cakewai</h2>
+    <header className="fixed top-0 z-10 h-16 w-full bg-slate-100">
+      <div className="mx-20 flex h-full items-center justify-between text-primary">
+        <Link to="/">
+          <img src="./src/assets/images/logo.svg" alt="Cake with AI" className="mt-2" />
+        </Link>
         <ul className="flex gap-16 text-base uppercase">
-          <li className="menu-navbar">
-            <a href="/">Home</a>
+          <li className={location.pathname === '/' ? 'menu-active' : 'menu-navbar'}>
+            <NavLink to="/">Home</NavLink>
           </li>
-          <li className="menu-navbar group">
-            <a href="/category" className="relative">
-              Categories
+          <li className={urls.includes(location.pathname) ? 'menu-active group' : 'menu-navbar group'}>
+            <NavLink to="/category" className="relative">
+              <span>Categories</span>
               <i>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -29,39 +32,32 @@ function Header() {
                   <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                 </svg>
               </i>
-            </a>
+            </NavLink>
+
             <div class="absolute left-0 top-full h-4 w-full cursor-default bg-transparent"></div>
-            <ul className="absolute left-0 top-11 z-10 hidden w-max rounded-lg bg-[#fefefdd1] text-sm normal-case group-hover:block">
-              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
-                <a href="/" className="">
-                  Birthday Cake
-                </a>
+            <ul className="absolute left-0 top-10 z-10 hidden w-max rounded-lg bg-[#CAB6B6] text-sm normal-case group-hover:block">
+              <li className="px-2 py-2 text-[#444444] hover:rounded-t-lg hover:bg-primary hover:text-slate-100">
+                <NavLink to="/birthday-cake">Birthday Cake</NavLink>
               </li>
               <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
-                <a href="/" className="">
-                  Traditional Cake
-                </a>
+                <NavLink to="/tradition">Traditional Cake</NavLink>
               </li>
               <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
-                <a href="/" className="">
-                  Cookie & Mini cake
-                </a>
+                <NavLink to="/cookie">Cookie & Mini cake</NavLink>
               </li>
-              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
-                <a href="/" className="">
-                  Bread & others
-                </a>
+              <li className="px-2 py-2 text-[#444444] hover:rounded-b-lg hover:bg-primary hover:text-slate-100">
+                <NavLink to="/bread">Bread & others</NavLink>
               </li>
             </ul>
           </li>
-          <li className="menu-navbar">
-            <a href="/discount">Discount</a>
+          <li className={location.pathname === '/discount' ? 'menu-active' : 'menu-navbar'}>
+            <NavLink to="/discount">Discount</NavLink>
           </li>
-          <li className="menu-navbar">
-            <a href="/generator">AI</a>
+          <li className={location.pathname === '/generator' ? 'menu-active' : 'menu-navbar'}>
+            <NavLink to="/generator">AI</NavLink>
           </li>
-          <li className="menu-navbar">
-            <a href="/about">About us</a>
+          <li className={location.pathname === '/about' ? 'menu-active' : 'menu-navbar'}>
+            <NavLink to="/about">About us</NavLink>
           </li>
         </ul>
         <div className="flex gap-6">

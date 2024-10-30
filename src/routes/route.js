@@ -5,6 +5,7 @@ import Discount from "../pages/Discount";
 import Category from "../pages/Categories/category";
 import Auth from "~/pages/authentication/auth";
 import Policy from "~/pages/Policy";
+import DetailedCake from "~/components/Layouts/components/DetailedCake";
 const publicRoute = [
   { path: "/", component: Home },
   { path: "/generator", component: GenImage },
@@ -13,6 +14,7 @@ const publicRoute = [
   { path: "/category", component: Category},
   { path: "/auth", component: Auth},
   { path: "/policy", component: Policy},
+  { path: "/detailed", component: DetailedCake},
 ];
 
 const privateRoute = [];
