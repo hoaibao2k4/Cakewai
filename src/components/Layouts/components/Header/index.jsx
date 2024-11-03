@@ -15,11 +15,11 @@ function Header() {
         </Link>
         <ul className="flex gap-16 text-base uppercase">
           <li className={location.pathname === '/' ? 'menu-active' : 'menu-navbar'}>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/">TRANG CHỦ</NavLink>
           </li>
           <li className={urls.includes(location.pathname) ? 'menu-active group' : 'menu-navbar group'}>
             <NavLink to="/category" className="relative">
-              <span>Categories</span>
+              <span>MENU BÁNH</span>
               <i>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -50,14 +50,14 @@ function Header() {
               </li>
             </ul>
           </li>
-          <li className={location.pathname === '/discount' ? 'menu-active' : 'menu-navbar'}>
-            <NavLink to="/discount">Discount</NavLink>
+          <li className={location.pathname === '/news' ? 'menu-active' : 'menu-navbar'}>
+            <NavLink to="/news">TIN TỨC</NavLink>
           </li>
           <li className={location.pathname === '/generator' ? 'menu-active' : 'menu-navbar'}>
             <NavLink to="/generator">AI</NavLink>
           </li>
           <li className={location.pathname === '/about' ? 'menu-active' : 'menu-navbar'}>
-            <NavLink to="/about">About us</NavLink>
+            <NavLink to="/about">VỀ CHÚNG TÔI</NavLink>
           </li>
         </ul>
         <div className="flex gap-6">
