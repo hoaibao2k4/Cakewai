@@ -1,8 +1,10 @@
+
 function Footer() {
+ 
   return (
     <footer className="relative flex h-[416px] w-full justify-evenly bg-[#E8E1E1] text-black border-t-2 ">
       <div className="flex-col items-center py-10 flex ">
-        <img src="./src/assets/images/logo.svg" alt="Cake with AI" className="mt-12" />
+         <a href=""><img src="./src/assets/images/logo.svg" alt="Cake with AI" className="mt-12" /></a>
         <div className="mt-2">
           <h2 className="text-xl text-[#3D3D3D]">Luôn lắng nghe, luôn thấu hiểu</h2>
       
@@ -43,7 +45,7 @@ function Footer() {
      
       <div className="absolute inset-x-0 bottom-0 justify-center flex items-end border-t-2 py-4 mx-auto w-[60%] mt-1">
         <div className="inline-flex">
-       <div className="text-[#B4B9C9]"> Copyright © 2024 CAKEWAI | All Rights Reserved | </div> <div><a href="#" className="underline hover:text-[#9E6B6B] ml-1 text-[#353E5C]">Điều khoản và điều kiện</a></div> 
+       <div className="text-[#B4B9C9]"> Copyright © 2024  <a href="#">CAKEWAI</a> | All Rights Reserved | </div> <div><a href="#" className="underline hover:text-[#9E6B6B] ml-1 text-[#353E5C]">Điều khoản và điều kiện</a></div> 
        </div>      
       </div>
     </footer>
