@@ -7,7 +7,7 @@ import Newsfeed5 from "~/components/Layouts/components/Newsfeed/News5";
 import Newsfeed6 from "~/components/Layouts/components/Newsfeed/News6";
 function News() {
     return ( 
-        <Newsfeed6/>
+        <Newsfeed/>
 
     );
 }
