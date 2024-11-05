@@ -20,3 +20,9 @@
     @apply transform transition duration-500 hover:scale-105
   }
 }
+
+@layer utilities {
+  .grid-custom-seller {
+    grid-template-columns: repeat(3, minmax(0, max-content))
+  }
+}

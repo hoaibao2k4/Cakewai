@@ -41,7 +41,7 @@ function Slider() {
     <div className="slider relative w-full">
       <div
         style={{ backgroundImage: `url(${sliders[slider]})` }}
-        className="mt-16 flex h-full w-full items-center bg-cover bg-center pt-[50%] duration-500"
+        className="mt-16 flex w-full items-center bg-cover bg-center pt-[50%] duration-500"
       ></div>
       <h2 className="absolute bottom-[22rem] left-28 text-2xl font-bold text-slate-100">
         Bring you Happiness <br />
@@ -62,8 +62,8 @@ function Slider() {
       </div>
       <div className="absolute bottom-0 left-[45%] flex justify-center py-2">
         {sliders.map((slider, index) => (
-          <div className="cursor-pointer text-2xl">
-            <RxDotFilled key={index} onClick={() => goToSlide(index)} />
+          <div key={index} className="cursor-pointer text-2xl">
+            <RxDotFilled onClick={() => goToSlide(index)} />
           </div>
         ))}
       </div>
