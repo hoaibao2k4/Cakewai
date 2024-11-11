@@ -16,17 +16,18 @@ function Newsfeed() {
     return formattedDate;
   };
   return (
-    <div className="mx-28 my-28 items-center text-black text-primary">
+    <div className="mx-4 sm:mx-10 lg:mx-28 my-28 items-center  text-black text-primary">
       <div>
         <a href="/">Trang chủ </a>
         <span>&gt;&gt;</span>
         <a href="/news"> Tin tức </a>
       </div>
       <h1 className="font-inter mb-10 text-center text-4xl font-extrabold leading-none text-black">Tin tức</h1>
-      <div className="relative flex w-full flex-wrap justify-evenly gap-8">
-        <div className="img-scale w-[354px] overflow-hidden rounded-xl border-2">
+      
+      <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mx-10">
+        <div className="img-scale w-full max-w-[354px] overflow-hidden rounded-xl border-2">
           <Link to="/news?mode=news1">
-            <img src={newsfeed5} alt="" width="354px" />
+            <img src={newsfeed5} alt="" width='full'/>
           </Link>
           <div className="bg-white pb-4 pt-2">
             <div className="mx-3">
@@ -50,10 +51,10 @@ function Newsfeed() {
           </div>
         </div>
 
-        <div className="img-scale w-[354px] overflow-hidden rounded-xl border-2">
-          <a href="#">
-            <img src={newsfeed6} alt="" width="354px" />
-          </a>
+        <div className="img-scale w-full max-w-[354px] overflow-hidden rounded-xl border-2">
+          <Link  to="/news?mode=news2">
+            <img src={newsfeed6} alt="" width="auto" />
+          </Link>
           <div className="bg-white pb-4 pt-2">
             <div className="mx-3">
               <div className="font-inter mt-3 flex items-center text-sm text-[#6D758F]">
@@ -63,7 +64,9 @@ function Newsfeed() {
                 <img src="./src/assets/images/calendar.svg" alt="" className="mr-1 inline-flex" />
                 <p>{handleDate('2024-11-02')}</p>
               </div>
-              <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F]">Mẫu bánh kem mừng 20/11 ngày Nhà Giáo...</h2>
+              <Link to="/news?mode=news2">
+                <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F] hover:text-slate-900">Mẫu bánh kem mừng 20/11 ngày Nhà Giáo...</h2>
+              </Link>
               <h3 className="mb-3 mt-3 text-base text-[#6D758F]">
                 "Không thầy đố mày làm nên" <br />
                 Ngày 20/11 được xem là ngày lễ lớn trọng đại của con người Việt Nam nhằm tôn vinh vẻ đẹp trong sáng và
@@ -73,10 +76,10 @@ function Newsfeed() {
           </div>
         </div>
 
-        <div className="img-scale w-[354px] overflow-hidden rounded-xl border-2">
-          <a href="#">
-            <img src={newsfeed2} alt="" width="354px" />
-          </a>
+        <div className="img-scale w-full max-w-[354px] overflow-hidden rounded-xl border-2">
+          <Link to="/news?mode=news3">
+            <img src={newsfeed2} alt="" width="auto" />
+          </Link>
           <div className="bg-white pb-4 pt-2">
             <div className="mx-3">
               <div className="font-inter mt-3 flex items-center text-sm text-[#6D758F]">
@@ -86,9 +89,11 @@ function Newsfeed() {
                 <img src="./src/assets/images/calendar.svg" alt="" className="mr-1 inline-flex" />
                 <p>{handleDate('2024-10-01')}</p>
               </div>
-              <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F]">
-                Happy women day - 20/10 Dành tặng cho những đóa hoa hồn...
-              </h2>
+              <Link to="/news?mode=news3">
+                <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F] hover:text-slate-900">
+                  Happy women day - 20/10 Dành tặng cho những đóa hoa hồn...
+                </h2>
+              </Link>
               <h3 className="mb-3 mt-3 text-base text-[#6D758F]">
                 Happy women day - 20/10. Dành tặng cho những người phụ nữ tôi yêu----- Vẻ đẹp hút hồn của những quý cô
                 được so sánh như bông hoa hồng nở rộ...
@@ -97,10 +102,10 @@ function Newsfeed() {
           </div>
         </div>
 
-        <div className="img-scale w-[354px] overflow-hidden rounded-xl border-2">
-          <a href="#">
-            <img src={newsfeed4} alt="" width="354px" />
-          </a>
+        <div className="img-scale w-full max-w-[354px] overflow-hidden rounded-xl border-2">
+          <Link to="/news?mode=news4">
+            <img src={newsfeed4} alt="" width="auto" />
+          </Link>
           <div className="bg-white pb-4 pt-2">
             <div className="mx-3">
               <div className="font-inter mt-3 flex items-center text-sm text-[#6D758F]">
@@ -110,9 +115,11 @@ function Newsfeed() {
                 <img src="./src/assets/images/calendar.svg" alt="" className="mr-1 inline-flex" />
                 <p>{handleDate('2024-07-29')}</p>
               </div>
-              <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F]">
-                Tưng bừng đắm chìm vào không gian huyền ảo cùng...
-              </h2>
+              <Link to="/news?mode=news4">
+                <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F] hover:text-slate-900">
+                  Tưng bừng đắm chìm vào không gian huyền ảo cùng...
+                </h2>
+              </Link>
               <h3 className="mb-3 mt-3 text-base text-[#6D758F]">
                 Bánh Passion Mousse Cheesecake là sự kết hợp tuyệt vời giữa vị chua ngọt của chanh dây và vị béo ngậy
                 của...
@@ -121,10 +128,10 @@ function Newsfeed() {
           </div>
         </div>
 
-        <div className="img-scale w-[354px] overflow-hidden rounded-xl border-2">
-          <a href="#">
-            <img src={newsfeed3} alt="" width="354px" />
-          </a>
+        <div className="img-scale w-full max-w-[354px] overflow-hidden rounded-xl border-2">
+          <Link to="/news?mode=news5">
+            <img src={newsfeed3} alt="" width="auto" />
+          </Link>
           <div className="bg-white pb-4 pt-2">
             <div className="mx-3">
               <div className="font-inter mt-3 flex items-center text-sm text-[#6D758F]">
@@ -134,9 +141,11 @@ function Newsfeed() {
                 <img src="./src/assets/images/calendar.svg" alt="" className="mr-1 inline-flex" />
                 <p>{handleDate('2024-04-12')}</p>
               </div>
-              <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F]">
-                Bầu trời châu âu được ra mắt hoành tráng với...
-              </h2>
+              <Link to="/news?mode=news5">
+                <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F] hover:text-slate-900">
+                  Bầu trời châu âu được ra mắt hoành tráng với...
+                </h2>
+              </Link>
               <h3 className="mb-3 mt-3 text-base text-[#6D758F]">
                 Nhà Cakewai đã vô cùng tâm đắc và trau chuốt khi đã chính thức cho ra mắt bộ sưu tập mới đầy màu sắc và
                 mang tính biểu tượng đến...
@@ -145,10 +154,10 @@ function Newsfeed() {
           </div>
         </div>
 
-        <div className="img-scale w-[354px] overflow-hidden rounded-xl border-2">
-          <a href="#">
-            <img src={newsfeed1} alt="" width="354px" />
-          </a>
+        <div className="img-scale w-full max-w-[354px] overflow-hidden rounded-xl border-2">
+          <Link to="/news?mode=news6">
+            <img src={newsfeed1} alt="" width="auto" />
+          </Link>
           <div className="bg-white pb-4 pt-2">
             <div className="mx-3">
               <div className="font-inter mt-3 flex items-center text-sm text-[#6D758F]">
@@ -158,9 +167,11 @@ function Newsfeed() {
                 <img src="./src/assets/images/calendar.svg" alt="" className="mr-1 inline-flex" />
                 <p>{handleDate('2024-01-03')}</p>
               </div>
-              <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F]">
-                Cakewai - Đặt bánh teabreak cho sự kiện, hội thảo,...
-              </h2>
+              <Link to="/news?mode=news6">
+                <h2 className="mb-3 mt-3 text-xl font-bold text-[#6D758F] hover:text-slate-900">
+                  Cakewai - Đặt bánh teabreak cho sự kiện, hội thảo,...
+                </h2>
+              </Link>
               <h3 className="mb-3 mt-3 text-base text-[#6D758F]">
                 Cakewai cung cấp: Bánh sinh nhật, bánh minicake, bánh sự kiện, tiệc buffet bánh ngọt, tiệc bánh ngọt
                 khai trương, bánh coockies,... liên hệ hotline để được tư...

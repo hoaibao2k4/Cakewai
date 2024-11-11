@@ -1,6 +1,7 @@
 import about_1 from "~/assets/images/about_1.jpg";
 import about_2 from "~/assets/images/about_2.jpg";
 import about_3 from "~/assets/images/about_3.jpg";
+import { Link } from 'react-router-dom';
 function Info3(){
 
     return(
@@ -23,18 +24,18 @@ function Info3(){
                 </div>
 
                 <div className="flex flex-col space-y-5 ">
-                    <a href="#">
+                    
                         <div style={{ backgroundImage: `url(${about_2})` }}
                         className="h-64 w-80 bg-cover bg-center rounded-lg flex items-start justify-center img-scale ">
-                        <span className="text-white text-5xl font-bold mt-3">DỊCH VỤ</span>
+                        <Link  to="/about?mode=info2" className="text-white text-5xl font-bold mt-3 hover:text-yellow-500">DỊCH VỤ</Link>
                         </div>
-                    </a>
-                    <a href="#">
+                    
+                    
                         <div style={{ backgroundImage: `url(${about_1})` }}
                         className="h-64 w-80 bg-cover bg-center rounded-lg flex items-start justify-center img-scale">
-                            <span className="text-white text-5xl font-bold mt-3">CÂU CHUYỆN</span>    
+                            <Link to="/about?mode=info1" className="text-white text-5xl font-bold mt-3 hover:text-yellow-500">CÂU CHUYỆN</Link>    
                         </div>
-                    </a>
+                    
                 </div>
             </div>
         </div>
