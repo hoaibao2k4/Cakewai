@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 function Footer() {
   return (
-    <footer className="relative flex h-[416px] w-full justify-evenly border-t-2 bg-[#E8E1E1] text-black">
-      <div className="flex flex-col items-center py-10">
+    <footer className="relative grid grid-custom-4 lg:h-[416px] h-[660px] w-full justify-evenly border-t-2 bg-[#E8E1E1] text-black">
+      <div className="lg:col-span-1 col-span-4 items-center lg:py-10 py-4 lg:mx-0 mx-auto">
         <Link to="/">
-          <img src="./src/assets/images/logo.svg" alt="Cake with AI" className="mt-12" />
+          <img src="./src/assets/images/logo.svg" alt="Cake with AI" className="lg:mt-12 mt-4 mx-auto lg:mx-0" />
         </Link>
         <div className="mt-2">
           <h2 className="text-xl text-[#3D3D3D]">Luôn lắng nghe, luôn thấu hiểu</h2>
         </div>
       </div>
-      <div className="my-20">
+
+      <div className="lg:my-20 lg:col-span-1 col-span-2 lg:mx-0 mx-4">
         <h3 className="text-xl font-semibold text-[#664545]">Về chúng tôi</h3>
         <ul className="mt-4 space-y-4 text-base text-[#3D3D3D]">
           <li>
@@ -30,7 +31,7 @@ function Footer() {
           </li>
         </ul>
       </div>
-      <div className="my-20">
+      <div className="lg:my-20 lg:col-span-1 col-span-2 lg:mx-0 mx-4">
         <h3 className="text-xl font-semibold text-[#664545]">Chính sách</h3>
         <ul className="mt-4 space-y-4 text-base text-[#3D3D3D]">
           <li>
@@ -60,7 +61,7 @@ function Footer() {
           </li>
         </ul>
       </div>
-      <div className="my-20">
+      <div className="lg:my-20 lg:col-span-1 col-span-4 lg:mx-0 mx-4">
         <h3 className="text-xl font-semibold text-[#664545]">Liên hệ</h3>
         <ul className="mt-4 space-y-4 text-base text-[#3D3D3D]">
           <li>
@@ -92,15 +93,15 @@ function Footer() {
         </ul>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 mx-auto mt-1 flex w-[60%] items-end justify-center border-t-2 py-4">
-        <div className="inline-flex">
+      <div className="lg:col-span-1 col-span-4 lg:absolute inset-x-0 bottom-0 mx-auto mt-1 lg:flex lg:w-[60%] lg:items-end items-center justify-center border-t-2 py-4">
+        
           <div className="text-[#B4B9C9]"> Copyright © 2024 CAKEWAI | All Rights Reserved | </div>{' '}
-          <div>
+          <div className='text-center'>
             <Link to="#" className="ml-1 text-[#353E5C] underline hover:text-[#9E6B6B]">
               Điều khoản và điều kiện
             </Link>
           </div>
-        </div>
+       
       </div>
     </footer>
   );
