@@ -44,7 +44,7 @@ function AboutUs() {
           }}
         >
           <div className="mr-20 max-w-lg text-right">
-            <Link to="#" className="text-5xl font-bold text-white hover:text-yellow-500">
+            <Link to="/about?mode=info2" className="text-5xl font-bold text-white hover:text-yellow-500">
               Dịch vụ
             </Link>
             <div className="my-5 text-sm text-white">
@@ -66,7 +66,7 @@ function AboutUs() {
           }}
         >
           <div className="ml-20 max-w-lg text-left">
-            <Link to="#" className="text-5xl font-bold text-white hover:text-yellow-500">
+            <Link to="/about?mode=info3" className="text-5xl font-bold text-white hover:text-yellow-500">
               Lời cam kết
             </Link>
             <div className="my-5 text-sm text-white">

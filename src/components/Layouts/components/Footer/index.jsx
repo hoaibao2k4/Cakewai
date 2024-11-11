@@ -15,17 +15,17 @@ function Footer() {
         <h3 className="text-xl font-semibold text-[#664545]">Về chúng tôi</h3>
         <ul className="mt-4 space-y-4 text-base text-[#3D3D3D]">
           <li>
-            <Link to="#" className="hover:text-[#9E6B6B]">
+            <Link to="/about?mode=info1" className="hover:text-[#9E6B6B]">
               Câu chuyện
             </Link>
           </li>
           <li>
-            <Link to="#" className="hover:text-[#9E6B6B]">
+            <Link to="/about?mode=info3" className="hover:text-[#9E6B6B]">
               Lời cam kết
             </Link>
           </li>
           <li>
-            <Link to="#" className="hover:text-[#9E6B6B]">
+            <Link to="/about?mode=info2" className="hover:text-[#9E6B6B]">
               Dịch vụ
             </Link>
           </li>
@@ -96,8 +96,10 @@ function Footer() {
       <div className="lg:col-span-1 col-span-4 lg:absolute inset-x-0 bottom-0 mx-auto mt-1 lg:flex lg:w-[60%] lg:items-end items-center justify-center border-t-2 py-4">
         
           <div className="text-[#B4B9C9]"> Copyright © 2024 CAKEWAI | All Rights Reserved | </div>{' '}
+
           <div className='text-center'>
-            <Link to="#" className="ml-1 text-[#353E5C] underline hover:text-[#9E6B6B]">
+            <Link to="/condition?mode=condition" className="ml-1 text-[#353E5C] underline hover:text-[#9E6B6B]">
+
               Điều khoản và điều kiện
             </Link>
           </div>
