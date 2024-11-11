@@ -20,16 +20,16 @@ function Seller() {
   };
   return (
     <div className="best-seller">
-      <div className="mx-28 my-20 flex items-center text-primary">
-        <h1 className="basis-1/2 text-center text-5xl font-bold">Our Best Sellers...</h1>
-        <div className="h-28 border-l-2 border-primary pr-8"></div>
-        <p className="basis-1/2 text-xl font-medium">
+      <div className="lg:mx-28 mx-10 lg:my-20 my-10 flex flex-col lg:flex-row items-center text-primary">
+        <h1 className="lg:basis-1/2 text-center lg:text-5xl md:text-4xl text-3xl font-bold">Our Best Sellers...</h1>
+        <div className="h-1 w-28 border-b-2 border-primary lg:pr-8 lg:rotate-90 lg:my-0 my-1"></div>
+        <p className="lg:basis-1/2 lg:text-xl text-base font-medium">
           We proudly present our most beloved creations, universally adored by all. The delectable lightness and
           sweetness of our cakes will leave you craving for more. Explore our diverse range of cakes, breads, and other
           delectable offerings.
         </p>
       </div>
-      <div className="Our-product relative grid w-full grid-custom-seller justify-evenly">
+      <div className="Our-product relative grid w-full lg:grid-custom-3 md:grid-custom-2 grid-custom-1 justify-evenly lg:gap-0 gap-6">
         {sellers.map((seller, index) => (
           index < 3 && (
           <div key = {index} className="img-scale w-[300px]">
@@ -112,11 +112,11 @@ function Seller() {
           <BsChevronCompactRight size={30} onClick={() => nextSlide()} />
         </div>
       </div>
-      <div className="Introduce mx-24 my-10 flex">
-        <img src={tessaCake} alt="" width="500px" className="rounded-br-[5rem] rounded-tl-[5rem] shadow-2xl" />
-        <div className="ml-20 flex flex-col justify-center gap-4 text-primary">
-          <h2 className="text-4xl font-bold">Oven-fresh baked goods, baked just for you</h2>
-          <p className="ml-4 text-2xl font-normal">
+      <div className="Introduce lg:mx-24 mx-10 my-10 lg:flex">
+        <img src={tessaCake} alt="" width="100%" height='100%' className="rounded-br-[5rem] rounded-tl-[5rem] shadow-2xl lg:max-w-[500px] max-w-[300px] h-auto mx-auto" />
+        <div className="lg:ml-20 lg:flex lg:my-0 my-8 lg:flex-col justify-center gap-4 text-primary">
+          <h2 className="lg:text-4xl text-2xl font-bold">Oven-fresh baked goods, baked just for you</h2>
+          <p className="ml-4 lg:text-2xl text-lg font-normal">
             We bake delicious treats with the finest ingredients. From warm chocolate chip cookies to flaky croissants,
             every bite is filled with warmth and flavor. Come experience the magic of our bakery.
           </p>

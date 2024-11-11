@@ -19,10 +19,28 @@
   .img-scale {
     @apply transform transition duration-500 hover:scale-105
   }
+  .navbar-icon {
+    @apply size-6 cursor-pointer
+  }
 }
 
 @layer utilities {
-  .grid-custom-seller {
+  .grid-custom-3 {
     grid-template-columns: repeat(3, minmax(0, max-content))
+  }
+  .grid-custom-2 {
+    grid-template-columns: repeat(2, minmax(0, max-content))
+  }
+  .grid-custom-1 {
+    grid-template-columns: repeat(1, minmax(0, max-content))
+  }
+  .grid-custom-4 {
+    grid-template-columns: repeat(4, minmax(0, max-content))
+  }
+  .grid-custom-rows-2 {
+    grid-template-rows: repeat(2, minmax(0, max-content))
+  }
+  .grid-custom-rows-1 {
+    grid-template-rows: repeat(1, minmax(0, max-content))
   }
 }

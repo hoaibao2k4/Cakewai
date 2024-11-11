@@ -14,11 +14,11 @@ function Blog() {
 
   return (
     <div className="Hot-event pb-32 pt-4">
-      <h1 className="text-center text-5xl font-bold text-primary">Hot Event</h1>
-      <div className="Our-product relative flex w-full justify-center gap-4">
-        <div className="img-scale my-10 h-[430px] w-[354px]">
+      <h1 className="text-center lg:text-5xl text-3xl font-bold text-primary">Hot Event</h1>
+      <div className="Our-product relative grid lg:grid-custom-3 md:grid-custom-2 grid-custom-1 w-full justify-center lg:gap-4 gap-16">
+        <div className="img-scale my-10 max-h-[430px] max-w-[354px]   ">
           <a href="#">
-            <img src={tessaCake} alt="" className="rounded-t-xl" />
+            <img src={tessaCake} alt="" width='100%' height='100%' className="rounded-t-xl h-auto w-full" />
           </a>
           <div className="rounded-b-xl bg-slate-100">
             <div className="mx-6 py-5">
@@ -109,10 +109,10 @@ function Blog() {
             </div>
           </div>
         </div>
-        <div className="absolute left-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
+        <div className="hidden lg:block absolute left-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
           <BsChevronCompactLeft size={30} onClick={() => prevSlide()} />
         </div>
-        <div className="absolute right-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
+        <div className="hidden lg:block absolute right-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
           <BsChevronCompactRight size={30} onClick={() => nextSlide()} />
         </div>
       </div>
