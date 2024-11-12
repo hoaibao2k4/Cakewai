@@ -2,10 +2,10 @@
 function SecurityPolicy(){
 
     return(
-        <div className="mx-28 my-28 items-center text-primary text-black">
-            <h2 className="text-3xl font-bold  text-center">CHÍNH SÁCH BẢO MẬT</h2>
+        <div className="mx-4 sm:mx-10 lg:mx-28 my-28 items-center text-primary text-black">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold  text-center">CHÍNH SÁCH BẢO MẬT</h2>
             <hr className=" h-1 bg-black w-1/2 my-4 mx-auto" /> <br />
-            <ol className="text-lg list-decimal pl-10 text-left text-black ">
+            <ol className="text-lg list-decimal pl-8 sm:pl-10 text-left text-black ">
                 <li className="font-bold  my-4">Mục đích và phạm vi thu thập thông tin:</li>
                 - Các thông tin giao dịch như: lịch sử đơn hàng, giá trị giao dịch sẽ được Cakewai lưu trữ nhằm giải quyết những vấn đề phát sinh nếu có. <br />
                 - Mục đích chính của việc thu thập thông tin là nhằm nâng cao chất lượng dịch vụ, nâng cao tiện ích nhằm chăm sóc khách hàng một cách tốt nhất. <br />
