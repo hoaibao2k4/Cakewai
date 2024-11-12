@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { RxDotFilled } from 'react-icons/rx';
 
 function Slider() {
-  const sliders = [cake1, cake2, cake3, cake4, cake5, cake6, cake7];
+  const sliders = [ cake1, cake2, cake3, cake4, cake5, cake6, cake7];
 
   const [slider, setSlider] = useState(0);
 
@@ -38,32 +38,32 @@ function Slider() {
     setSlider(index);
   };
   return (
-    <div className="slider relative w-full">
+    <div className="slider relative w-full mt-16">
       <div
         style={{ backgroundImage: `url(${sliders[slider]})` }}
-        className="mt-16 flex h-full w-full items-center bg-cover bg-center pt-[50%] duration-500"
+        className=" flex w-full items-center bg-cover bg-center pt-[40%] duration-500"
       ></div>
-      <h2 className="absolute bottom-[22rem] left-28 text-2xl font-bold text-slate-100">
+      <h2 className="absolute bottom-[50%] left-[10%] lg:text-2xl font-bold text-slate-100 md:text-lg text-base">
         Bring you Happiness <br />
         through a piece of cake
       </h2>
-      <p className="absolute bottom-[18rem] left-28 text-xl font-medium text-slate-100">
+      <p className="absolute bottom-[35%] left-[10%] lg:text-xl md:text-lg text-xs  font-medium text-slate-100">
         Reach out to us to place an order or ask about our many menu options. <br />
         We'd love to help you create a memorable dessert experience
       </p>
-      <button className="absolute bottom-48 left-28 h-12 w-40 rounded-lg bg-slate-200 text-xl font-medium text-primary">
+      <button className="absolute bottom-[20%] left-[10%] h-[10%] w-[12%] lg:rounded-lg rounded-md bg-slate-200 lg:text-xl md:text-lg text-[10px] font-medium text-primary">
         Discover
       </button>
-      <div className="absolute left-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
+      <div className="absolute left-[1%] top-[40%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
         <BsChevronCompactLeft size={30} onClick={() => prevSlide()} />
       </div>
-      <div className="absolute right-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
+      <div className="absolute right-[1%] top-[40%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
         <BsChevronCompactRight size={30} onClick={() => nextSlide()} />
       </div>
       <div className="absolute bottom-0 left-[45%] flex justify-center py-2">
         {sliders.map((slider, index) => (
-          <div className="cursor-pointer text-2xl">
-            <RxDotFilled key={index} onClick={() => goToSlide(index)} />
+          <div key={index} className="cursor-pointer text-2xl">
+            <RxDotFilled onClick={() => goToSlide(index)} />
           </div>
         ))}
       </div>
