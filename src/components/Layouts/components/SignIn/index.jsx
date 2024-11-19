@@ -3,41 +3,41 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function SignInForm() {
   const [hidden, setHidden] = useState(true);
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [email, setEmail] = useState('');
+  // const [emailError, setEmailError] = useState('');
+  // const [isSubmitted, setIsSubmitted] = useState(false);
 
 
   const hiddenPassword = () => {
     setHidden((prev) => !prev);
   };
 
-  const validateEmail = (value) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!value) {
-      return 'Email không được để trống';
-    } else if (!emailRegex.test(value)) {
-      return 'Hãy nhập Email';
-    }
-    return ''; 
-  };
+  // const validateEmail = (value) => {
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   if (!value) {
+  //     return 'Email không được để trống';
+  //   } else if (!emailRegex.test(value)) {
+  //     return 'Hãy nhập Email';
+  //   }
+  //   return ''; 
+  // };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setIsSubmitted(true);
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitted(true);
     
-    let isValid = true;
+  //   let isValid = true;
 
-    const emailValidationError = validateEmail(email);
-    setEmailError(emailValidationError);
-    if (emailValidationError) {
-      isValid = false;
-    }
+  //   const emailValidationError = validateEmail(email);
+  //   setEmailError(emailValidationError);
+  //   if (emailValidationError) {
+  //     isValid = false;
+  //   }
 
-    if (isValid) {
-      alert('Đăng nhập thành công');
-    }
-  };
+  //   if (isValid) {
+  //     alert('Đăng nhập thành công');
+  //   }
+  // };
  
   return (
     <div className="absolute right-20 top-[10%] h-[80%] w-4/12 rounded-3xl bg-gray-100">
@@ -50,31 +50,33 @@ function SignInForm() {
               type="text"
               name="email"
               id="email"
-              className={`peer block w-[20rem] appearance-none rounded-lg border ${
-                emailError ? 'border-red-500' : 'border-gray-300'
-              } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0`}              
+              className='peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500'
+              // className={`peer block w-[20rem] appearance-none rounded-lg border ${
+              //   emailError ? 'border-red-500' : 'border-gray-300'
+              // } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0`}              
               placeholder=" "
               tabIndex={1}
-              value={email}
-              onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (emailError) setEmailError(''); 
-                }
-              }            
+              // value={email}
+              // onChange={(e) => {
+              //     setEmail(e.target.value);
+              //     if (emailError) setEmailError(''); 
+              //   }
+              // }            
             />
             <label
               htmlFor="email"
-              className={`absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm ${
-                emailError ? 'text-red-500' : 'text-gray-500'
-              } duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
+              className='absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500'
+              // className={`absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm ${
+              //   emailError ? 'text-red-500' : 'text-gray-500'
+              // } duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
              >
               Email
             </label>
-            {emailError && (
+            {/* {emailError && (
               <p className="absolute -top-5 left-0 text-xs text-red-500 mb-1">
                 * {emailError}
               </p>
-            )}
+            )} */}
           </div>
           <div className="relative my-3">
             <input
