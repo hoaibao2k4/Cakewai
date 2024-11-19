@@ -7,6 +7,7 @@ import Auth from "~/pages/authentication/auth";
 import Policy from "~/pages/Policy";
 import DetailedCake from "~/components/Layouts/components/DetailedCake";
 import Condition from "~/pages/Condition";
+import Cart from "~/components/Layouts/components/Cart";
 const publicRoute = [
   { path: "/", component: Home },
   { path: "/generator", component: GenImage },
@@ -17,6 +18,7 @@ const publicRoute = [
   { path: "/policy", component: Policy},
   { path: "/detailed", component: DetailedCake},
   { path: "/condition", component: Condition},
+  { path: "/cart", component: Cart },
 ];
 
 const privateRoute = [];

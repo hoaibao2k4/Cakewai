@@ -3,11 +3,11 @@ function GeneralPolicy(){
 
     return(
         <div className="mx-28 my-28 items-center text-primary text-black" >
-            <h2 className="text-3xl font-bold  text-center">CHÍNH SÁCH VÀ QUY ĐỊNH CHUNG</h2>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold  text-center">CHÍNH SÁCH VÀ QUY ĐỊNH CHUNG</h2>
             <hr className=" h-1 bg-black w-1/2 my-4 mx-auto"/> <br />
-            <ol className="text-lg list-decimal pl-8 text-left text-black ">
+            <ol className="text-lg list-decimal pl-6 sm:pl-8 text-left text-black ">
                 <li><h3 className="text-lg font-bold">Tiêu chuẩn dịch vụ</h3>
-                    <ul className="list-non pl6 my-4">
+                    <ul className="list-non pl-4 sm:pl-6 my-4">
                         <li className="my-2">- Cakewai là thương hiệu bánh ngọt kết hợp giữa văn hóa Á Âu đầy màu sắc của công ty cổ phần bánh ngọt Cakewai. </li>
                         <li className="my-2">- Sản phẩm và mẫu mã đa dạng của nhà Cakewai được làm từ nguồn nguyên liệu cao cấp, chất lượng hàng đầu nhập khẩu từ các đối tác có truyền thống làm bánh như: Pháp, Bỉ, Đức, Nga.</li>
                         <li className="my-2">- Quy mô và quy trình sản xuất rộng hơn 1000m² cùng với các trang thiết bị hiện đại tiên tiến theo tiêu chuẩn ISO 2018 cùng đội ngũ nhân viên có kinh nghiệm trong lĩnh vực làm bánh.</li>                   
