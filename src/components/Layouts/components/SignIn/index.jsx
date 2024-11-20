@@ -6,6 +6,10 @@ import { loginUser } from '~/redux/apiRequest';
 import { BE_BASE_URL } from '~/services/axios';
 function SignInForm() {
   const [hidden, setHidden] = useState(true);
+  // const [email, setEmail] = useState('');
+  // const [emailError, setEmailError] = useState('');
+  // const [isSubmitted, setIsSubmitted] = useState(false);
+ 
 
   const hiddenPassword = () => {
     setHidden((prev) => !prev);
@@ -33,15 +37,24 @@ function SignInForm() {
         <h2 className="my-4 text-center text-3xl font-semibold">Login</h2>
         <p className="my-2 mb-4 text-center text-sm font-normal">Login below to access your account </p>
         <form action="" onSubmit={handleSubmit} className="flex flex-col items-center">
-          <div className="relative my-2">
+          <div className="relative my-3">
             <input
-              type="Email"
+              type="text"
               name="email"
               id="email"
-              className="peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500"
+              className='peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500'
+              // className={`peer block w-[20rem] appearance-none rounded-lg border ${
+              //   emailError ? 'border-red-500' : 'border-gray-300'
+              // } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0`}              
               placeholder=" "
               onChange={(e) => setEmail(e.target.value)}
               tabIndex={1}
+              // value={email}
+              // onChange={(e) => {
+              //     setEmail(e.target.value);
+              //     if (emailError) setEmailError(''); 
+              //   }
+              // }            
             />
             <label
               htmlFor="email"
@@ -49,8 +62,13 @@ function SignInForm() {
             >
               Email
             </label>
+            {/* {emailError && (
+              <p className="absolute -top-5 left-0 text-xs text-red-500 mb-1">
+                * {emailError}
+              </p>
+            )} */}
           </div>
-          <div className="relative my-2">
+          <div className="relative my-3">
             <input
               type={hidden ? 'password' : 'text'}
               name="password"
@@ -59,6 +77,7 @@ function SignInForm() {
               placeholder=" "
               onChange={(e) => setPassword(e.target.value)}
               tabIndex={2}
+              
             />
 
             <label
@@ -73,6 +92,7 @@ function SignInForm() {
             >
               {hidden === true ? <FaEyeSlash className="text-slate-500" /> : <FaEye />}
             </i>
+            
           </div>
           <div className="relative flex w-[20rem] justify-between text-sm font-light">
             <div className="flex items-center gap-1">
