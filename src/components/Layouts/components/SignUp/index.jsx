@@ -6,12 +6,112 @@ function SignUpForm() {
     password: true,
     confirm: true,
   });
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordStrength, setPasswordStrength] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmError, setConfirmError] = useState('');
+  const [name, setName] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const hiddenPassword = (field) => {
     setHidden((prev) => ({
       ...prev,
       [field]: !prev[field],
     }));
+  };
+
+  const validateEmail = (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!value) {
+      return 'Email không được để trống';
+    } else if (!emailRegex.test(value)) {
+      return 'Hãy nhập Email';
+    }
+    return ''; 
+  };
+
+  const validatePassword = (value) => {
+    setPassword(value);
+    if (value.length >= 12 && value.length <= 15){
+      setPasswordStrength('strong');
+    } else if (value.length >= 9 && value.length <12){
+      setPasswordStrength ('fair');
+    } else if(value.length < 9){
+      setPasswordStrength('warning');
+    } else if (value.length > 15){
+      setPasswordStrength('notenough');
+    }else{
+      setPasswordStrength('');
+    }
+  };
+
+  const getStrengthColor = () => {
+    switch (passwordStrength) {
+      case 'strong':
+        return 'text-green-500';
+      case 'fair':
+        return 'text-orange-500';
+      case 'warning':
+        return 'text-red-500';
+      case 'notenough':
+        return 'text-red-500';
+      default:
+        return 'text-gray-500';
+    }
+  };
+
+  const validateName = (nameValue) => {
+    let error = '';
+    const hasSpecialChars = /[^\p{L}\d\s]/u.test(nameValue); // Kiểm tra ký tự đặc biệt
+    const letterCount = (nameValue.match(/\p{L}/gu) || []).length; // Đếm số ký tự chữ
+    const digitCount = (nameValue.match(/\d/g) || []).length; // Đếm số ký tự số
+
+    if (/^\d+$/.test(nameValue)) {
+      error = 'Bạn có chắc nhập đúng tên của mình không';
+    } else if (letterCount < 3) {
+      error = 'Tên cần ít nhất 3 ký tự chữ';
+    } else if (hasSpecialChars) {
+      error = 'Tên không được chứa ký tự đặc biệt';
+    } else if (letterCount >= 3 && digitCount > 8) {
+      error = 'Tên không nên chứa quá nhiều ký tự số';
+    }
+
+    return error;
+  };
+
+    const handleLogin = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+
+    let isValid = true;
+
+    const nameValidationError = validateName(name);
+    setNameError(nameValidationError);
+    if (nameValidationError) {
+      isValid = false;
+    }
+
+    const emailValidationError = validateEmail(email);
+    setEmailError(emailValidationError);
+    if (emailValidationError) {
+      isValid = false;
+    }
+
+    
+
+    if (password !== confirmPassword) {
+      setConfirmError('Mật khẩu không trùng khớp');
+      isValid = false;
+    } else {
+      setConfirmError('');
+    }
+
+    if (isValid) {
+      alert('Đăng ký thành công');
+    }
   };
 
   return (
@@ -21,15 +121,22 @@ function SignUpForm() {
         <p className="my-2 mb-4 text-center text-sm font-normal">
           Create your account. It's free and only take a minute{' '}
         </p>
-        <form action="" className="flex flex-col items-center">
-          <div className="relative my-2">
+        <form action="" className="flex flex-col items-center " onSubmit={handleLogin}>
+          <div className="relative my-3">
             <input
               type="name"
               name="name"
               id="name"
-              className="peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500"
+              className={`peer block w-[20rem] appearance-none rounded-lg border ${
+                isSubmitted && nameError ? 'border-red-500' : 'border-gray-300'
+              } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none`}              
               placeholder=" "
               tabIndex={1}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                if (nameError) setNameError(''); 
+              }}
             />
             <label
               htmlFor="name"
@@ -37,24 +144,44 @@ function SignUpForm() {
             >
               Your name
             </label>
+            {isSubmitted && nameError && (
+              <p className="absolute -top-5 left-0 text-xs text-red-500 mb-1">
+                * {nameError}
+              </p>
+            )}
           </div>
-          <div className="relative my-2">
+          <div className="relative my-3">
             <input
-              type="Email"
+              type="text"
               name="email"
               id="email"
-              className="peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500"
+              className={`peer block w-[20rem] appearance-none rounded-lg border ${
+                emailError ? 'border-red-500' : 'border-gray-300'
+              } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0`}              
               placeholder=" "
               tabIndex={2}
+              value={email}
+              onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailError) setEmailError(''); 
+                }
+              }
             />
             <label
               htmlFor="email"
-              className="absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
-            >
+              className={`absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm ${
+                emailError ? 'text-red-500' : 'text-gray-500'
+              } duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
+             >
               Email
             </label>
+            {emailError && (
+              <p className="absolute -top-5 left-0 text-xs text-red-500 mb-1">
+                * {emailError}
+              </p>
+            )}
           </div>
-          <div className="relative my-2">
+          <div className="relative my-3">
             <input
               type={hidden.password ? 'password' : 'text'}
               name="password"
@@ -62,6 +189,8 @@ function SignUpForm() {
               className="peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500"
               placeholder=" "
               tabIndex={3}
+              value={password}
+              onChange={(e) => validatePassword(e.target.value)}
             />
 
             <label
@@ -76,15 +205,31 @@ function SignUpForm() {
             >
               {hidden.password === true ? <FaEyeSlash className="text-slate-500" /> : <FaEye />}
             </i>
+            {password && (
+              <p className={`absolute -top-5 left-0 text-xs  mb-1 ${getStrengthColor()}`}>
+                * {passwordStrength === 'strong'
+                  ? 'Bảo mật: An toàn'
+                  : passwordStrength === 'fair'
+                  ? 'Bảo mật: Khá'
+                  : passwordStrength === 'warning'
+                  ? 'Bảo mật: Không an toàn'
+                  : 'Độ dài mật khẩu không quá 15 ký tự!!!'
+                }
+              </p>
+            )}
           </div>
-          <div className="relative my-2">
+          <div className="relative my-3">
             <input
               type={hidden.confirm ? 'password' : 'text'}
               name="confirm"
               id="confirm"
-              className="peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500"
+              className={`peer block w-[20rem] appearance-none rounded-lg border ${
+                confirmError ? 'border-red-500' : 'border-gray-300'
+              } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none`}
               placeholder=" "
               tabIndex={4}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
             <label
@@ -99,10 +244,15 @@ function SignUpForm() {
             >
               {hidden.confirm === true ? <FaEyeSlash className="text-slate-500" /> : <FaEye />}
             </i>
+            {confirmError && (
+              <p className="absolute -top-5 left-0 text-xs text-red-500 mb-1">
+                * {confirmError}
+              </p>
+            )}
           </div>
 
           <div className="my-4 w-[20rem] rounded-xl bg-primary text-center">
-            <button className="font-n h-10 text-lg text-slate-100">Login</button>
+            <button className="font-n h-10 text-lg text-slate-100">Sign up</button>
           </div>
         </form>
         <div className="grid w-full grid-cols-3 items-center text-gray-500">

@@ -22,7 +22,8 @@ function Newsfeed() {
         <span>&gt;&gt;</span>
         <a href="/news"> Tin tức </a>
       </div>
-      <h1 className="font-inter mb-10 text-center text-4xl font-extrabold leading-none text-black">Tin tức</h1>
+      <h1 className="font-inter mb-10 text-center  text-4xl font-extrabold leading-none text-black">Tin tức</h1>
+      
       
       <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mx-10">
         <div className="img-scale w-full max-w-[354px] overflow-hidden rounded-xl border-2">
