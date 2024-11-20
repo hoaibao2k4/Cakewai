@@ -1,6 +1,7 @@
 import axios from 'axios';
+const BE_BASE_URL = 'http://localhost:8080'
 const instance = axios.create({
-  baseURL: 'https://cakewai.onrender.com',
+  baseURL: 'http://localhost:8080',
 });
 
 instance.interceptors.response.use(
@@ -17,3 +18,4 @@ instance.interceptors.response.use(
 );
 
 export default instance;
+export {BE_BASE_URL}

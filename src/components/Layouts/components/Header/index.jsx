@@ -1,12 +1,15 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
+import MobMenu from '../MobMenu';
+import { useSelector } from 'react-redux';
+import { UserTooltip } from '~/components/clients/client';
 function Header() {
   const navigator = useNavigate();
   const handleLogin = () => {
     navigator('/auth?mode=signin');
   };
-
+  const user = useSelector(state => state.auth.google.user || state.auth.login.currentUser);
   const { pathname, search } = useLocation();
 
   useEffect(() => {
@@ -20,7 +23,7 @@ function Header() {
     <header className="fixed top-0 z-10 h-16 w-full bg-slate-100">
       <div className="mx-10 flex h-full items-center justify-between gap-4 text-primary lg:mx-20">
         <Link to="/">
-          <img src="./src/assets/images/logo.svg" alt="Cake with AI" className="mt-2" />
+          <img src={`./src/assets/images/logo.svg?v${Date.now()}`} alt="Cake with AI" className="mt-2" />
         </Link>
         <ul className="hidden lg:flex gap-12 px-4 text-base uppercase">
           <li className={pathname === '/' ? 'menu-active' : 'menu-navbar'}>
@@ -88,30 +91,33 @@ function Header() {
           />
         </svg>
         {/* User Logo */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="navbar-icon"
-          onClick={() => handleLogin()}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          stroke="currentColor"
-          strokeWidth="0.5"
-          className="navbar-icon lg:hidden"
-          viewBox="0 0 30 30"
-        >
-          <path d="M 3 7 A 1.0001 1.0001 0 1 0 3 9 L 27 9 A 1.0001 1.0001 0 1 0 27 7 L 3 7 z M 3 14 A 1.0001 1.0001 0 1 0 3 16 L 27 16 A 1.0001 1.0001 0 1 0 27 14 L 3 14 z M 3 21 A 1.0001 1.0001 0 1 0 3 23 L 27 23 A 1.0001 1.0001 0 1 0 27 21 L 3 21 z"></path>
-        </svg>
+        {
+          user ? 
+            <UserTooltip/>
+
+            : 
+          
+           ( <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="navbar-icon"
+            onClick={handleLogin}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+            />
+          </svg>)
+          
+        }
+        
+        <div className='lg:hidden'>
+          <MobMenu/>
+        </div>
       </div>
       </div>
     </header>

@@ -7,7 +7,7 @@
     @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 after:ease-in-out hover:after:w-full;
   }
   .menu-active {
-      @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5  after:bg-primary after:w-full;
+    @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary;
   }
   .icon {
     @apply transition-transform duration-300 ease-in-out; /* Thiết lập hiệu ứng chuyển đổi */
@@ -17,30 +17,33 @@
     @apply rotate-180; /* Xoay biểu tượng 180 độ khi hover */
   }
   .img-scale {
-    @apply transform transition duration-500 hover:scale-105
+    @apply transform transition duration-500 hover:scale-105;
   }
   .navbar-icon {
-    @apply size-6 cursor-pointer
+    @apply size-6 cursor-pointer;
+  }
+  .sub-menu {
+    @apply flex items-center justify-between p-4 relative hover:bg-secondary hover:text-white;
   }
 }
 
 @layer utilities {
   .grid-custom-3 {
-    grid-template-columns: repeat(3, minmax(0, max-content))
+    grid-template-columns: repeat(3, minmax(0, max-content));
   }
   .grid-custom-2 {
-    grid-template-columns: repeat(2, minmax(0, max-content))
+    grid-template-columns: repeat(2, minmax(0, max-content));
   }
   .grid-custom-1 {
-    grid-template-columns: repeat(1, minmax(0, max-content))
+    grid-template-columns: repeat(1, minmax(0, max-content));
   }
   .grid-custom-4 {
-    grid-template-columns: repeat(4, minmax(0, max-content))
+    grid-template-columns: repeat(4, minmax(0, max-content));
   }
   .grid-custom-rows-2 {
-    grid-template-rows: repeat(2, minmax(0, max-content))
+    grid-template-rows: repeat(2, minmax(0, max-content));
   }
   .grid-custom-rows-1 {
-    grid-template-rows: repeat(1, minmax(0, max-content))
+    grid-template-rows: repeat(1, minmax(0, max-content));
   }
 }

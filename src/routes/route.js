@@ -7,6 +7,7 @@ import Auth from "~/pages/authentication/auth";
 import Policy from "~/pages/Policy";
 import DetailedCake from "~/components/Layouts/components/DetailedCake";
 import Condition from "~/pages/Condition";
+
 const publicRoute = [
   { path: "/", component: Home },
   { path: "/generator", component: GenImage },
