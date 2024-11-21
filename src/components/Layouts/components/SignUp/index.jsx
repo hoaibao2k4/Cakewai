@@ -130,6 +130,7 @@ function SignUpForm() {
     }
 
     if (isValid) {
+      handleSubmit();
       alert('Đăng ký thành công');
     }
   };
