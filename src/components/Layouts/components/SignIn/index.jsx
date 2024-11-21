@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '~/redux/apiRequest';
+import { BE_BASE_URL } from '~/services/axios';
 function SignInForm() {
   const [hidden, setHidden] = useState(true);
   // const [email, setEmail] = useState('');
@@ -11,40 +14,29 @@ function SignInForm() {
   const hiddenPassword = () => {
     setHidden((prev) => !prev);
   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  // const validateEmail = (value) => {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   if (!value) {
-  //     return 'Email không được để trống';
-  //   } else if (!emailRegex.test(value)) {
-  //     return 'Hãy nhập Email';
-  //   }
-  //   return ''; 
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      email: email,
+      password: password,
+    };
+    loginUser(dispatch, newUser, navigate);
+  };
 
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   setIsSubmitted(true);
-    
-  //   let isValid = true;
-
-  //   const emailValidationError = validateEmail(email);
-  //   setEmailError(emailValidationError);
-  //   if (emailValidationError) {
-  //     isValid = false;
-  //   }
-
-  //   if (isValid) {
-  //     alert('Đăng nhập thành công');
-  //   }
-  // };
- 
+  const handleGoogleLogin = async () => {
+    window.location.href = `${BE_BASE_URL}/api/public/google/login`;
+  };
   return (
     <div className="absolute right-20 top-[10%] h-[80%] w-4/12 rounded-3xl bg-gray-100">
       <div className="mx-12">
         <h2 className="my-4 text-center text-3xl font-semibold">Login</h2>
         <p className="my-2 mb-4 text-center text-sm font-normal">Login below to access your account </p>
-        <form action="" className="flex flex-col items-center">
+        <form action="" onSubmit={handleSubmit} className="flex flex-col items-center">
           <div className="relative my-3">
             <input
               type="text"
@@ -55,6 +47,7 @@ function SignInForm() {
               //   emailError ? 'border-red-500' : 'border-gray-300'
               // } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0`}              
               placeholder=" "
+              onChange={(e) => setEmail(e.target.value)}
               tabIndex={1}
               // value={email}
               // onChange={(e) => {
@@ -65,11 +58,8 @@ function SignInForm() {
             />
             <label
               htmlFor="email"
-              className='absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500'
-              // className={`absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm ${
-              //   emailError ? 'text-red-500' : 'text-gray-500'
-              // } duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
-             >
+              className="absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
+            >
               Email
             </label>
             {/* {emailError && (
@@ -85,13 +75,14 @@ function SignInForm() {
               id="password"
               className="peer block w-[20rem] appearance-none rounded-lg border border-gray-300 bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:focus:border-blue-500"
               placeholder=" "
+              onChange={(e) => setPassword(e.target.value)}
               tabIndex={2}
               
             />
 
             <label
               htmlFor="password"
-              className="absolute start-1 top-2 z-0 flex origin-[0] -translate-y-4 scale-75 transform items-center justify-between bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
+              className="absolute start-1 top-2 z-0 flex origin-[0] -translate-y-4 scale-75 transform items-center justify-between bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
             >
               Password
             </label>
@@ -113,7 +104,9 @@ function SignInForm() {
             </a>
           </div>
           <div className="my-4 w-[20rem] rounded-xl bg-primary text-center">
-            <button className="font-n h-10 text-lg text-slate-100">Login</button>
+            <button type="submit" className="font-n h-10 text-lg text-slate-100">
+              Login
+            </button>
           </div>
         </form>
         <div className="grid w-full grid-cols-3 items-center text-gray-500">
@@ -121,8 +114,19 @@ function SignInForm() {
           <p className="text-center">Or</p>
           <hr className="border-gray-800" />
         </div>
-        <button className=" flex justify-center items-center my-2 w-full rounded-xl border bg-white py-2">
-          <svg xmlns="http://www.w3.org/2000/svg" className='mr-2' x="0px" y="0px" width="25px" height="25px" viewBox="0 0 48 48">
+        <button
+          onClick={handleGoogleLogin}
+          className="my-2 flex w-full items-center justify-center rounded-xl border bg-white py-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="mr-2"
+            x="0px"
+            y="0px"
+            width="25px"
+            height="25px"
+            viewBox="0 0 48 48"
+          >
             <path
               fill="#FFC107"
               d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
@@ -142,9 +146,11 @@ function SignInForm() {
           </svg>
           Login with Google
         </button>
-        <div className='text-base font-light flex w-full justify-center pt-2 gap-1'>
+        <div className="flex w-full justify-center gap-1 pt-2 text-base font-light">
           <p>New user?</p>
-          <a href="/auth?mode=signup" className=' hover:text-blue-700'>Register</a>
+          <a href="/auth?mode=signup" className="hover:text-blue-700">
+            Register
+          </a>
         </div>
       </div>
     </div>

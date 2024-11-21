@@ -1,18 +1,27 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '~/redux/apiRequest';
 
 function SignUpForm() {
   const [hidden, setHidden] = useState({
     password: true,
     confirm: true,
   });
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
+  //const [confirmPass, setConfirmPass] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  //const [password, setPassword] = useState('');
   const [passwordStrength, setPasswordStrength] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [confirmError, setConfirmError] = useState('');
-  const [name, setName] = useState('');
+  //const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -23,6 +32,17 @@ function SignUpForm() {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      name: name,
+      email: email,
+      password: password,
+      // confirmPass: confirmPass,
+      role_id: '127coi1579zx5c',
+    };
+    registerUser(dispatch, newUser, navigate);
+  }
   const validateEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!value) {
@@ -110,6 +130,7 @@ function SignUpForm() {
     }
 
     if (isValid) {
+      handleSubmit();
       alert('Đăng ký thành công');
     }
   };
@@ -121,7 +142,7 @@ function SignUpForm() {
         <p className="my-2 mb-4 text-center text-sm font-normal">
           Create your account. It's free and only take a minute{' '}
         </p>
-        <form action="" className="flex flex-col items-center " onSubmit={handleLogin}>
+        <form action="" className="flex flex-col items-center " onSubmit={handleLogin} >
           <div className="relative my-3">
             <input
               type="name"
@@ -140,7 +161,7 @@ function SignUpForm() {
             />
             <label
               htmlFor="name"
-              className="absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
+              className="absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
             >
               Your name
             </label>
@@ -171,7 +192,7 @@ function SignUpForm() {
               htmlFor="email"
               className={`absolute start-1 top-2 z-0 origin-[0] -translate-y-4 scale-75 transform bg-gray-100 px-2 text-sm ${
                 emailError ? 'text-red-500' : 'text-gray-500'
-              } duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600`}
+              } duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4`}
              >
               Email
             </label>
@@ -190,12 +211,16 @@ function SignUpForm() {
               placeholder=" "
               tabIndex={3}
               value={password}
-              onChange={(e) => validatePassword(e.target.value)}
+              onChange={(e) => {
+                validatePassword(e.target.value)
+                setPassword(e.target.value)
+
+              }}
             />
 
             <label
               htmlFor="password"
-              className="absolute start-1 top-2 z-0 flex origin-[0] -translate-y-4 scale-75 transform items-center justify-between bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
+              className="absolute start-1 top-2 z-0 flex origin-[0] -translate-y-4 scale-75 transform items-center justify-between bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
             >
               Password
             </label>
@@ -234,7 +259,7 @@ function SignUpForm() {
 
             <label
               htmlFor="confirm"
-              className="absolute start-1 top-2 z-0 flex origin-[0] -translate-y-4 scale-75 transform items-center justify-between bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
+              className="absolute start-1 top-2 z-0 flex origin-[0] -translate-y-4 scale-75 transform items-center justify-between bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
             >
               Confirm password
             </label>
@@ -252,7 +277,9 @@ function SignUpForm() {
           </div>
 
           <div className="my-4 w-[20rem] rounded-xl bg-primary text-center">
-            <button className="font-n h-10 text-lg text-slate-100">Sign up</button>
+            <button type="submit" className="font-n h-10 text-lg text-slate-100">
+              Register
+            </button>
           </div>
         </form>
         <div className="grid w-full grid-cols-3 items-center text-gray-500">

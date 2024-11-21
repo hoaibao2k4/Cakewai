@@ -1,6 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import MobMenu from '../MobMenu';
+import { useSelector } from 'react-redux';
+import { UserTooltip } from '~/components/clients/client';
 import { Drawer } from 'antd';
 function Header() {
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ function Header() {
   const handleLogin = () => {
     navigate('/auth?mode=signin');
   };
-
+  const user = useSelector(state => state.auth.google.user || state.auth.login.currentUser);
   const { pathname, search } = useLocation();
 
   useEffect(() => {
@@ -30,7 +33,7 @@ function Header() {
     <header className="fixed top-0 z-10 h-16 w-full bg-slate-100">
       <div className="mx-10 flex h-full items-center justify-between gap-4 text-primary lg:mx-20">
         <Link to="/">
-          <img src="./src/assets/images/logo.svg" alt="Cake with AI" className="mt-2" />
+          <img src={`./src/assets/images/logo.svg?v${Date.now()}`} alt="Cake with AI" className="mt-2" />
         </Link>
         <ul className="hidden lg:flex gap-12 px-4 text-base uppercase">
           <li className={pathname === '/' ? 'menu-active' : 'menu-navbar'}>
@@ -79,10 +82,10 @@ function Header() {
             <NavLink to="/about">VỀ CHÚNG TÔI</NavLink>
           </li>
         </ul>
-
-        <div className="flex gap-6">
-          {/* Cart Logo */}
-          <svg
+      
+      <div className="flex gap-6">
+        {/* Cart Logo */}
+        <svg
             width="24" height="24"
             viewBox="0 0 24 24"
             fill="none"
@@ -114,29 +117,35 @@ function Header() {
           >
             <h1>Thông tin giỏ hàng sẽ xuất hiện ở đây</h1>
           </Drawer>
-
-          {/* User Logo */}
+        {/* User Logo */}
+        {user ? <UserTooltip/> : (
           <svg
-            width="24" height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="navbar-icon"
-            onClick={() => handleLogin()}>
-            <path
-              d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-              stroke="#664545"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path
-              d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-              stroke="#664545"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
+          width="24" height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="navbar-icon"
+          onClick={() => handleLogin()}>
+          <path
+            d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+            stroke="#664545"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path
+            d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+            stroke="#664545"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        )
+}
+<div className='lg:hidden'>
+          <MobMenu/>
         </div>
+        
+      </div>
       </div>
     </header>
   );
