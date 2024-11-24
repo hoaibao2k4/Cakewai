@@ -136,13 +136,13 @@ function SignUpForm() {
   };
 
   return (
-    <div className="absolute right-20 top-5 h-[90%] w-4/12 rounded-3xl bg-gray-100">
-      <div className="mx-12">
+    <div className="flex flex-col justify-center items-center   min-h-[calc(100vh-15rem)] md:min-h-[calc(100vh-25rem)] lg:min-h-[calc(100vh-36rem)] py-2 md:py-4 lg:py-8  lg:justify-start  ">
+      <div className="absolute top-1/2 transform -translate-y-1/2  md:absolute md:top-1/2  lg:absolute lg:right-20 lg:top-1/2  flex flex-col items-center justify-center  sm:w-6.5/12  md:w-6/12 lg:w-4/12   rounded-3xl bg-gray-100 p-6 shadow-md transition-all duration-500   ml-auto  ">
         <h2 className="my-4 text-center text-3xl font-semibold">Register</h2>
         <p className="my-2 mb-4 text-center text-sm font-normal">
           Create your account. It's free and only take a minute{' '}
         </p>
-        <form action="" className="flex flex-col items-center " onSubmit={handleLogin} >
+        <form action="" className="flex flex-col items-center w-full px-4" onSubmit={handleLogin} >
           <div className="relative my-3">
             <input
               type="name"
@@ -150,7 +150,7 @@ function SignUpForm() {
               id="name"
               className={`peer block w-[20rem] appearance-none rounded-lg border ${
                 isSubmitted && nameError ? 'border-red-500' : 'border-gray-300'
-              } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none`}              
+              } bg-transparent px-4 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0`}              
               placeholder=" "
               tabIndex={1}
               value={name}
