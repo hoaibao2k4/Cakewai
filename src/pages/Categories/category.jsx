@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import Categories from "~/components/Layouts/components/Categories";
-import Birthday from "~/components/Layouts/components/Categories/Birthday";
 
 function Category() {
   const location = useLocation()
