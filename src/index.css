@@ -47,3 +47,8 @@
     grid-template-rows: repeat(1, minmax(0, max-content));
   }
 }
+
+
+.react-multi-carousel-item {
+  padding: 0 50px !important;
+}

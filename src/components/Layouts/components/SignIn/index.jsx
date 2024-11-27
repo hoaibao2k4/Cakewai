@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { GoogleIcon } from '~/assets/icons';
 import { loginUser } from '~/redux/apiRequest';
 import { BE_BASE_URL } from '~/services/axios';
 function SignInForm() {
@@ -30,7 +31,7 @@ function SignInForm() {
     loginUser(dispatch, newUser, navigate);
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = () => {
     window.location.href = `${BE_BASE_URL}/api/public/google/login`;
   };
 
@@ -60,12 +61,20 @@ function SignInForm() {
       alert('Đăng ký thành công');
     }
   };
+  const location = useLocation()
+  useEffect(() => {
+    if (window.innerWidth >= 1024)
+    window.scrollTo({
+      top: 93,
+      behavior: 'smooth'
+    })
+  },[location])
   return (
     
     <div className=" flex flex-col justify-center items-center   min-h-[calc(100vh-20rem)] md:min-h-[calc(100vh-30rem)] lg:min-h-[calc(100vh-35rem)] py-2 md:py-4 lg:py-8  lg:justify-start lg:absolute top-0 left-0 right-0 bottom-0 "> 
     <div className="absolute top-1/2 transform -translate-y-1/2  md:absolute md:top-1/2  lg:absolute lg:right-20 lg:top-1/2  flex flex-col items-center justify-center  sm:w-6.5/12  md:w-6/12 lg:w-4/12  rounded-3xl bg-gray-100 p-6 shadow-md transition-all duration-500   ml-auto  "  >
-        <h2 className="my-4 text-center text-3xl font-semibold">Login</h2>
-        <p className="my-2 mb-4 text-center text-sm font-normal">Login below to access your account </p>
+        <h2 className="my-4 text-center text-3xl font-semibold">Đăng nhập</h2>
+        <p className="my-2 mb-4 text-center text-sm font-normal">Đăng nhập bên dưới để truy cập tài khoản của bạn </p>
         <form action="" onSubmit={handleLogin} className="flex flex-col items-center w-full px-4">
         <div className="relative my-3">
             <input
@@ -114,7 +123,7 @@ function SignInForm() {
               htmlFor="password"
               className="absolute start-1 top-2 z-0 flex origin-[0] -translate-y-4 scale-75 transform items-center justify-between bg-gray-100 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4"
             >
-              Password
+              Mật khẩu
             </label>
             <i
               className="absolute right-2 top-1/2 mx-1 -translate-y-1/2 cursor-pointer hover:text-slate-900"
@@ -127,59 +136,34 @@ function SignInForm() {
           <div className="relative flex w-full max-w-[20rem] justify-between text-sm font-light">
             <div className="flex items-center gap-1">
               <input type="checkbox" id="checkbox" />
-              <label htmlFor="checkbox">Remember me</label>
+              <label htmlFor="checkbox">Nhớ mật khẩu</label>
             </div>
             <a href="#" className="text-slate-600 hover:text-black hover:underline">
-              Forgot Password?
+              Quên mật khẩu?
             </a>
           </div>
           <div className="my-4 w-[20rem] rounded-xl bg-primary text-center">
-            <button type="submit" className="font-n h-10 text-lg text-slate-100">
-              Login
+            <button type="submit" className="font-n h-10 text-lg text-slate-100 w-full">
+              Đăng nhập
             </button>
           </div>
         </form>
         <div className="grid w-full grid-cols-3 items-center text-gray-500">
           <hr className="border-gray-800" />
-          <p className="text-center">Or</p>
+          <p className="text-center">Hoặc</p>
           <hr className="border-gray-800" />
         </div>
         <button
           onClick={handleGoogleLogin}
           className="my-2 flex w-full items-center justify-center rounded-xl border bg-white py-2"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="mr-2"
-            x="0px"
-            y="0px"
-            width="25px"
-            height="25px"
-            viewBox="0 0 48 48"
-          >
-            <path
-              fill="#FFC107"
-              d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
-            ></path>
-            <path
-              fill="#FF3D00"
-              d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
-            ></path>
-            <path
-              fill="#4CAF50"
-              d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
-            ></path>
-            <path
-              fill="#1976D2"
-              d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
-            ></path>
-          </svg>
-          Login with Google
+         <GoogleIcon className='mr-2'/>
+          Đăng nhập với Google
         </button>
         <div className="flex w-full justify-center gap-1 pt-2 text-base font-light">
-          <p>New user?</p>
+          <p>Chưa có tài khoản?</p>
           <a href="/auth?mode=signup" className="hover:text-blue-700">
-            Register
+            Đăng kí
           </a>
         </div>
     </div>

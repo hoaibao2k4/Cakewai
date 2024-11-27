@@ -32,43 +32,45 @@ function MobMenu() {
       >
         <ul className="uppercase">
           <li>
-            <Link className="sub-menu">trang chủ</Link>
+            <Link to='/' className="sub-menu">trang chủ</Link>
           </li>
           <li>
-            <Link className="sub-menu" to="">
-              <span className="">menu bánh</span>{' '}
-              <ChevronDown onClick={() => setClicked(!clicked)} className={`ml-auto ${clicked && 'rotate-180'}`} />
-            </Link>
+            <div  className="sub-menu">
+              <Link to='category'>
+                <span className="">menu bánh</span>{' '}
+              </Link>
+              <ChevronDown onClick={() => setClicked(!clicked)} className={`ml-auto cursor-pointer ${clicked && 'rotate-180'}`} />
+            </div>
             <motion.ul initial='exit'
             animate={clicked ? 'enter' : 'exit'}
             variants={toggleSubMenuItems}
             className="px-6">
               <li className="sub-menu py-2">
-                <Link to="">Bánh Sinh Nhật</Link>
+                <Link to="/category?mode=birthday">Bánh Sinh Nhật</Link>
               </li>
               <li className="sub-menu py-2">
-                <Link to="">Bánh Truyền Thống</Link>
+                <Link to="/category?mode=tradition">Bánh Truyền Thống</Link>
               </li>
               <li className="sub-menu py-2">
-                <Link to="">Cookie & Mini cake</Link>
+                <Link to="/category?mode=cookie">Cookie & Mini cake</Link>
               </li>
               <li className="sub-menu py-2">
-                <Link to="">Bánh Mì và Bánh mặn</Link>
+                <Link to="/category?mode=bread">Bánh Mì và Bánh mặn</Link>
               </li>
             </motion.ul>
           </li>
           <li>
-            <Link to="" className="sub-menu">
+            <Link to="/news" className="sub-menu">
               tin tức
             </Link>
           </li>
           <li>
-            <Link to="" className="sub-menu">
+            <Link to="/generator" className="sub-menu">
               ai
             </Link>
           </li>
           <li>
-            <Link to="" className="sub-menu">
+            <Link to="/about" className="sub-menu">
               về chúng tôi
             </Link>
           </li>
