@@ -5,7 +5,7 @@ import avatar from '~/assets/react.svg';
 import { Link } from 'react-router-dom';
 export function CakeDropdown() {
   return (
-    <Dropdown label="Dropdown button" dismissOnClick={false}>
+    <Dropdown label="Bộ lọc" dismissOnClick={false}>
       <Dropdown.Item>Dashboard</Dropdown.Item>
       <Dropdown.Item>Settings</Dropdown.Item>
       <Dropdown.Item>Earnings</Dropdown.Item>
