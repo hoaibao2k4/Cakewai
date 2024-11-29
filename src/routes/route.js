@@ -16,7 +16,7 @@ const publicRoute = [
   { path: "/category", component: Category},
   { path: "/auth", component: Auth},
   { path: "/policy", component: Policy},
-  { path: "/detailed", component: DetailedCake},
+  { path: "/detailed/:id", component: DetailedCake},
   { path: "/condition", component: Condition},
   { path: "/cart", component: Cart },
 ];

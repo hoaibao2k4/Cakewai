@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import fetchCake from '~/api/cake';
+import getCake from '~/api/cake';
 
 const useCake = (params) => {
   const [cakes, setCakes] = useState([]);
@@ -26,9 +26,9 @@ const useCake = (params) => {
     }
   };
 
-  const getCakes = async (typeId) => {
+  const fetchCakes = async (typeId) => {
     try {
-      const result = await fetchCake(typeId);
+      const result = await getCake(typeId);
       setCakes(result?.data || []);
     } catch (error) {
       console.error('Failed to fetch cakes:', error);
@@ -38,7 +38,7 @@ const useCake = (params) => {
 
   useEffect(() => {
     const index = getTypeOfCakes(params);
-    getCakes(categories[index].typeId);
+    fetchCakes(categories[index].typeId);
   }, [params]);
 
   const index = getTypeOfCakes(params);

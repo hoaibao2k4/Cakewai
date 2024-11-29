@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { Cakewai, EmailIcon, Facebook, Instagram, Location, Telephone, Tiktok, Youtube } from '~/assets/icons';
 function Footer() {
   return (
     <footer className="relative grid grid-custom-4 lg:h-[416px] h-[660px] w-full justify-evenly border-t-2 bg-[#E8E1E1] text-black">
       <div className="lg:col-span-1 col-span-4 items-center lg:py-10 py-4 lg:mx-0 mx-auto">
         <Link to="/">
-          <img src={`./src/assets/images/logo.svg?v=${Date.now()}` }alt="Cake with AI" className="lg:mt-12 mt-4 mx-auto lg:mx-0" />
+          <Cakewai className="lg:mt-12 mt-4 mx-auto lg:mx-0"/>
         </Link>
         <div className="mt-2">
           <h2 className="text-xl text-[#3D3D3D]">Luôn lắng nghe, luôn thấu hiểu</h2>
@@ -65,29 +66,29 @@ function Footer() {
         <h3 className="text-xl font-semibold text-[#664545]">Liên hệ</h3>
         <ul className="mt-4 space-y-4 text-base text-[#3D3D3D]">
           <li>
-            <img src={`./src/assets/images/Location on.svg?v=${Date.now()}`} alt="iconlocate" className="mb-1 mr-2 inline-flex" />
+            <Location className="mb-1 mr-2 inline-flex"/>
             371 Đ.Đoàn Kết, P.Bình Thọ, TP.Thủ Đức, HCM
           </li>
           <li>
-            <img src={`./src/assets/images/Email.svg?v=${Date.now()}`} alt="iconmail" className="mb-1 mr-2 inline-flex" />
+            <EmailIcon className="mb-1 mr-2 inline-flex"/>
             cakewai@gmail.com
           </li>
           <li>
-            <img src={`./src/assets/images/Local phone.svg?v=${Date.now()}`} alt="iconphone" className="mb-1 mr-2 inline-flex" />
+            <Telephone className="mb-1 mr-2 inline-flex"/>
             0966.888888
           </li>
           <li className="inline-flex space-x-2">
             <a href="">
-              <img src={`./src/assets/images/facebook.svg?v=${Date.now()}`} alt="facebook" />
+              <Facebook/>
             </a>
             <a href="">
-              <img src={`./src/assets/images/instagram.svg?v=${Date.now()}`} alt="instagram" />
+              <Instagram/>
             </a>
             <a href="">
-              <img src={`./src/assets/images/tiktok.svg?v=${Date.now()}`} alt="tiktok" />
+              <Tiktok/>
             </a>
             <a href="">
-              <img src={`./src/assets/images/youtube.svg?v=${Date.now()}`} alt="youtube" />
+              <Youtube/>
             </a>
           </li>
         </ul>
