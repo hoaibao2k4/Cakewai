@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { UserTooltip } from '~/components/clients/client';
 import { Drawer } from 'antd';
 import { ChevronDown } from 'lucide-react';
-import { Cart, UserProfile } from '~/assets/icons';
+import { Cakewai, Cart, UserProfile } from '~/assets/icons';
 function Header() {
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function Header() {
     <header className="fixed top-0 z-10 h-16 w-full bg-slate-100">
       <div className="mx-10 flex h-full items-center justify-between gap-4 text-primary lg:mx-20">
         <Link to="/">
-          <img src={`./src/assets/images/logo.svg?v${Date.now()}`} alt="Cake with AI" className="mt-2" />
+          <Cakewai className='mt-2'/>
         </Link>
         <ul className="hidden gap-12 px-4 text-base uppercase lg:flex">
           <li className={pathname === '/' ? 'menu-active' : 'menu-navbar'}>
