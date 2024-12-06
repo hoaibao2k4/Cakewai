@@ -1,11 +1,9 @@
 import tessaCake from '~/assets/images/CakeBestSeller/tessacake.png';
-import { useEffect, useState } from 'react';
-import { fetchBestSeller } from '~/api/bestSeller';
+import useCake from '~/hooks/useCake';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Card from '../Card';
-function Seller() {
-  const [sellers, setSellers] = useState([]);
+function Seller({params}) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -13,27 +11,17 @@ function Seller() {
       slidesToSlide: 1, // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1024, min: 600 },
       items: 2,
       slidesToSlide: 1, // optional, default to 1.
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 600, min: 0 },
       items: 1,
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-  useEffect(() => {
-    fetchSeller();
-  }, []);
-  const fetchSeller = async () => {
-    try {
-      let res = await fetchBestSeller();
-      setSellers(res.data);
-    } catch (error) {
-      console.log('Error...', error);
-    }
-  };
+ const {cakes, categoryName} = useCake(params)
   return (
     <div className="best-seller w-full">
       <div className="mx-10 my-10 flex flex-col items-center text-primary lg:mx-28 lg:my-20 lg:flex-row">
@@ -51,7 +39,7 @@ function Seller() {
           additionalTransfrom={0}
           arrows
           centerMode={false}
-          className="py-5"
+          className="py-4"
           containerClass="container-with-dots"
           dotListClass=""
           draggable
@@ -63,12 +51,16 @@ function Seller() {
           swipeable
           itemClass="react-multi-carousel-item"
         >
-          {sellers.map((seller, index) => (
+          {cakes.map((cake, index) => (
             <Card
               key={index}
-              image_link={seller.image_link}
-              product_name={seller.product_name}
-              description={seller.description}
+              image_link={cake.image_link}
+              product_name={cake.product_name}
+              description={cake.description}
+              id={cake._id}
+              price={cake.product_variant[0].price}
+              categoryName={categoryName}
+              cake={cake}
             />
           ))}
         </Carousel>

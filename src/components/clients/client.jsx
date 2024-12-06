@@ -14,42 +14,44 @@ export function CakeDropdown() {
   );
 }
 const customThemeTooltip = {
-    "target": "w-fit",
-    "animation": "transition-opacity",
-    "arrow": {
-      "base": "absolute z-10 h-2 w-2 rotate-45 group",
-      "style": {
-        "dark": "bg-secondary dark:bg-gray-700",
-        "light": "bg-white",
-        "auto": "bg-white dark:bg-gray-700"
-      },
-      "placement": "-4px"
+  target: 'w-fit',
+  animation: 'transition-opacity',
+  arrow: {
+    base: 'absolute z-10 h-2 w-2 rotate-45 group',
+    style: {
+      dark: 'bg-slate-50 dark:bg-gray-700',
+      light: 'bg-white',
+      auto: 'bg-white dark:bg-gray-700',
     },
-    "base": "absolute z-10 inline-block rounded-lg  text-sm font-medium shadow-sm",
-    "hidden": "invisible opacity-0",
-    "style": {
-      "dark": "bg-secondary text-black dark:bg-gray-700",
-      "light": "border border-gray-200 bg-white text-gray-900",
-      "auto": "border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white"
-    },
-    "content": "relative z-20"
-}
-export function UserTooltip() {
+    placement: '-4px',
+  },
+  base: 'absolute z-10 inline-block rounded-lg  text-sm font-medium shadow-sm',
+  hidden: 'invisible opacity-0',
+  style: {
+    dark: 'bg-slate-50 text-black dark:bg-gray-700',
+    light: 'border border-gray-200 bg-white text-gray-900',
+    auto: 'border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white',
+  },
+  content: 'relative z-20',
+};
+export function UserTooltip({ onClick }) {
   return (
     <Tooltip
       theme={customThemeTooltip}
       content={
         <div>
-          <ul className=''>
-            <li className=' px-3 py-2 rounded-tl-lg rounded-tr-lg hover:bg-primary'>
-              <Link> Tài khoản của tôi</Link>
-            </li>
-            <li className=' px-3 py-2 hover:bg-primary'>
-              <Link>Lịch sử mua hàng</Link>
-            </li>
-            <li className=' px-3 py-2 hover:bg-primary rounded-bl-lg rounded-br-lg'>
-              <Link>Đăng xuất</Link>
-            </li>
+          <ul className="">
+            <Link>
+              <li className="rounded-tl-lg rounded-tr-lg px-3 py-2 hover:bg-slate-100 hover:text-fourth">
+                Tài khoản của tôi
+              </li>
+            </Link>
+            <Link>
+              <li className="px-3 py-2 hover:bg-slate-100 hover:text-fourth">Lịch sử mua hàng</li>
+            </Link>
+            <button onClick={() => onClick()}>
+              <li className="rounded-bl-lg rounded-br-lg px-3 py-2 hover:bg-slate-100 hover:text-fourth">Đăng xuất</li>
+            </button>
           </ul>
         </div>
       }

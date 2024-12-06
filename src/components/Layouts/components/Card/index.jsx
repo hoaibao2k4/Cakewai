@@ -1,6 +1,33 @@
 import { Star } from '~/assets/icons';
 import { Link } from 'react-router-dom';
-function Card({ image_link, product_name, description, price, index, id, categoryName }) {
+import { useDispatch } from 'react-redux';
+import { addToCart } from '~/redux/cartSlice';
+import {AddToCartContext} from '~/components/Layouts/DefaultLayout'
+import { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+function Card({ image_link, product_name, description, price, index, id, categoryName, cake }) {
+  const {handleAddToCartPopup, triggerSuccessPopup} = useContext(AddToCartContext)
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.google.user || state.auth.login.currentUser);
+  const handleAddToCart = (cake) => {
+    if (user) {
+    if (cake?.product_variant.length > 1)
+    handleAddToCartPopup(cake)
+    else {
+      const selectedVariant = cake.product_variant[0]
+      dispatch(addToCart({
+        ...cake,
+        product_variant: selectedVariant,
+        quantity: 1
+      }))
+      triggerSuccessPopup();
+    }}
+    else {
+      navigate('/auth?mode=signin')
+    }
+  }
   return (
     <div key={index} className="img-scale m-5 h-[480px] w-[280px]">
       <Link to={`/detailed/${id}`} state={{ categoryName }}>
@@ -32,7 +59,7 @@ function Card({ image_link, product_name, description, price, index, id, categor
             >
               Xem chi tiết
             </Link>
-            <button className="basis-3/5 rounded bg-white px-4 py-[6px] text-center text-slate-500">
+            <button onClick={() => handleAddToCart(cake)} className="basis-3/5 rounded bg-white px-4 py-[6px] text-center text-slate-500">
               Thêm vào giỏ hàng
             </button>
           </div>

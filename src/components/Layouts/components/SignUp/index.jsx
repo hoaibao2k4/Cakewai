@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GoogleIcon } from '~/assets/icons';
 import { registerUser } from '~/redux/apiRequest';
-
+import response from '~/services/axios'
 function SignUpForm() {
   const [hidden, setHidden] = useState({
     password: true,
@@ -13,16 +13,14 @@ function SignUpForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  //const [confirmPass, setConfirmPass] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //const [email, setEmail] = useState('');
+
   const [emailError, setEmailError] = useState('');
-  //const [password, setPassword] = useState('');
   const [passwordStrength, setPasswordStrength] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [confirmError, setConfirmError] = useState('');
-  //const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -35,12 +33,11 @@ function SignUpForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const newUser = {
       name: name,
       email: email,
       password: password,
-      // confirmPass: confirmPass,
-      role_id: '127coi1579zx5c',
     };
     registerUser(dispatch, newUser, navigate);
   }
@@ -103,8 +100,8 @@ function SignUpForm() {
     return error;
   };
 
-    const handleLogin = (e) => {
-    e.preventDefault();
+    const handleRegister = (e) => {
+    //e.preventDefault();
     setIsSubmitted(true);
 
     let isValid = true;
@@ -131,10 +128,11 @@ function SignUpForm() {
     }
 
     if (isValid) {
-      handleSubmit();
+      handleSubmit(e);
       alert('Đăng ký thành công');
     }
   };
+
   const location = useLocation()
   useEffect(() => {
     if (window.innerWidth >= 1024)
@@ -150,7 +148,7 @@ function SignUpForm() {
         <p className="my-2 mb-4 text-center text-sm font-normal">
         Tạo tài khoản của bạn ngay. Miễn phí và chỉ mất một phút!{' '}
         </p>
-        <form action="" className="flex flex-col items-center w-full px-4" onSubmit={handleLogin} >
+        <form action="" className="flex flex-col items-center w-full px-4" onSubmit={e =>handleRegister(e)} >
           <div className="relative my-3">
             <input
               type="name"
