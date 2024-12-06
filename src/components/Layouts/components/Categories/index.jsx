@@ -6,14 +6,16 @@ import { useState } from 'react';
 import { Pagination } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 function Categories({ params }) {
   const { cakes, categoryName } = useCake(params);
   const cakesPerPage = usePagination(cakes);
-  // console.log(cakesPerPage.currentData()[0].product_variant[0].price)
+  const {list} = useSelector(state => state.cart)
+  console.log(list)
   return (
-    <div className="mt-16 w-full bg-slate-100">
+    <div className="mt-16 w-full bg-white">
       <div className="mx-[5rem]">
-        <div className="flex h-11 items-center text-primary">
+        <div className="flex h-11 items-center text-primary ml-[32px] pt-[43px]">
           <div>
             <a href="/">Trang chủ </a>
             <span>&gt;&gt;</span>
@@ -39,7 +41,7 @@ function Categories({ params }) {
           <div className="float-right mx-4">
             <CakeDropdown></CakeDropdown>
           </div>
-          <div className="product grid-custom-3 relative grid w-full justify-evenly">
+          <div className="product lg:grid-custom-3 md:grid-custom-2 grid-custom-1 relative grid w-full justify-evenly">
             {cakesPerPage.currentData().map((cake, index) => (
               <Card
                 key={index}
@@ -49,6 +51,7 @@ function Categories({ params }) {
                 product_name={cake.product_name}
                 categoryName={categoryName}
                 price={cake.product_variant[0].price}
+                cake={cake}
               />
             ))}
           

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Cakewai, EmailIcon, Facebook, Instagram, Location, Telephone, Tiktok, Youtube } from '~/assets/icons';
 function Footer() {
   return (
-    <footer className="relative grid grid-custom-4 lg:h-[416px] h-[660px] w-full justify-evenly border-t-2 bg-[#E8E1E1] text-black">
+    <footer className="relative grid grid-custom-4 lg:h-[416px] h-[660px] w-full justify-evenly border-t-2 bg-fifth text-black">
       <div className="lg:col-span-1 col-span-4 items-center lg:py-10 py-4 lg:mx-0 mx-auto">
         <Link to="/">
           <Cakewai className="lg:mt-12 mt-4 mx-auto lg:mx-0"/>

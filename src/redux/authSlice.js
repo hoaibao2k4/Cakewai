@@ -14,7 +14,6 @@ const authSlice = createSlice({
       error: false,
     },
     google: {
-      //token: null,
       isFetching: false,
       error: false,
       user: null,
@@ -25,25 +24,34 @@ const authSlice = createSlice({
       state.login.isFetching = true;
     },
     loginSuccess: (state, action) => {
-      state.login.currentUser = action.payload;
-      state.login.isFetching = true;
+      state.login.currentUser = action.payload.data;
+      state.login.isFetching = false;
       state.login.error = false;
     },
     loginFail: (state) => {
       state.login.error = true;
+    },
+    logOutStart: (state) => {
+      state.login.isFetching = true;
+    },
+    logOutSuccess: (state) => {
+      state.login.currentUser = null;
       state.login.isFetching = false;
+      state.login.error = false;
+    },
+    logOutFail: (state) => {
+      state.login.error = true;
     },
     registerStart: (state) => {
       state.register.isFetching = true;
     },
     registerSuccess: (state) => {
       state.register.success = true;
-      state.register.isFetching = true;
+      state.register.isFetching = false;
       state.register.error = false;
     },
     registerFail: (state) => {
       state.register.error = true;
-      state.register.isFetching = false;
     },
     googleStart: (state) => {
       state.google.isFetching = true;
@@ -52,11 +60,9 @@ const authSlice = createSlice({
       state.google.user = action.payload;
       state.google.isFetching = false;
       state.google.error = false;
-      //state.google.token = action.payload;
     },
     googleFail: (state) => {
       state.google.error = true;
-      state.google.isFetching = false;
     },
   },
 });
@@ -65,6 +71,9 @@ export const {
   loginStart,
   loginSuccess,
   loginFail,
+  logOutStart,
+  logOutSuccess,
+  logOutFail,
   registerFail,
   registerStart,
   registerSuccess,

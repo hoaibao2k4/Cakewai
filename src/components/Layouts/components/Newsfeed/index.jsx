@@ -16,15 +16,13 @@ function Newsfeed() {
     return formattedDate;
   };
   return (
-    <div className="flex flex-col px-7 md:px-10 lg:px-28 my-28 items-center justify-center text-black text-primary">
+    <div className="flex flex-col px-7 md:px-10 lg:px-28 my-24 items-center justify-center text-black text-primary">
       <div className='text-left w-full'>
         <a href="/">Trang chủ </a>
         <span>&gt;&gt;</span>
         <a href="/news"> Tin tức </a>
       </div>
       <h1 className="font-inter mb-10 text-center  text-4xl font-extrabold leading-none text-black">Tin tức</h1>
-      
-      
       <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center place-items-center items-stretch">
         <div className="img-scale flex flex-col h-full w-full max-w-[354px] overflow-hidden rounded-xl border-2">
           <Link to="/news?mode=news1">

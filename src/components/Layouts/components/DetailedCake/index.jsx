@@ -1,16 +1,21 @@
-import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router-dom';
 import getCake, { getCakeById } from '~/api/cake';
 import Card from '../Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '~/redux/cartSlice';
+import { AddToCartContext } from '../../DefaultLayout';
 function DetailedCake() {
   const [cake, setCake] = useState({});
   const [alikeCake, setAlikeCake] = useState([]);
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(null);
-
+  const {triggerSuccessPopup} = useContext(AddToCartContext)
+  const user = useSelector(state => state.auth.login.user || state.auth.google.user)
   const location = useLocation();
+  const navigate = useNavigate()
   const { categoryName } = location.state || {};
 
   useEffect(() => {
@@ -33,12 +38,21 @@ function DetailedCake() {
       console.error('Error fetching data:', err);
     }
   };
-
+const dispatch = useDispatch()
+const handleAddToCart = (cake) => {
+  if (user) {
+  const variant = selected ? selected : cake.product_variant[0]
+  dispatch(addToCart({
+    ...cake,
+    product_variant: variant,
+    quantity: quantity
+  }))
+  triggerSuccessPopup()}
+  navigate('/auth?mode=signin')
+}
   const selectVariant = (value) => {
     setSelected(value);
   }
-
-  //console.log(cake)
   const message = cake.product_variant && cake?.product_variant.length > 1 ? 'Vui lòng chọn kích thước' : `${cake?.product_variant && cake?.product_variant[0].price.toLocaleString('vi-VN')} VND`;
   const size = cake.product_variant && cake?.product_variant.length > 1 ? 'Kích thước' : '';
 
@@ -87,7 +101,7 @@ function DetailedCake() {
               >
                 -
               </button>
-              <input type="text" value={quantity} className="h-10 w-10 border-b border-t border-primary text-center" />
+              <input type="text" value={quantity} onChange={e => e.target.quantity} className="h-10 w-10 border-b border-t border-primary text-center" />
               <button
                 className="h-10 w-10 rounded-br-lg rounded-tr-lg border border-primary"
                 onClick={() => setQuantity(quantity + 1)}
@@ -96,7 +110,7 @@ function DetailedCake() {
               </button>
             </div>
             <div className="mt-10 flex gap-4">
-              <button className="h-[65px] w-[260px] rounded-lg border border-primary text-2xl font-semibold text-primary">
+              <button onClick={() => handleAddToCart(cake)} className="h-[65px] w-[260px] rounded-lg border border-primary text-2xl font-semibold text-primary">
                 Thêm vào giỏ hàng
               </button>
               <button className="h-[65px] w-[260px] rounded-lg border bg-primary text-2xl font-semibold text-slate-100">
@@ -115,6 +129,8 @@ function DetailedCake() {
               product_name={cake.product_name}
               description={cake.description}
               image_link={cake.image_link}
+              id={cake._id}
+              price={cake.product_variant[0].price}
             />
           ))}
         </div>

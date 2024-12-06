@@ -45,7 +45,6 @@ function SignInForm() {
     return ''; 
   };
   const handleLogin = (e) => {
-    e.preventDefault();
     setIsSubmitted(true);
 
     let isValid = true;
@@ -57,8 +56,8 @@ function SignInForm() {
     }
 
     if(isValid){
-      handleSubmit();
-      alert('Đăng ký thành công');
+      handleSubmit(e);
+      alert('Đăng nhập thành công');
     }
   };
   const location = useLocation()

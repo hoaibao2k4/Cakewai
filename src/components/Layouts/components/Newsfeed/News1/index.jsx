@@ -12,7 +12,7 @@ function Newsfeed1() {
     return formattedDate;
   };
   return (
-    <div className="mx-4 sm:mx-10 lg:mx-28 my-28 items-center  text-black text-primary">
+    <div className="mx-4 sm:mx-10 lg:mx-28 my-24 items-center text-black">
       <div>
         <a href="/">Trang chủ </a>
         <span>&gt;&gt;</span>
