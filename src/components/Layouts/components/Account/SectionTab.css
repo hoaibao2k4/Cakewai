@@ -1,0 +1,17 @@
+.ant-menu-item-selected {
+  background-color: #E3DCDC !important; /* Màu nền */
+  color: #3D2828 !important;           /* Màu chữ */
+}
+
+/* Khi menu item được click */
+.ant-menu-item:active {
+  background-color: #E3DCDC !important; /* Màu nền */
+}
+
+
+
+/* Đối với sub-menu khi expanded */
+.ant-menu-submenu-open .ant-menu-submenu-title {
+  background-color: #E3DCDC !important; /* Màu nền */
+  color: #3D2828 !important;           /* Màu chữ */
+}

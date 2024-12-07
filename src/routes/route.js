@@ -8,18 +8,28 @@ import Policy from "~/pages/Policy";
 import DetailedCake from "~/components/Layouts/components/DetailedCake";
 import Condition from "~/pages/Condition";
 import Cart from "~/components/Layouts/components/Cart";
+import AccountPage from "~/pages/Account";
+
 const publicRoute = [
   { path: "/", component: Home },
   { path: "/generator", component: GenImage },
-  { path: "/about", component: About},
-  { path: "/news", component: News},
-  { path: "/category", component: Category},
-  { path: "/auth", component: Auth},
-  { path: "/policy", component: Policy},
-  { path: "/detailed", component: DetailedCake},
-  { path: "/condition", component: Condition},
+  { path: "/about", component: About },
+  { path: "/news", component: News },
+  { path: "/category", component: Category },
+  { path: "/auth", component: Auth },
+  { path: "/policy", component: Policy },
+  { path: "/detailed", component: DetailedCake },
+  { path: "/condition", component: Condition },
   { path: "/cart", component: Cart },
-];
+  ...[
+    "/account",
+    "/account_profile",
+    "/account_address",
+    "/account_change_password",
+    "/account_orders",
+  ].map(path => ({ path, component: AccountPage })),
+]
+
 
 const privateRoute = [];
 
