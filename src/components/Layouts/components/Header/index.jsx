@@ -13,7 +13,7 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const viewCart =  async() => {
+  const viewCart = async () => {
     setOpen(true);
   };
   const onClose = () => {
@@ -84,12 +84,14 @@ function Header() {
 
         <div className="flex gap-6">
           {/* Cart Logo */}
+
           <div className="relative">
             <Cart className="navbar-icon" onClick={viewCart} />
             <span className="absolute bottom-3 left-4 rounded-full bg-fourth px-2.5 text-sm text-slate-100">
               {list?.length}
             </span>
           </div>
+
           <Drawer
             title={<span style={{ fontSize: '20px', color: '#664545' }}>Giỏ hàng</span>}
             onClose={onClose}
