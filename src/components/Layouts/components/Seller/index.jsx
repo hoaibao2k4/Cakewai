@@ -1,122 +1,81 @@
 import tessaCake from '~/assets/images/CakeBestSeller/tessacake.png';
-import birthdayCake from '~/assets/images/CakeBestSeller/birthdaycake.jpg';
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
-import { fetchBestSeller } from '~/api/bestSeller';
-function Seller() {
-  const [sellers, setSellers] = useState([]);
-
-  useEffect(() => {
-    fetchSeller();
-  }, []);
-  const fetchSeller = async () => {
-    try {
-      let res = await fetchBestSeller()
-      setSellers(res.data)
-    }
-    catch(error) {
-      console.log('Error...', error)
-    }
+import useCake from '~/hooks/useCake';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import Card from '../Card';
+function Seller({params}) {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 600 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 600, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
   };
+ const {cakes, categoryName} = useCake(params)
   return (
-    <div className="best-seller">
-      <div className="lg:mx-28 mx-10 lg:my-20 my-10 flex flex-col lg:flex-row items-center text-primary">
-        <h1 className="lg:basis-1/2 text-center lg:text-5xl md:text-4xl text-3xl font-bold">Our Best Sellers...</h1>
-        <div className="h-1 w-28 border-b-2 border-primary lg:pr-8 lg:rotate-90 lg:my-0 my-1"></div>
-        <p className="lg:basis-1/2 lg:text-xl text-base font-medium">
+    <div className="best-seller w-full">
+      <div className="mx-10 my-10 flex flex-col items-center text-primary lg:mx-28 lg:my-20 lg:flex-row">
+        <h1 className="text-center text-3xl font-bold md:text-4xl lg:basis-1/2 lg:text-5xl">Our Best Sellers...</h1>
+        <div className="my-1 h-1 w-28 border-b-2 border-primary lg:my-0 lg:rotate-90 lg:pr-8"></div>
+        <p className="text-base font-medium lg:basis-1/2 lg:text-xl">
           We proudly present our most beloved creations, universally adored by all. The delectable lightness and
           sweetness of our cakes will leave you craving for more. Explore our diverse range of cakes, breads, and other
           delectable offerings.
         </p>
       </div>
-      <div className="Our-product relative grid w-full lg:grid-custom-3 md:grid-custom-2 grid-custom-1 justify-evenly lg:gap-0 gap-6">
-        {sellers.map((seller, index) => (
-          index < 3 && (
-          <div key = {index} className="img-scale w-[300px]">
-          <a href="#">
-            <img src={seller.image_link} alt="" width="300px" />
-          </a>
-          <div className="rounded-b-xl bg-secondary pb-4 pt-2">
-            <div className="mx-3">
-              <h3 className="text-xl font-semibold">{seller.product_name}</h3>
-              <p className="text-sm font-light">{seller.description}</p>
-              <div className="flex justify-between">
-                <div className="mt-2 flex gap-1">
-                  <svg
-                    className="h-4 w-4 text-yellow-300"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 22 20"
-                  >
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                  </svg>
-                  <svg
-                    className="h-4 w-4 text-yellow-300"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 22 20"
-                  >
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                  </svg>
-                  <svg
-                    className="h-4 w-4 text-yellow-300"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 22 20"
-                  >
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                  </svg>
-                  <svg
-                    className="h-4 w-4 text-yellow-300"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 22 20"
-                  >
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                  </svg>
-                  <svg
-                    className="h-4 w-4 text-yellow-300"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 22 20"
-                  >
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                  </svg>
-                </div>
-                <div className="absolute right-3 top-3 rounded bg-slate-400 px-2 py-1">
-                  <span className="text-xl font-bold">230$</span>
-                </div>
-              </div>
-              <div className="mt-2 flex justify-between gap-2 text-xs font-semibold">
-                <a href="#" className="basis-1/2 rounded bg-primary px-4 py-[6px] text-center text-slate-100">
-                  Buy Now
-                </a>
-                <a href="#" className="basis-1/2 rounded bg-white px-4 py-[6px] text-center text-slate-500">
-                  Add to cart
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        )))}
-        
-        <div className="absolute left-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
-          <BsChevronCompactLeft size={30} onClick={() => prevSlide()} />
-        </div>
-        <div className="absolute right-5 top-[50%] -translate-x-0 translate-y-[50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white">
-          <BsChevronCompactRight size={30} onClick={() => nextSlide()} />
-        </div>
+      <div className="Our-product mx-auto w-full overflow-hidden">
+        <Carousel
+          responsive={responsive}
+          additionalTransfrom={0}
+          arrows
+          centerMode={false}
+          className="py-4"
+          containerClass="container-with-dots"
+          dotListClass=""
+          draggable
+          focusOnSelect={false}
+          infinite
+          keyBoardControl
+          minimumTouchDrag={80}
+          pauseOnHover
+          swipeable
+          itemClass="react-multi-carousel-item"
+        >
+          {cakes.map((cake, index) => (
+            <Card
+              key={index}
+              image_link={cake.image_link}
+              product_name={cake.product_name}
+              description={cake.description}
+              id={cake._id}
+              price={cake.product_variant[0].price}
+              categoryName={categoryName}
+              cake={cake}
+            />
+          ))}
+        </Carousel>
       </div>
-      <div className="Introduce lg:mx-24 mx-10 my-10 lg:flex">
-        <img src={tessaCake} alt="" width="100%" height='100%' className="rounded-br-[5rem] rounded-tl-[5rem] shadow-2xl lg:max-w-[500px] max-w-[300px] h-auto mx-auto" />
-        <div className="lg:ml-20 lg:flex lg:my-0 my-8 lg:flex-col justify-center gap-4 text-primary">
-          <h2 className="lg:text-4xl text-2xl font-bold">Oven-fresh baked goods, baked just for you</h2>
-          <p className="ml-4 lg:text-2xl text-lg font-normal">
+      <div className="Introduce mx-10 my-10 lg:mx-24 lg:flex">
+        <img
+          src={tessaCake}
+          alt=""
+          width="100%"
+          height="100%"
+          className="mx-auto h-auto max-w-[300px] rounded-br-[5rem] rounded-tl-[5rem] shadow-2xl lg:max-w-[500px]"
+        />
+        <div className="my-8 justify-center gap-4 text-primary lg:my-0 lg:ml-20 lg:flex lg:flex-col">
+          <h2 className="text-2xl font-bold lg:text-4xl">Oven-fresh baked goods, baked just for you</h2>
+          <p className="ml-4 text-lg font-normal lg:text-2xl">
             We bake delicious treats with the finest ingredients. From warm chocolate chip cookies to flaky croissants,
             every bite is filled with warmth and flavor. Come experience the magic of our bakery.
           </p>

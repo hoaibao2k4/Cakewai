@@ -1,8 +1,12 @@
 
 import response from '~/services/axios'
 
-const fetchCake = () => {
-    return response.get('/api/public/products/')
+const getCake = (typeId) => {
+    return response.get(`/api/public/products/${typeId}`)
 }
 
-export default fetchCake;
+export default getCake;
+
+export const getCakeById = (id) => {
+    return response.get(`/api/public/product/${id}`)
+}

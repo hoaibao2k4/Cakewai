@@ -9,6 +9,9 @@ import DetailedCake from "~/components/Layouts/components/DetailedCake";
 import Condition from "~/pages/Condition";
 import Cart from "~/components/Layouts/components/Cart";
 import AccountPage from "~/pages/Account";
+import AdminDashboard from "~/pages/AdminDashboard";
+import AdminLogin from "~/pages/AdminLogin";
+
 
 const publicRoute = [
   { path: "/", component: Home },
@@ -18,9 +21,10 @@ const publicRoute = [
   { path: "/category", component: Category },
   { path: "/auth", component: Auth },
   { path: "/policy", component: Policy },
-  { path: "/detailed", component: DetailedCake },
+  { path: "/detailed/:id", component: DetailedCake },
   { path: "/condition", component: Condition },
   { path: "/cart", component: Cart },
+  { path: "/admin/login", component: AdminLogin, layout: null },
   ...[
     "/account",
     "/account_profile",
@@ -30,7 +34,9 @@ const publicRoute = [
   ].map(path => ({ path, component: AccountPage })),
 ]
 
-
-const privateRoute = [];
+const privateRoute = [
+  { path: "/cart", component: Cart },
+  { path: "/admin/dashboard", component: AdminDashboard },
+];
 
 export { publicRoute, privateRoute };

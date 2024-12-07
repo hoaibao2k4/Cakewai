@@ -9,7 +9,7 @@ function Auth() {
   const mode = searchParams.get("mode") || "signup";
 
   return (
-    <div style={{backgroundImage: `url(${authImage})`}} className="bg-center bg-cover w-full relative mt-16 pt-[50%]">
+    <div style={{backgroundImage: `url(${authImage})`}} className="bg-center bg-cover w-full relative mt-16 lg:pt-[55%] md:pt-[55%] pt-[65%]">
       {mode === "signin" ? <SignInForm /> : <SignUpForm />}
     </div>
   );

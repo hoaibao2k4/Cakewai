@@ -5,6 +5,9 @@ import {
   loginFail,
   loginStart,
   loginSuccess,
+  logOutFail,
+  logOutStart,
+  logOutSuccess,
   registerFail,
   registerStart,
   registerSuccess,
@@ -22,26 +25,51 @@ export const loginUser = async (dispatch, user, navigate) => {
   }
 };
 
-export const registerUser = async (dispatch, user, navigator) => {
-  dispatch(registerStart());
+export const logOutUser = async (dispatch, token, navigate) => {
+  dispatch(logOutStart());
   try {
-    const res = await response.post('/api/public/signup', user);
-    dispatch(registerSuccess(res));
-    navigator('/auth?mode=signin');
+    await response.post('/api/public/logout', { refresh_token: token });
+    dispatch(logOutSuccess());
+    navigate('/');
   } catch (err) {
-    dispatch(registerFail());
+    console.log(err);
+    dispatch(logOutFail());
   }
 };
 
-export const googleLoginUser = async (dispatch, token) => {
-  dispatch(googleStart())
+export const registerUser = async (dispatch, user, navigator) => {
+  dispatch(registerStart());
   try {
-    const res = await response.get('/api/protected/user/current_user',
-      {headers: {Authorization: `Bearer: ${token}`}},
-    )
-    dispatch(googleSuccess(res))
+    await response.post('/api/public/signup', user);
+    dispatch(registerSuccess());
+    navigator('/auth?mode=signin');
+  } catch (err) {
+    if (err.response) {
+        console.error('Server error:', err.response.status, err.response.data);
+    } else {
+        console.error('Request error:', err.message);
+    }
+    dispatch(registerFail());
+}
+};
+
+export const googleLoginUser = async (dispatch, token) => {
+  dispatch(googleStart());
+  try {
+    const res = await response.get('/api/protected/user/current_user', {
+      headers: { Authorization: `Bearer: ${token}` },
+    });
+    dispatch(googleSuccess(res));
+  } catch (err) {
+    dispatch(googleFail());
   }
-  catch(err) {
-    dispatch(googleFail())
+};
+
+export const refreshToken = async (token) => {
+  try {
+    const res = await response.post('/api/public/refreshtoken', { refresh_token: token });
+    return res.data;
+  } catch (err) {
+    console.log(err);
   }
 };
