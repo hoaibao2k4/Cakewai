@@ -11,6 +11,9 @@ import Cart from "~/components/Layouts/components/Cart";
 import AccountPage from "~/pages/Account";
 import AdminDashboard from "~/pages/AdminDashboard";
 import AdminLogin from "~/pages/AdminLogin";
+import AdminProduct from "~/pages/Admin Product/product";
+import AdminOrder from "~/pages/Admin Order/order";
+import AdminCustomer from "~/pages/Admin Customer/customer";
 
 
 const publicRoute = [
@@ -37,6 +40,9 @@ const publicRoute = [
 const privateRoute = [
   { path: "/cart", component: Cart },
   { path: "/admin/dashboard", component: AdminDashboard },
+  { path: "/admin/product_management", component: AdminProduct },
+  { path: "/admin/order_management", component: AdminOrder },
+  { path: "/admin/register_customer", component: AdminCustomer },
 ];
 
 export { publicRoute, privateRoute };
