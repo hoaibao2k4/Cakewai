@@ -13,6 +13,9 @@ import AdminDashboard from "~/pages/AdminDashboard";
 import AdminLogin from "~/pages/AdminLogin";
 import DefaultLayout from "~/components/Layouts/DefaultLayout";
 import DashBoardLayout from "~/components/Layouts/DashboardLayout";
+import AdminProduct from "~/pages/Admin Product/product";
+import AdminOrder from "~/pages/Admin Order/order";
+import AdminCustomer from "~/pages/Admin Customer/customer";
 
 
 const publicRoute = [
@@ -38,6 +41,9 @@ const privateRoute = [
     "/account/change-password",
     "/account/orders",
   ].map(path => ({ path, component: AccountPage, layout: DefaultLayout })),
+  { path: "/admin/product_management", component: AdminProduct },
+  { path: "/admin/order_management", component: AdminOrder },
+  { path: "/admin/register_customer", component: AdminCustomer },
 ];
 
 export { publicRoute, privateRoute };
