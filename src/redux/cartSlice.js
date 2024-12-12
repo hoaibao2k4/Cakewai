@@ -9,10 +9,10 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const index = state.list.findIndex(
-        (cake) => cake._id === action.payload._id && cake.product_variant.variant_features === action.payload.product_variant.variant_features,
+        (cake) => cake.product_id === action.payload.product_id && cake.variant === action.payload.variant,
       );
       if (index !== -1) {
-        state.list[index].quantity += action.payload.quantity;
+        state.list[index].buy_quantity += action.payload.buy_quantity;
       } else {
         state.list.push(action.payload);
       }
@@ -20,33 +20,41 @@ const cartSlice = createSlice({
     increaseItem: (state, action) => {
       const item = state.list.find(
         (item) =>
-          item._id === action.payload._id &&
-          item.product_variant.variant_features === action.payload.product_variant.variant_features,
+          item.product_id === action.payload.product_id &&
+          item.variant === action.payload.variant,
       );
-      if (item) item.quantity += 1;
+      if (item) item.buy_quantity += 1;
     },
     decreaseItem: (state, action) => {
       const item = state.list.find(
         (item) =>
-          item._id === action.payload._id &&
-          item.product_variant.variant_features === action.payload.product_variant.variant_features,
+          item.product_id === action.payload.product_id &&
+          item.variant === action.payload.variant,
       );
-      if (item && item.quantity > 1) item.quantity -= 1;
+      if (item && item.buy_quantity > 1) item.buy_quantity -= 1;
     },
     removeFromCart: (state, action) => {
-      const { _id, product_variant } = action.payload;
+      const { product_id, variant } = action.payload;
       state.list = state.list.filter(
-        (item) => !(item._id === _id && item.product_variant.variant_features === product_variant.variant_features),
+        (item) => !(item.product_id === product_id && item.variant === variant),
       );
     },
+    setCart: (state, action) => {
+      state.list = action.payload
+    },
+    updateItem: (state, action) => {
+      const { product_id, variant, quantity } = action.payload;
+      const item = state.list.find(
+        (item) =>
+          item.product_id === product_id && item.variant === variant,
+      );
+      if (item) {
+        item.buy_quantity = quantity; 
+      }
+    }
   },
 });
 
-// const {actions , reducer} = cartSlice
-
-// export const {addToCart} = actions
-// export default reducer
-
-export const { addToCart, increaseItem, decreaseItem, removeFromCart } = cartSlice.actions;
+export const { addToCart, increaseItem, decreaseItem, removeFromCart, setCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

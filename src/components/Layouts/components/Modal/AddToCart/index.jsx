@@ -1,31 +1,44 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '~/redux/cartSlice';
 import { CloseIcon } from '~/assets/icons';
+import { createInstance } from '~/redux/interceptors';
+import { loginSuccess } from '~/redux/authSlice';
+import { addCartItem } from '~/api/apiCart';
 function AddToCart({ content, close }) {
   const [selected, setSelected] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.login.currentUser)
+  let instance = createInstance(user, dispatch, loginSuccess)
+
   const selectVariant = (value) => {
     setSelected(value);
   };
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!selected) {
       alert('Vui lòng chọn kích thước')
       return;
     }
+    const newItem = {
+      product_id: content._id,
+        type_id: content.product_type_id,
+        name: content.product_name,
+        variant: selected.variant_features,
+        discount: selected.discount,
+        price: selected.price,
+        image_link: content.image_link,
+        buy_quantity: quantity,
+    }
     dispatch(
-      addToCart({
-        ...content,
-        product_variant: selected,
-        quantity: quantity,
-      }),
+      addToCart(newItem),
     );
+    await addCartItem(user.access_token, instance, newItem);
     close(false);
   };
   return (
-    <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-black bg-opacity-40">
-      <div className="relative flex h-[300px] w-[600px] rounded-xl bg-slate-50">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black bg-opacity-40">
+      <div className="relative flex h-[300px] w-[680px] rounded-xl bg-slate-50">
         <img src={content.image_link} alt="" className="m-4 h-[200px] w-[200px] rounded-xl" />
         <div className="flex flex-col justify-center">
           <h2 className="pb-1 text-2xl font-semibold capitalize">{content.product_name}</h2>

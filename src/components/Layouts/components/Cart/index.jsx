@@ -1,22 +1,23 @@
-import { CloseIcon } from '~/assets/icons';
+
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { decreaseItem, increaseItem, removeFromCart } from '~/redux/cartSlice';
+import { useSelector } from 'react-redux';
 import { selectCartTotal } from '~/redux/selectors';
+import CartItem from './CartItem';
 
 const Cart = () => {
-  const { list, total } = useSelector((state) => state.cart);
+  const { list } = useSelector((state) => state.cart);
   const [show, setShow] = useState(false);
-  const dispatch = useDispatch()
-  console.log(list)
+  const totalAmount = useSelector(selectCartTotal)
+  
+
   useEffect(() => {
     if (list.length > 0) {
         setShow(true);
     }
     else setShow(false);
   }, [list.length]);
-  const totalAmount = useSelector(selectCartTotal)
+  
   return (
     <>
       <div className="mt-16 w-full bg-white">
@@ -42,53 +43,7 @@ const Cart = () => {
               </thead>
               <tbody className="px-[var(--Number,] pb-[0px)] w-[1106px] items-center pt-[20px]">
                 {list?.map((item, index) => (
-                  <tr key={index} className="items-center">
-                    <td className="text-center align-middle">
-                      <CloseIcon className="hover:cursor-pointer" onClick={() => dispatch(removeFromCart(item))}/>
-                    </td>
-                    <td className="m-[20px] flex items-center gap-[20px] space-x-4 text-center align-middle">
-                      <div className="flex-shrink-0">
-                        <img src={item.image_link} alt="" width={180} height={180} />
-                      </div>
-                      <div className='flex flex-col'>
-                        <label htmlFor="name-of-cake" className="text-center">
-                          {item?.product_name}
-                        </label>
-                        <label htmlFor="name-of-cake" className="text-left">
-                          {item?.product_variant.variant_features}
-                        </label>
-                      </div>
-                    </td>
-                    <td className="text-center align-middle text-[20px] text-primary">
-                      {item?.product_variant && item?.product_variant.price.toLocaleString('vi-VN') + ' VND'}
-                    </td>
-                    <td>
-                      <div className="flex items-center justify-center">
-                        <button
-                          className="h-11 w-11 rounded-bl-lg rounded-tl-lg border border-primary"
-                          onClick={() => 
-                            dispatch(decreaseItem(item))
-                          }
-                        >
-                          -
-                        </button>
-                        <input
-                          type="text"
-                          value={item.quantity}
-                          onChange={e => e.target.quantity}
-                          className="h-11 w-11 border-b border-t border-primary text-center"
-                          disabled
-                        />
-                        <button
-                          className="h-11 w-11 rounded-br-lg rounded-tr-lg border border-primary"
-                          onClick={() => dispatch(increaseItem(item))}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="text-center align-middle text-[20px] text-primary">{((item.quantity * item?.product_variant.price).toLocaleString('vi-VN')+' VND')}</td>
-                  </tr>
+                  <CartItem item={item} key={index}/>
                 ))}
               </tbody>
               {show && (

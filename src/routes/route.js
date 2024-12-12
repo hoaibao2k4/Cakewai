@@ -11,6 +11,8 @@ import Cart from "~/components/Layouts/components/Cart";
 import AccountPage from "~/pages/Account";
 import AdminDashboard from "~/pages/AdminDashboard";
 import AdminLogin from "~/pages/AdminLogin";
+import DefaultLayout from "~/components/Layouts/DefaultLayout";
+import DashBoardLayout from "~/components/Layouts/DashboardLayout";
 import AdminProduct from "~/pages/Admin Product/product";
 import AdminOrder from "~/pages/Admin Order/order";
 import AdminCustomer from "~/pages/Admin Customer/customer";
@@ -26,20 +28,19 @@ const publicRoute = [
   { path: "/policy", component: Policy },
   { path: "/detailed/:id", component: DetailedCake },
   { path: "/condition", component: Condition },
-  { path: "/cart", component: Cart },
   { path: "/admin/login", component: AdminLogin, layout: null },
-  ...[
-    "/account",
-    "/account_profile",
-    "/account_address",
-    "/account_change_password",
-    "/account_orders",
-  ].map(path => ({ path, component: AccountPage })),
 ]
 
 const privateRoute = [
-  { path: "/cart", component: Cart },
-  { path: "/admin/dashboard", component: AdminDashboard },
+  { path: "/admin/dashboard", component: AdminDashboard, layout: DashBoardLayout },
+  { path: "/cart", component: Cart, layout: DefaultLayout },
+  ...[
+    "/account",
+    "/account/profile",
+    "/account/address",
+    "/account/change-password",
+    "/account/orders",
+  ].map(path => ({ path, component: AccountPage, layout: DefaultLayout })),
   { path: "/admin/product_management", component: AdminProduct },
   { path: "/admin/order_management", component: AdminOrder },
   { path: "/admin/register_customer", component: AdminCustomer },

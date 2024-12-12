@@ -1,5 +1,5 @@
 import response from '~/services/axios';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Fix import
 import { refreshToken } from './apiRequest';
 
 export const createInstance = (user, dispatch, stateAuth) => {
@@ -15,13 +15,27 @@ export const createInstance = (user, dispatch, stateAuth) => {
           access_token: data.access_token,
         };
         dispatch(stateAuth(refreshUser));
-        config.headers['token'] = 'Bearer' + data.access_token;
+        config.headers['Authorization'] = 'Bearer ' + data.access_token;
       }
       return config;
     },
-    (err) => {
-      Promise.reject(err);
+    (err) => Promise.reject(err),
+  );
+
+  // Interceptor cho response
+  newInstance.interceptors.response.use(
+    (response) => {
+      // Chỉ trả về phần `data` từ phản hồi
+      return response.data;
+    },
+    (error) => {
+      // Nếu có lỗi, trả về phần `data` từ lỗi (nếu có)
+      if (error.response) {
+        return Promise.reject(error.response.data);
+      }
+      return Promise.reject(error);
     },
   );
-  return newInstance
+
+  return newInstance;
 };
