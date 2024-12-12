@@ -41,12 +41,12 @@ export function UserTooltip({ onClick }) {
       content={
         <div>
           <ul className="">
-            <Link>
+            <Link to='/account'>
               <li className="rounded-tl-lg rounded-tr-lg px-3 py-2 hover:bg-slate-100 hover:text-fourth">
                 Tài khoản của tôi
               </li>
             </Link>
-            <Link>
+            <Link to='/account/orders'>
               <li className="px-3 py-2 hover:bg-slate-100 hover:text-fourth">Lịch sử mua hàng</li>
             </Link>
             <button onClick={() => onClick()}>

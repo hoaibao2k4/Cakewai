@@ -1,7 +1,4 @@
 import {
-  googleFail,
-  googleStart,
-  googleSuccess,
   loginFail,
   loginStart,
   loginSuccess,
@@ -53,21 +50,21 @@ export const registerUser = async (dispatch, user, navigator) => {
 }
 };
 
-export const googleLoginUser = async (dispatch, token) => {
-  dispatch(googleStart());
+export const googleLoginUser = async (dispatch, refToken) => {
+  dispatch(loginStart());
   try {
     const res = await response.get('/api/protected/user/current_user', {
-      headers: { Authorization: `Bearer: ${token}` },
+      headers: { Authorization: `Bearer ${refToken}` },
     });
-    dispatch(googleSuccess(res));
+    dispatch(loginSuccess(res));
   } catch (err) {
-    dispatch(googleFail());
+    dispatch(loginFail());
   }
 };
 
 export const refreshToken = async (token) => {
   try {
-    const res = await response.post('/api/public/refreshtoken', { refresh_token: token });
+    const res = await response.post('/api/public/renew_access', { refresh_token: token });
     return res.data;
   } catch (err) {
     console.log(err);

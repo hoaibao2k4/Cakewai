@@ -10,11 +10,11 @@
     @apply relative cursor-pointer py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary;
   }
   .icon {
-    @apply transition-transform duration-300 ease-in-out; /* Thiết lập hiệu ứng chuyển đổi */
+    @apply transition-transform duration-300 ease-in-out;
   }
 
   .menu-navbar:hover .icon {
-    @apply rotate-180; /* Xoay biểu tượng 180 độ khi hover */
+    @apply rotate-180;
   }
   .img-scale {
     @apply transform transition duration-500 hover:scale-105;
@@ -49,6 +49,26 @@
 }
 
 
+
+
+
+/* React Carousel CSS */
 .react-multi-carousel-item {
   padding: 0 50px !important;
+}
+
+@media (max-width: 600px) { 
+  .react-multi-carousel-item {
+     padding: 0 80px !important;
+   }
+ }
+ 
+ @media (max-width: 1024px) {
+   .react-multi-carousel-item {
+     padding: 0 80px !important;
+   }
+ } 
+
+.react-multiple-carousel__arrow {
+  z-index: 5;
 }

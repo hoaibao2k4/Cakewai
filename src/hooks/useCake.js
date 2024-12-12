@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getCake from '~/api/cake';
+import { getCake } from '~/api/apiCakes';
 
 const useCake = (params) => {
   const [cakes, setCakes] = useState([]);
