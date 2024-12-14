@@ -4,23 +4,27 @@ import { updateCartItem } from '~/api/apiCart';
 import { loginSuccess } from '~/redux/authSlice';
 import { createInstance } from '~/redux/interceptors';
 import SubItem from './SubItem';
+import { useState } from 'react';
 
 function ListItems({ list }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector(state => state.auth.login.currentUser)
     let instance = createInstance(user, dispatch, loginSuccess)
-
+    const [originalList, setOriginalList] = useState(list);
     const handleViewCart = async () => {
       try {
-        await Promise.all(
-          list.map((item) => updateCartItem(user.access_token, instance, item))
-        );
+        const itemsToUpdate = list.filter((item, index) => item.buy_quantity !== originalList[index].buy_quantity);
+        if (itemsToUpdate.length > 0) {
+          await Promise.all(
+            itemsToUpdate.map((item) => updateCartItem(user.access_token, instance, item))
+          );
+        }
         navigate('/cart');
       } catch (err) {
         console.error("Failed to update cart items", err);
       }
-    };   
+    }; 
   return (
     <div>
       {list?.map((item, index) => (

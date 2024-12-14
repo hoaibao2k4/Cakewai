@@ -48,6 +48,9 @@ const authSlice = createSlice({
     registerFail: (state) => {
       state.register.error = true;
     },
+    setUser: (state, action) => {
+      state.login.currentUser = action.payload
+    }
   },
 });
 
@@ -61,5 +64,6 @@ export const {
   registerFail,
   registerStart,
   registerSuccess,
+  setUser
 } = authSlice.actions;
 export default authSlice.reducer;

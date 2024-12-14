@@ -62,3 +62,19 @@ export const addCartItem = async (token, instance, item) => {
             console.error('Request error: ', err.message)
     }
 }
+
+export const createOrder = async (token, instance, invoice) => {
+    try {
+        const res = await instance.post('/api/protected/order', invoice, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+        return res.data
+    }
+    catch(err) {
+        if (err.response)
+            console.error('Server error: ', err.response.message, err.response.code)
+        else
+            console.error('Request error: ', err.message)
+    }
+
+}

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router-dom';
 import { getCake, getCakeById } from '~/api/apiCakes';
 import Card from '../Card';
@@ -63,6 +63,24 @@ function DetailedCake() {
       triggerSuccessPopup();
     } else navigate('/auth?mode=signin');
   };
+
+  const handleBuyNow = (cake) => {
+    if (user) {
+      const variant = selected ? selected : cake.product_variant[0];
+      const newItem = {
+        product_id: cake._id,
+        type_id: cake.product_type_id,
+        name: cake.product_name,
+        variant: variant.variant_features,
+        discount: variant.discount,
+        price: variant.price,
+        image_link: cake.image_link,
+        buy_quantity: quantity,
+      };
+      navigate('/payment', { state: { newItem } });
+    }
+    else navigate('/auth?mode=signin');
+  }
   const selectVariant = (value) => {
     setSelected(value);
   };
@@ -71,7 +89,6 @@ function DetailedCake() {
       ? 'Vui lòng chọn kích thước'
       : `${cake?.product_variant && cake?.product_variant[0].price.toLocaleString('vi-VN')} VND`;
   const size = cake.product_variant && cake?.product_variant.length > 1 ? 'Kích thước' : '';
-
   return (
     <div className="mt-16 w-full bg-white">
       <div className="mx-[5rem]">
@@ -95,7 +112,7 @@ function DetailedCake() {
             </span>
             <h4 className={`my-4 text-2xl font-semibold text-black`}>{size} </h4>
             <div className={`flex items-center gap-4`}>
-              {cake.product_variant &&
+              {cake?.product_variant?.length > 1 &&
                 cake.product_variant?.map(
                   (variant, index) =>
                     variant.variant_features && (
@@ -139,9 +156,11 @@ function DetailedCake() {
               >
                 Thêm vào giỏ hàng
               </button>
-              <button className="h-[65px] w-[260px] rounded-lg border bg-primary text-2xl font-semibold text-slate-100">
-                Mua ngay
-              </button>
+              
+                <button onClick={() => handleBuyNow(cake)} className="h-[65px] w-[260px] rounded-lg border bg-primary text-2xl font-semibold text-slate-100">
+                  Mua ngay
+                </button>
+            
             </div>
           </div>
         </div>

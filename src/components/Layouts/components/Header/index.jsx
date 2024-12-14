@@ -15,6 +15,7 @@ import { createInstance } from '~/redux/interceptors';
 import { loginSuccess } from '~/redux/authSlice';
 import { setCart } from '~/redux/cartSlice';
 import { updateCartItem } from '~/api/apiCart';
+
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,21 +23,27 @@ function Header() {
   const user = useSelector((state) => state.auth.login.currentUser);
   const [open, setOpen] = useState(false);
   const {list} = useSelector(state => state.cart)
+  const [originalList, setOriginalList] = useState([]);
 
   let instance = createInstance(user, dispatch, loginSuccess);
 
   const viewCart = async () => {
     setOpen(true);
   };
+
   const onClose = async () => {
     try {
-      await Promise.all(
-        list.map((item) => updateCartItem(user.access_token, instance, item))
-      );
-      setOpen(false);
-    } catch (err) {
-      console.error("Failed to update cart items", err);
-    } 
+      console.log(originalList)
+        const itemsToUpdate = list.filter((item, index) => item.buy_quantity !== originalList[index].buy_quantity);
+        if (itemsToUpdate.length > 0) {
+          await Promise.all(
+            itemsToUpdate.map((item) => updateCartItem(user.access_token, instance, item))
+          );
+        }
+        setOpen(false)
+      } catch (err) {
+        console.error("Failed to update cart items", err);
+      }
   };
   const handleLogin = () => {
     navigate('/auth?mode=signin');
@@ -57,7 +64,8 @@ function Header() {
     const fetchCart = async () => {
       if (user) {
         const res = await getCart(user?.access_token, instance);
-        dispatch(setCart(res.items))
+        dispatch(setCart(res?.items))
+        setOriginalList(res?.items)
       }
     };
     fetchCart(user, instance);
@@ -142,7 +150,7 @@ function Header() {
           </Drawer>
           {/* User Logo */}
           {user ? (
-            <UserTooltip onClick={handleLogOut} />
+            <UserTooltip onClick={handleLogOut} currentUser={user.user} />
           ) : (
             <UserProfile className="navbar-icon" onClick={() => handleLogin()} />
           )}

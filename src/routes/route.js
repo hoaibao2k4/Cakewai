@@ -16,6 +16,7 @@ import DashBoardLayout from "~/components/Layouts/DashboardLayout";
 import AdminProduct from "~/pages/Admin Product/product";
 import AdminOrder from "~/pages/Admin Order/order";
 import AdminCustomer from "~/pages/Admin Customer/customer";
+import Payment from "~/pages/Payment";
 
 
 const publicRoute = [
@@ -29,6 +30,7 @@ const publicRoute = [
   { path: "/detailed/:id", component: DetailedCake },
   { path: "/condition", component: Condition },
   { path: "/admin/login", component: AdminLogin, layout: null },
+  { path: "/payment", component: Payment },
 ]
 
 const privateRoute = [
@@ -41,9 +43,9 @@ const privateRoute = [
     "/account/change-password",
     "/account/orders",
   ].map(path => ({ path, component: AccountPage, layout: DefaultLayout })),
-  { path: "/admin/product_management", component: AdminProduct },
-  { path: "/admin/order_management", component: AdminOrder },
-  { path: "/admin/register_customer", component: AdminCustomer },
+  { path: "/admin/product_management", component: AdminProduct, layout: DashBoardLayout },
+  { path: "/admin/order_management", component: AdminOrder, layout: DashBoardLayout },
+  { path: "/admin/register_customer", component: AdminCustomer, layout: DashBoardLayout },
 ];
 
 export { publicRoute, privateRoute };

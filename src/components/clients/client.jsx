@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Dropdown, Tooltip } from 'flowbite-react';
-import avatar from '~/assets/react.svg';
+import { Dropdown, Tooltip } from 'flowbite-react';
+import avatar from '~/assets/default_avt.jpg';
 import { Link } from 'react-router-dom';
 export function CakeDropdown() {
   return (
@@ -34,7 +34,7 @@ const customThemeTooltip = {
   },
   content: 'relative z-20',
 };
-export function UserTooltip({ onClick }) {
+export function UserTooltip({ onClick, currentUser }) {
   return (
     <Tooltip
       theme={customThemeTooltip}
@@ -56,7 +56,8 @@ export function UserTooltip({ onClick }) {
         </div>
       }
     >
-      <img src={avatar} alt="User account" className="h-7 w-7 rounded-full border-2" />
+      <img src={currentUser?.profile_picture || avatar} alt="User account" className="h-7 w-7 rounded-full border-2" />
     </Tooltip>
   );
 }
+

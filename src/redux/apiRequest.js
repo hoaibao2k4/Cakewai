@@ -27,7 +27,7 @@ export const logOutUser = async (dispatch, token, navigate) => {
   try {
     await response.post('/api/public/logout', { refresh_token: token });
     dispatch(logOutSuccess());
-    navigate('/');
+    navigate('/auth?mode=signin')
   } catch (err) {
     console.log(err);
     dispatch(logOutFail());
@@ -62,7 +62,7 @@ export const googleLoginUser = async (dispatch, refToken) => {
   }
 };
 
-export const refreshToken = async (token) => {
+export const renewToken = async (token) => {
   try {
     const res = await response.post('/api/public/renew_access', { refresh_token: token });
     return res.data;
@@ -70,3 +70,12 @@ export const refreshToken = async (token) => {
     console.log(err);
   }
 };
+
+export const refreshToken = async (token) => {
+  try {
+    const res = await response.post('/api/public/renew_refresh', {refresh_token: token})
+    return res.data
+  } catch(err) {
+    console.log(err)
+  }
+}
