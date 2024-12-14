@@ -1,5 +1,5 @@
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCartTotal } from '~/redux/selectors';
@@ -9,7 +9,7 @@ const Cart = () => {
   const { list } = useSelector((state) => state.cart);
   const [show, setShow] = useState(false);
   const totalAmount = useSelector(selectCartTotal)
-  
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (list.length > 0) {
@@ -58,7 +58,7 @@ const Cart = () => {
                     <th colSpan={3}></th>
                     <th colSpan={2}>
                       <div className="float-right pr-[60px]">
-                        <button className="h-[56px] w-[270px] rounded-[8px] bg-primary text-white">Thanh toán</button>
+                        <button onClick={() => navigate('/payment')} className="h-[56px] w-[270px] rounded-[8px] bg-primary text-white">Thanh toán</button>
                       </div>
                     </th>
                   </tr>
