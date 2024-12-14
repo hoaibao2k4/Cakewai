@@ -1,0 +1,51 @@
+
+.ant-input:focus,
+.ant-input-password:hover,
+.ant-input-password:focus,
+.ant-input-focused,
+.ant-input-textarea:focus,
+.ant-input-textarea-focused,
+.ant-select-selector:focus {
+  border-color: #664545 !important; /* Viền khi click vào */
+  box-shadow: 0 0 0 2px rgba(102, 69, 69, 0.2) !important; /* Hiệu ứng viền sáng nhẹ */
+}
+.ant-input, .ant-input-password {
+   border-color: #d9d9d9 !important;
+   border-radius: 6px !important;
+   
+}
+
+.ant-select-selector:hover,
+.ant-select-selection .ant-input:hover .antd-select-show-arrow {
+  border-color: #664545 !important; 
+}
+
+.ant-select-item-option-active {
+  background-color: #664545 !important; 
+  color: white !important; 
+}
+
+.ant-select-dropdown .ant-select-item-option {
+  background-color: #ffffff !important; 
+  color: #000000 !important; 
+}
+
+.ant-select-dropdown:hover {
+  background-color: rgba(102, 69, 69, 0.1) !important;
+}
+.ant-select-selector:focus,
+.ant-select-selector:hover,
+.ant-select-selector:active,
+.ant-select-open .ant-select-selector {
+  border-color: #664545 !important; 
+}
+
+.ant-select-open .ant-select-selector {
+  border-color: #664545 !important; 
+}
+.ant-select-selector {
+  border-color: #d9d9d9 !important;
+}
+
+
+

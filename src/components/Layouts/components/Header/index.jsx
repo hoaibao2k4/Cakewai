@@ -1,28 +1,88 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import MobMenu from '../MobMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserTooltip } from '~/components/clients/client';
+import { Drawer } from 'antd';
+import { ChevronDown } from 'lucide-react';
+import { Cakewai, Cart, UserProfile } from '~/assets/icons';
+import ListItems from '../ListItems';
+import { logOutUser } from '~/redux/apiRequest';
+import { persistor } from '~/redux/store';
+import { getCart } from '~/api/apiCart';
+import { createInstance } from '~/redux/interceptors';
+import { loginSuccess } from '~/redux/authSlice';
+import { setCart } from '~/redux/cartSlice';
+import { updateCartItem } from '~/api/apiCart';
+
 function Header() {
-  const navigator = useNavigate();
-  const handleLogin = () => {
-    navigator('/auth?mode=signin');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { pathname, search } = useLocation();
+  const user = useSelector((state) => state.auth.login.currentUser);
+  const [open, setOpen] = useState(false);
+  const {list} = useSelector(state => state.cart)
+  const [originalList, setOriginalList] = useState([]);
+
+  let instance = createInstance(user, dispatch, loginSuccess);
+
+  const viewCart = async () => {
+    setOpen(true);
   };
 
-  const { pathname, search } = useLocation();
+  const onClose = async () => {
+    try {
+      console.log(originalList)
+        const itemsToUpdate = list.filter((item, index) => item.buy_quantity !== originalList[index].buy_quantity);
+        if (itemsToUpdate.length > 0) {
+          await Promise.all(
+            itemsToUpdate.map((item) => updateCartItem(user.access_token, instance, item))
+          );
+        }
+        setOpen(false)
+      } catch (err) {
+        console.error("Failed to update cart items", err);
+      }
+  };
+  const handleLogin = () => {
+    navigate('/auth?mode=signin');
+  };
+  const handleLogOut = () => {
+    if (user?.refresh_token) logOutUser(dispatch, user?.refresh_token, navigate);
+    else {
+      const refresh_token = localStorage.getItem('refreshToken');
+      logOutUser(dispatch, refresh_token, navigate);
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('refreshToken');
+    }
+    dispatch(setCart([]))
+    persistor.purge();
+  };
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      if (user) {
+        const res = await getCart(user?.access_token, instance);
+        dispatch(setCart(res?.items))
+        setOriginalList(res?.items)
+      }
+    };
+    fetchCart(user, instance);
+  }, [user]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname, search]);
 
-  console.log(search);
-
-  const urls = ['/category', '/birthday-cake', '/tradition-cake', '/cookie', '/bread'];
+  const urls = ['/category', '/birthday', '/tradition', '/cookie', '/bread'];
   return (
-    <header className="fixed top-0 z-10 h-16 w-full bg-slate-100">
+    <header className="fixed top-0 z-[100] h-16 w-full bg-fifth">
       <div className="mx-10 flex h-full items-center justify-between gap-4 text-primary lg:mx-20">
         <Link to="/">
-          <img src="./src/assets/images/logo.svg" alt="Cake with AI" className="mt-2" />
+          <Cakewai className="mt-2" />
         </Link>
-        <ul className="hidden lg:flex gap-12 px-4 text-base uppercase">
+        <ul className="hidden gap-12 px-4 text-base uppercase lg:flex">
           <li className={pathname === '/' ? 'menu-active' : 'menu-navbar'}>
             <NavLink to="/">TRANG CHỦ</NavLink>
           </li>
@@ -30,33 +90,28 @@ function Header() {
             <NavLink to="/category" className="relative">
               <span>MENU BÁNH</span>
               <i>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="icon mx-0.5 inline-block size-5"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
+                <ChevronDown className="icon mx-0.5 inline-block size-5" />
               </i>
             </NavLink>
 
             <div className="absolute left-0 top-full h-4 w-full cursor-default bg-transparent"></div>
             <ul className="absolute left-0 top-10 z-10 hidden w-max rounded-lg bg-[#CAB6B6] text-sm uppercase group-hover:block">
-              <li className="px-2 py-2 text-[#444444] hover:rounded-t-lg hover:bg-primary hover:text-slate-100">
-                <NavLink to="/birthday-cake">Bánh Sinh Nhật</NavLink>
-              </li>
-              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
-                <NavLink to="/tradition">Bánh Truyền Thống</NavLink>
-              </li>
-              <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">
-                <NavLink to="/cookie">Cookie & Mini cake</NavLink>
-              </li>
-              <li className="px-2 py-2 text-[#444444] hover:rounded-b-lg hover:bg-primary hover:text-slate-100">
-                <NavLink to="/bread">Bánh Mì và Bánh mặn</NavLink>
-              </li>
+              <NavLink to="/category?mode=birthday">
+                <li className="px-2 py-2 text-[#444444] hover:rounded-t-lg hover:bg-primary hover:text-slate-100">
+                  Bánh Sinh Nhật
+                </li>
+              </NavLink>
+              <NavLink to="/category?mode=tradition">
+                <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">Bánh Truyền Thống</li>
+              </NavLink>
+              <NavLink to="/category?mode=cookie">
+                <li className="px-2 py-2 text-[#444444] hover:bg-primary hover:text-slate-100">Cookie & Mini cake</li>
+              </NavLink>
+              <NavLink to="/category?mode=bread">
+                <li className="px-2 py-2 text-[#444444] hover:rounded-b-lg hover:bg-primary hover:text-slate-100">
+                  Bánh Mì và Bánh mặn
+                </li>
+              </NavLink>
             </ul>
           </li>
           <li className={pathname === '/news' ? 'menu-active' : 'menu-navbar'}>
@@ -69,50 +124,40 @@ function Header() {
             <NavLink to="/about">VỀ CHÚNG TÔI</NavLink>
           </li>
         </ul>
-      
-      <div className="flex gap-6">
-        {/* Cart Logo */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="navbar-icon"
-          onClick={() => viewCart()}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-          />
-        </svg>
-        {/* User Logo */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="navbar-icon"
-          onClick={() => handleLogin()}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          stroke="currentColor"
-          strokeWidth="0.5"
-          className="navbar-icon lg:hidden"
-          viewBox="0 0 30 30"
-        >
-          <path d="M 3 7 A 1.0001 1.0001 0 1 0 3 9 L 27 9 A 1.0001 1.0001 0 1 0 27 7 L 3 7 z M 3 14 A 1.0001 1.0001 0 1 0 3 16 L 27 16 A 1.0001 1.0001 0 1 0 27 14 L 3 14 z M 3 21 A 1.0001 1.0001 0 1 0 3 23 L 27 23 A 1.0001 1.0001 0 1 0 27 21 L 3 21 z"></path>
-        </svg>
-      </div>
+
+        <div className="flex gap-6">
+          {/* Cart Logo */}
+
+          <div className="relative">
+            <Cart className="navbar-icon" onClick={viewCart} />
+            <span className="absolute bottom-3 left-4 rounded-full bg-fourth px-2.5 text-sm text-slate-100">
+              {list?.length}
+            </span>
+          </div>
+
+          <Drawer
+            title={<span style={{ fontSize: '20px', color: '#664545' }}>Giỏ hàng</span>}
+            onClose={onClose}
+            open={open}
+          >
+            {list.length > 0 ? (
+              <ListItems list={list} />
+            ) : (
+              <>
+                <h1 className="m-6">Thông tin giỏ hàng sẽ xuất hiện ở đây</h1>
+              </>
+            )}
+          </Drawer>
+          {/* User Logo */}
+          {user ? (
+            <UserTooltip onClick={handleLogOut} currentUser={user.user} />
+          ) : (
+            <UserProfile className="navbar-icon" onClick={() => handleLogin()} />
+          )}
+          <div className="lg:hidden">
+            <MobMenu />
+          </div>
+        </div>
       </div>
     </header>
   );
