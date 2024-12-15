@@ -2,10 +2,11 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Label, TextInput, Textarea } from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartTotal } from '~/redux/selectors';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { createInstance } from '~/redux/interceptors';
 import { loginSuccess } from '~/redux/authSlice';
 import { createOrder } from '~/api/apiCart';
+import { AddToCartContext } from '~/components/Layouts/DefaultLayout';
 function Payment() {
   const location = useLocation();
   const { newItem } = location.state || {};
@@ -15,6 +16,8 @@ function Payment() {
   const [profile, setProfile] = useState(currentUser?.user)
   const [note, setNote] = useState('');
   const dispatch = useDispatch()
+  const {setIsOrder} = useContext(AddToCartContext)
+
   let instance = createInstance(currentUser, dispatch, loginSuccess)
   
 
@@ -44,7 +47,8 @@ function Payment() {
       }
       catch(err) {
         console.log(err)
-      }   
+      }
+      setIsOrder(true);   
     }
 
   return (

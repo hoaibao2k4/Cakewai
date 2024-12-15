@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MobMenu from '../MobMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserTooltip } from '~/components/clients/client';
@@ -15,6 +15,7 @@ import { createInstance } from '~/redux/interceptors';
 import { loginSuccess } from '~/redux/authSlice';
 import { setCart } from '~/redux/cartSlice';
 import { updateCartItem } from '~/api/apiCart';
+import { AddToCartContext } from '../../DefaultLayout';
 
 function Header() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function Header() {
   const [open, setOpen] = useState(false);
   const {list} = useSelector(state => state.cart)
   const [originalList, setOriginalList] = useState([]);
+  const { setIsLogout } = useContext(AddToCartContext)
 
   let instance = createInstance(user, dispatch, loginSuccess);
 
@@ -140,7 +142,7 @@ function Header() {
             onClose={onClose}
             open={open}
           >
-            {list.length > 0 ? (
+            {list?.length > 0 ? (
               <ListItems list={list} />
             ) : (
               <>
@@ -150,7 +152,7 @@ function Header() {
           </Drawer>
           {/* User Logo */}
           {user ? (
-            <UserTooltip onClick={handleLogOut} currentUser={user.user} />
+            <UserTooltip onClick={() => setIsLogout(true)} currentUser={user.user} />
           ) : (
             <UserProfile className="navbar-icon" onClick={() => handleLogin()} />
           )}

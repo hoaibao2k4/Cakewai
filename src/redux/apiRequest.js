@@ -10,24 +10,25 @@ import {
   registerSuccess,
 } from './authSlice';
 import response from '~/services/axios';
-
-export const loginUser = async (dispatch, user, navigate) => {
+import { toast } from "react-toastify";
+export const loginUser = async (dispatch, user, navigate, redirectPath = '/') => {
   dispatch(loginStart());
   try {
     const res = await response.post('/api/public/login', user);
     dispatch(loginSuccess(res));
-    navigate('/');
+    navigate(redirectPath);
   } catch (err) {
     dispatch(loginFail());
+    toast.error('Đăng nhập thất bại')
   }
 };
 
-export const logOutUser = async (dispatch, token, navigate) => {
+export const logOutUser = async (dispatch, token, navigate, redirectPath = '/auth?mode=signin') => {
   dispatch(logOutStart());
   try {
     await response.post('/api/public/logout', { refresh_token: token });
     dispatch(logOutSuccess());
-    navigate('/auth?mode=signin')
+    navigate(redirectPath)
   } catch (err) {
     console.log(err);
     dispatch(logOutFail());
