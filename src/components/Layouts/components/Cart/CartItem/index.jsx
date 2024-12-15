@@ -6,7 +6,7 @@ import { loginSuccess } from '~/redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { toast } from 'react-toastify';
 function CartItem({ item, index }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
@@ -15,6 +15,10 @@ function CartItem({ item, index }) {
 
   const handleRemoveItem = async (item) => {
     dispatch(removeFromCart(item));
+    toast.success('Xóa thành công!', {
+      position: 'bottom-right',
+      onClose: 3000
+    })
     await removeCartItem(user?.access_token, instance, item.product_id, item.variant);
   };
 

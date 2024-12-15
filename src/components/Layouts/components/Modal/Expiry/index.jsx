@@ -7,7 +7,6 @@ function ExpiryModal({isExpiry}) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector(state => state.auth.login.currentUser)
-    const {list} = useSelector(state => state.cart)
     const handleLogout = () => {
         logOutUser(dispatch, user.refresh_token, navigate)
         isExpiry(false)

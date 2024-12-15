@@ -2,62 +2,96 @@ import { Form, Input } from 'antd';
 import './index.css';
 import { Pencil } from 'lucide-react';
 import avatar from '~/assets/default_avt.jpg';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { getCurrentUser, updateUser } from '~/api/apiUser';
 import { setUser } from '~/redux/authSlice';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
-const AccountProfile = ({currentUser, instance}) => {
-  const [profile, setProfile] = useState(currentUser?.user)
+const AccountProfile = ({ currentUser, instance }) => {
+  const [profile, setProfile] = useState(currentUser?.user);
   const [editProfile, setEditProfile] = useState({
     name: false,
     email: false,
-    phone: false
-  })
-  const dispatch = useDispatch()
+    phone: false,
+  });
+  const [image, setImage] = useState('');
+  const dispatch = useDispatch();
+  const inputRef = useRef(null);
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      await updateUser(currentUser?.access_token, profile, instance)
+    e.preventDefault();
+    if (profile !== currentUser?.user) {
+      try {
+        await updateUser(currentUser?.access_token, profile, instance);
+        await refreshUser();
+        toast.success('Cập nhật thành công!', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
-    catch(err) {
-      console.log(err)
-    }
-    setEditProfile(prev => (
+    setEditProfile((prev) =>
       Object.keys(prev).reduce((acc, index) => {
-        acc[index] = false; 
-        return acc; 
-      }, {}) 
-    ));
-    refreshUser();    
-  }
+        acc[index] = false;
+        return acc;
+      }, {}),
+    );
+    setProfile(currentUser?.user);
+  };
 
   const handleProfileChange = (e) => {
-    const {name, value} = e.target
+    const { name, value } = e.target;
     setProfile((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
   const refreshUser = async () => {
-      const newUser = await getCurrentUser(instance, currentUser?.access_token);
-      if (JSON.stringify(newUser) !== JSON.stringify(currentUser.user)) {
-        console.log('New user data:', newUser);
-        dispatch(setUser({
-          ...currentUser,   // Giữ lại token, nhưng thay user mới
+    const newUser = await getCurrentUser(instance, currentUser?.access_token);
+    if (JSON.stringify(newUser) !== JSON.stringify(currentUser.user)) {
+      //console.log('New user data:', newUser);
+      dispatch(
+        setUser({
+          ...currentUser, // Giữ lại token, nhưng thay user mới
           user: newUser,
-        }));
-        console.log('Update user: ', currentUser);
-      }
-    };
+        }),
+      );
+      //console.log('Update user: ', currentUser);
+    }
+  };
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
+
   return (
     <>
       <div className="flex-col">
         <div className="flex basis-1/3 flex-col items-center justify-center">
           <div className="relative size-40 rounded-full border-2">
-            <img src={currentUser?.user.profile_picture || avatar} alt="" className="absolute right-0 top-0 size-40 rounded-full" />
-            <div className="absolute bottom-2 right-2 flex size-8 cursor-pointer items-center justify-center rounded-full bg-black/60 bg-opacity-20 text-slate-50 hover:text-amber-300">
+            {image ? (
+              <img
+                src={URL.createObjectURL(image)}
+                alt="Ảnh đại diện"
+                className="absolute right-0 top-0 size-40 rounded-full"
+              />
+            ) : (
+              <img
+                src={currentUser?.user.profile_picture || avatar}
+                alt="Ảnh đại diện"
+                className="absolute right-0 top-0 size-40 rounded-full"
+              />
+            )}
+            <input type="file" className="hidden" ref={inputRef} onChange={handleImage} />
+            <div
+              onClick={() => inputRef.current.click()}
+              className="absolute bottom-2 right-2 flex size-8 cursor-pointer items-center justify-center rounded-full bg-black/60 bg-opacity-20 text-slate-50 hover:text-amber-300"
+            >
               <Pencil size={20} />
             </div>
           </div>
@@ -73,17 +107,19 @@ const AccountProfile = ({currentUser, instance}) => {
                 },
               ]}
             >
-             <div>
-               <Input name='name' disabled={!editProfile.name} value={profile.name} onChange={handleProfileChange} />
-               <Pencil
-                 onClick={() => setEditProfile((prev) =>( {
-                  ...prev,
-                  name: !prev.name
-                 }))}
-                 size={20}
-                 className="absolute bottom-3 right-2 cursor-pointer text-black/30 hover:text-black/60"
-               />
-             </div>
+              <div>
+                <Input name="name" disabled={!editProfile.name} value={profile.name} onChange={handleProfileChange} />
+                <Pencil
+                  onClick={() =>
+                    setEditProfile((prev) => ({
+                      ...prev,
+                      name: !prev.name,
+                    }))
+                  }
+                  size={20}
+                  className="absolute bottom-3 right-2 cursor-pointer text-black/30 hover:text-black/60"
+                />
+              </div>
             </Form.Item>
             <Form.Item
               label="Email"
@@ -96,12 +132,19 @@ const AccountProfile = ({currentUser, instance}) => {
               ]}
             >
               <div>
-               <Input name='email' disabled={!editProfile.email} value={profile.email} onChange={handleProfileChange} />
+                <Input
+                  name="email"
+                  disabled={!editProfile.email}
+                  value={profile.email}
+                  onChange={handleProfileChange}
+                />
                 <Pencil
-                onClick={() => setEditProfile((prev) =>( {
-                  ...prev,
-                  email: !prev.email
-                 }))}
+                  onClick={() =>
+                    setEditProfile((prev) => ({
+                      ...prev,
+                      email: !prev.email,
+                    }))
+                  }
                   size={20}
                   className="absolute bottom-3 right-2 cursor-pointer text-black/30 hover:text-black/60"
                 />
@@ -118,12 +161,19 @@ const AccountProfile = ({currentUser, instance}) => {
               ]}
             >
               <div>
-              <Input name='phone' disabled={!editProfile.phone} value={profile.phone} onChange={handleProfileChange} />
+                <Input
+                  name="phone"
+                  disabled={!editProfile.phone}
+                  value={profile.phone}
+                  onChange={handleProfileChange}
+                />
                 <Pencil
-                onClick={() => setEditProfile((prev) =>( {
-                  ...prev,
-                  phone: !prev.phone
-                 }))}
+                  onClick={() =>
+                    setEditProfile((prev) => ({
+                      ...prev,
+                      phone: !prev.phone,
+                    }))
+                  }
                   size={20}
                   className="absolute bottom-3 right-2 cursor-pointer text-black/30 hover:text-black/60"
                 />
@@ -131,7 +181,7 @@ const AccountProfile = ({currentUser, instance}) => {
             </Form.Item>
             <Form.Item>
               <button
-                onClick={e => handleSubmit(e)}
+                onClick={(e) => handleSubmit(e)}
                 className="w-full cursor-pointer rounded-[6px] border-[none] bg-[#664545] p-[10px] text-[1rem] text-[white] hover:bg-[#7a4f4f] active:bg-[#523636]"
                 type="submit"
               >

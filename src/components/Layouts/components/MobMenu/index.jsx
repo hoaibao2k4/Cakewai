@@ -32,11 +32,11 @@ function MobMenu() {
       >
         <ul className="uppercase">
           <li>
-            <Link to='/' className="sub-menu">trang chủ</Link>
+            <Link to='/' className="sub-menu" onClick={() => setIsOpen(false)}>trang chủ</Link>
           </li>
           <li>
             <div  className="sub-menu">
-              <Link to='category'>
+              <Link to='category' onClick={() => setIsOpen(false)}>
                 <span className="">menu bánh</span>{' '}
               </Link>
               <ChevronDown onClick={() => setClicked(!clicked)} className={`ml-auto cursor-pointer ${clicked && 'rotate-180'}`} />
@@ -46,31 +46,31 @@ function MobMenu() {
             variants={toggleSubMenuItems}
             className="px-6">
               <li className="sub-menu py-2">
-                <Link to="/category?mode=birthday">Bánh Sinh Nhật</Link>
+                <Link to="/category?mode=birthday" onClick={() => setIsOpen(false)}>Bánh Sinh Nhật</Link>
               </li>
               <li className="sub-menu py-2">
-                <Link to="/category?mode=tradition">Bánh Truyền Thống</Link>
+                <Link to="/category?mode=tradition" onClick={() => setIsOpen(false)}>Bánh Truyền Thống</Link>
               </li>
               <li className="sub-menu py-2">
-                <Link to="/category?mode=cookie">Cookie & Mini cake</Link>
+                <Link to="/category?mode=cookie" onClick={() => setIsOpen(false)}>Cookie & Mini cake</Link>
               </li>
               <li className="sub-menu py-2">
-                <Link to="/category?mode=bread">Bánh Mì và Bánh mặn</Link>
+                <Link to="/category?mode=bread" onClick={() => setIsOpen(false)}>Bánh Mì và Bánh mặn</Link>
               </li>
             </motion.ul>
           </li>
           <li>
-            <Link to="/news" className="sub-menu">
+            <Link to="/news" className="sub-menu" onClick={() => setIsOpen(false)}>
               tin tức
             </Link>
           </li>
           <li>
-            <Link to="/generator" className="sub-menu">
+            <Link to="/generator" className="sub-menu" onClick={() => setIsOpen(false)}>
               ai
             </Link>
           </li>
           <li>
-            <Link to="/about" className="sub-menu">
+            <Link to="/about" className="sub-menu" onClick={() => setIsOpen(false)}>
               về chúng tôi
             </Link>
           </li>
