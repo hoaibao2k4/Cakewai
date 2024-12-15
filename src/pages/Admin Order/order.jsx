@@ -1,9 +1,10 @@
-
-const AdminOrder = () => {
+import AdminOrder from "~/components/Layouts/components/AdminOrder/adminorder";
+function adminOrder() {
+    
     return (
-        <div>
-            <h1>Admin Order</h1>
-        </div>
+       
+        <div>{AdminOrder()}</div>
+    
     );
 }
-export default AdminOrder;
+export default adminOrder;

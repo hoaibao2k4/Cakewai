@@ -1,10 +1,10 @@
+import AdminCustomer from "~/components/Layouts/components/AdminCustomer/admincustomer";
 
-const AdminCustomer = () => {
-    return (
-        <div>
-            <h1>Admin Customer</h1>
-        </div>
-    )
+function adminCustomer(){
+
+    return(
+        <div>{AdminCustomer()}</div>
+    );
 }
 
-export default AdminCustomer;
+export default adminCustomer;

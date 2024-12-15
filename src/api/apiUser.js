@@ -27,3 +27,33 @@ export const getCurrentUser = async (instance, token) => {
         console.error('Request error: ', err.message)
     }
 }
+
+export const getListUsers = async (token) => {
+    try {
+      const res = await response.get('/api/public/user/all', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log('Response từ API:', res.data);
+      return res.data; 
+    } catch (err) {
+      console.error('Lỗi API:', err.response?.data || err.message);
+      throw new Error(err.response?.data?.message || 'Lỗi khi lấy danh sách người dùng');
+    }
+  };
+
+  export const deleteUsers = async (token, id, instance) => {
+    try{
+        const res = await instance.delete(`/api/public/user/${id}`, {
+            headers: {Authorization: `Bearer ${token}`},
+        });
+        console.log('Xóa thành công:', res.data);
+        return res.data;
+    } catch (err) {
+        if(err.response){
+            console.error('Server error: ', err.response.data, err.response.status);
+            console.error('Request error: ', err.message);
+            throw err;
+        }
+    }
+  }; 
+  
