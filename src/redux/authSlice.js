@@ -13,18 +13,13 @@ const authSlice = createSlice({
       isFetching: false,
       error: false,
     },
-    google: {
-      isFetching: false,
-      error: false,
-      user: null,
-    },
   },
   reducers: {
     loginStart: (state) => {
       state.login.isFetching = true;
     },
     loginSuccess: (state, action) => {
-      state.login.currentUser = action.payload.data;
+      state.login.currentUser = action.payload.data || action.payload;
       state.login.isFetching = false;
       state.login.error = false;
     },
@@ -53,17 +48,9 @@ const authSlice = createSlice({
     registerFail: (state) => {
       state.register.error = true;
     },
-    googleStart: (state) => {
-      state.google.isFetching = true;
-    },
-    googleSuccess: (state, action) => {
-      state.google.user = action.payload;
-      state.google.isFetching = false;
-      state.google.error = false;
-    },
-    googleFail: (state) => {
-      state.google.error = true;
-    },
+    setUser: (state, action) => {
+      state.login.currentUser = action.payload
+    }
   },
 });
 
@@ -77,8 +64,6 @@ export const {
   registerFail,
   registerStart,
   registerSuccess,
-  googleSuccess,
-  googleFail,
-  googleStart,
+  setUser
 } = authSlice.actions;
 export default authSlice.reducer;

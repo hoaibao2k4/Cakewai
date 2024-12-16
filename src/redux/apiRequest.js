@@ -1,7 +1,4 @@
 import {
-  googleFail,
-  googleStart,
-  googleSuccess,
   loginFail,
   loginStart,
   loginSuccess,
@@ -13,24 +10,25 @@ import {
   registerSuccess,
 } from './authSlice';
 import response from '~/services/axios';
-
-export const loginUser = async (dispatch, user, navigate) => {
+import { toast } from "react-toastify";
+export const loginUser = async (dispatch, user, navigate, redirectPath = '/') => {
   dispatch(loginStart());
   try {
     const res = await response.post('/api/public/login', user);
     dispatch(loginSuccess(res));
-    navigate('/');
+    navigate(redirectPath);
   } catch (err) {
     dispatch(loginFail());
+    toast.error('Đăng nhập thất bại')
   }
 };
 
-export const logOutUser = async (dispatch, token, navigate) => {
+export const logOutUser = async (dispatch, token, navigate, redirectPath = '/auth?mode=signin') => {
   dispatch(logOutStart());
   try {
     await response.post('/api/public/logout', { refresh_token: token });
     dispatch(logOutSuccess());
-    navigate('/');
+    navigate(redirectPath)
   } catch (err) {
     console.log(err);
     dispatch(logOutFail());
@@ -53,23 +51,32 @@ export const registerUser = async (dispatch, user, navigator) => {
 }
 };
 
-export const googleLoginUser = async (dispatch, token) => {
-  dispatch(googleStart());
+export const googleLoginUser = async (dispatch, refToken) => {
+  dispatch(loginStart());
   try {
     const res = await response.get('/api/protected/user/current_user', {
-      headers: { Authorization: `Bearer: ${token}` },
+      headers: { Authorization: `Bearer ${refToken}` },
     });
-    dispatch(googleSuccess(res));
+    dispatch(loginSuccess(res));
   } catch (err) {
-    dispatch(googleFail());
+    dispatch(loginFail());
   }
 };
 
-export const refreshToken = async (token) => {
+export const renewToken = async (token) => {
   try {
-    const res = await response.post('/api/public/refreshtoken', { refresh_token: token });
+    const res = await response.post('/api/public/renew_access', { refresh_token: token });
     return res.data;
   } catch (err) {
     console.log(err);
   }
 };
+
+export const refreshToken = async (token) => {
+  try {
+    const res = await response.post('/api/public/renew_refresh', {refresh_token: token})
+    return res.data
+  } catch(err) {
+    console.log(err)
+  }
+}

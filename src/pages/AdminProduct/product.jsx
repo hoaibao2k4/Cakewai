@@ -1,7 +1,7 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { notification, Popconfirm, Table } from 'antd';
 import { useEffect, useState } from 'react';
-import { deleteCake, getAllCakes } from '~/api/cake';
+import { deleteCake, getAllCakes } from '~/api/apiCakes';
 import AddProductModal from '~/components/Layouts/components/AdminProduct/AddProduct';
 import UpdateProductModal from '~/components/Layouts/components/AdminProduct/UpdateProduct';
 

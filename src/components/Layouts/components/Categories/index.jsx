@@ -11,7 +11,7 @@ function Categories({ params }) {
   const { cakes, categoryName } = useCake(params);
   const cakesPerPage = usePagination(cakes);
   const {list} = useSelector(state => state.cart)
-  console.log(list)
+  //console.log(list)
   return (
     <div className="mt-16 w-full bg-white">
       <div className="mx-[5rem]">

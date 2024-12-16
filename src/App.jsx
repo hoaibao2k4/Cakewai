@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { publicRoute, privateRoute } from "./routes/route";
 import DefaultLayout from "./components/Layouts/DefaultLayout";
-import DashBoardLayout from "./components/Layouts/DashBoardLayout";
 import PrivateRoute from "./Middleware";
 import { Fragment } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
 
           {/* Private Routes */}
           {privateRoute.map((route, index) => {
-            const Layout = route.layout === null ? Fragment : DashBoardLayout;
+            const Layout = route.layout === null ? Fragment : route.layout
             const Page = route.component;
             return (
               <Route
@@ -46,6 +47,7 @@ function App() {
             );
           })}
         </Routes>
+        <ToastContainer/>
       </div>
     </Router>
   );

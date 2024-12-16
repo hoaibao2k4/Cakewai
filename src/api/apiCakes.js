@@ -1,11 +1,9 @@
 
 import response from '~/services/axios'
 
-const getCake = (typeId) => {
+export const getCake = (typeId) => {
     return response.get(`/api/public/products/${typeId}`)
 }
-
-export default getCake;
 
 export const getCakeById = (id) => {
     return response.get(`/api/public/product/${id}`)
@@ -40,4 +38,8 @@ export const updateCake = (_id, product_name, image_link, description, product_t
         product_variant: product_variant
     };
     return response.put(`/api/public/product/${_id}`, data)
+}
+
+export const fetchBestSeller = () => {
+    return response.get('/api/public/products/')
 }

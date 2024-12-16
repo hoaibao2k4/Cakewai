@@ -1,21 +1,27 @@
 import { useContext, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router-dom';
-import getCake, { getCakeById } from '~/api/cake';
+import { getCake, getCakeById } from '~/api/apiCakes';
 import Card from '../Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '~/redux/cartSlice';
 import { AddToCartContext } from '../../DefaultLayout';
+import { loginSuccess } from '~/redux/authSlice';
+import { createInstance } from '~/redux/interceptors';
+import { addCartItem } from '~/api/apiCart';
 function DetailedCake() {
   const [cake, setCake] = useState({});
   const [alikeCake, setAlikeCake] = useState([]);
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(null);
-  const {triggerSuccessPopup} = useContext(AddToCartContext)
-  const user = useSelector(state => state.auth.login.user || state.auth.google.user)
+  const { triggerSuccessPopup } = useContext(AddToCartContext);
+  const user = useSelector((state) => state.auth.login.currentUser);
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  let instance = createInstance(user, dispatch, loginSuccess);
+
   const { categoryName } = location.state || {};
 
   useEffect(() => {
@@ -26,8 +32,8 @@ function DetailedCake() {
       // Fetch cake by ID
       const result = await getCakeById(id);
       const cakeData = result.data;
-      setCake(cakeData)
-      console.log("Fetching OK")
+      setCake(cakeData);
+      console.log('Fetching OK');
 
       // Fetch similar cakes
       if (cakeData?.product_type_id) {
@@ -38,25 +44,51 @@ function DetailedCake() {
       console.error('Error fetching data:', err);
     }
   };
-const dispatch = useDispatch()
-const handleAddToCart = (cake) => {
-  if (user) {
-  const variant = selected ? selected : cake.product_variant[0]
-  dispatch(addToCart({
-    ...cake,
-    product_variant: variant,
-    quantity: quantity
-  }))
-  triggerSuccessPopup()}
-  navigate('/auth?mode=signin')
-}
+
+  const handleAddToCart = async (cake) => {
+    if (user) {
+      const variant = selected ? selected : cake.product_variant[0];
+      const newItem = {
+        product_id: cake._id,
+        type_id: cake.product_type_id,
+        name: cake.product_name,
+        variant: variant.variant_features,
+        discount: variant.discount,
+        price: variant.price,
+        image_link: cake.image_link,
+        buy_quantity: quantity,
+      };
+      dispatch(addToCart(newItem));
+      await addCartItem(user.access_token, instance, newItem);
+      triggerSuccessPopup();
+    } else navigate('/auth?mode=signin');
+  };
+
+  const handleBuyNow = (cake) => {
+    if (user) {
+      const variant = selected ? selected : cake.product_variant[0];
+      const newItem = {
+        product_id: cake._id,
+        type_id: cake.product_type_id,
+        name: cake.product_name,
+        variant: variant.variant_features,
+        discount: variant.discount,
+        price: variant.price,
+        image_link: cake.image_link,
+        buy_quantity: quantity,
+      };
+      navigate('/payment', { state: { newItem } });
+    }
+    else navigate('/auth?mode=signin');
+  }
   const selectVariant = (value) => {
     setSelected(value);
-  }
-  const message = cake.product_variant && cake?.product_variant.length > 1 ? 'Vui lòng chọn kích thước' : `${cake?.product_variant && cake?.product_variant[0].price.toLocaleString('vi-VN')} VND`;
+  };
+  const message =
+    cake.product_variant && cake?.product_variant.length > 1
+      ? 'Vui lòng chọn kích thước'
+      : `${cake?.product_variant && cake?.product_variant[0].price.toLocaleString('vi-VN')} VND`;
   const size = cake.product_variant && cake?.product_variant.length > 1 ? 'Kích thước' : '';
-
-  
   return (
     <div className="mt-16 w-full bg-white">
       <div className="mx-[5rem]">
@@ -73,23 +105,26 @@ const handleAddToCart = (cake) => {
         </div>
         <div className="my-10 flex gap-5">
           <img src={cake.image_link} alt={cake.product_name} className="h-[450px] w-[450px] rounded-xl" />
-          <div className='flex flex-col justify-center'>
+          <div className="flex flex-col justify-center">
             <h2 className="pb-4 text-4xl font-bold capitalize">{cake.product_name}</h2>
             <span className={`text-3xl font-semibold text-primary`}>
               {selected ? `${selected.price.toLocaleString('vi-VN')} VND` : message}
             </span>
             <h4 className={`my-4 text-2xl font-semibold text-black`}>{size} </h4>
             <div className={`flex items-center gap-4`}>
-              {cake.product_variant && cake.product_variant?.map((variant, index) => (
-                variant.variant_features && (
-                <button
-                  key={index}
-                  onClick={() => selectVariant(variant)}
-                  className={`h-10 w-[72px] rounded-lg border text-center leading-10 ${selected === variant ? 'bg-secondary' : 'bg-slate-100'}`}
-                >
-                  {variant.variant_features}
-                </button>)
-              ))}
+              {cake?.product_variant?.length > 1 &&
+                cake.product_variant?.map(
+                  (variant, index) =>
+                    variant.variant_features && (
+                      <button
+                        key={index}
+                        onClick={() => selectVariant(variant)}
+                        className={`h-10 w-[72px] rounded-lg border text-center leading-10 ${selected === variant ? 'bg-secondary' : 'bg-slate-100'}`}
+                      >
+                        {variant.variant_features}
+                      </button>
+                    ),
+                )}
             </div>
             <h4 className="my-4 text-2xl font-semibold">Số lượng</h4>
             <div className="flex">
@@ -101,7 +136,12 @@ const handleAddToCart = (cake) => {
               >
                 -
               </button>
-              <input type="text" value={quantity} onChange={e => e.target.quantity} className="h-10 w-10 border-b border-t border-primary text-center" />
+              <input
+                type="text"
+                value={quantity}
+                onChange={(e) => e.target.quantity}
+                className="h-10 w-10 border-b border-t border-primary text-center"
+              />
               <button
                 className="h-10 w-10 rounded-br-lg rounded-tr-lg border border-primary"
                 onClick={() => setQuantity(quantity + 1)}
@@ -110,12 +150,17 @@ const handleAddToCart = (cake) => {
               </button>
             </div>
             <div className="mt-10 flex gap-4">
-              <button onClick={() => handleAddToCart(cake)} className="h-[65px] w-[260px] rounded-lg border border-primary text-2xl font-semibold text-primary">
+              <button
+                onClick={() => handleAddToCart(cake)}
+                className="h-[65px] w-[260px] rounded-lg border border-primary text-2xl font-semibold text-primary"
+              >
                 Thêm vào giỏ hàng
               </button>
-              <button className="h-[65px] w-[260px] rounded-lg border bg-primary text-2xl font-semibold text-slate-100">
-                Mua ngay
-              </button>
+              
+                <button onClick={() => handleBuyNow(cake)} className="h-[65px] w-[260px] rounded-lg border bg-primary text-2xl font-semibold text-slate-100">
+                  Mua ngay
+                </button>
+            
             </div>
           </div>
         </div>

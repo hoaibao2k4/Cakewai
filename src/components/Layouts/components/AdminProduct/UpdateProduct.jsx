@@ -1,7 +1,7 @@
-import { Button, Input, Modal, Select, notification } from "antd";
-import { updateCake } from "~/api/cake";
+import { Input, Modal, Select, notification } from "antd";
 import { useEffect, useState } from "react";
 import UpdateVariantProduct from "./UpdateVariantProduct";
+import { updateCake } from "~/api/apiCakes";
 
 const UpdateProductModal = (props) => {
     const { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate, fetchProducts } = props;

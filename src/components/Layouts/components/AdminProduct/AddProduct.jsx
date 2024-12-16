@@ -1,7 +1,7 @@
 import { Button, Input, Modal, Select, notification } from "antd";
-import { createCake } from "~/api/cake";
 import { useState } from "react";
 import AddVariantProduct from "./AddVariantProduct";
+import { createCake } from "~/api/apiCakes";
 
 const AddProductModal = (props) => {
     const { fetchProducts } = props;

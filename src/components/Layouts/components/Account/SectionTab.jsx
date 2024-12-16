@@ -19,20 +19,20 @@ const ProfileSectionTab = ({ handleMenuClick }) => {
     };
     const items = [
         {
-            label: <Link to={"/account_profile"}>Hồ sơ</Link>,
+            label: <Link to={"/account/profile"}>Hồ sơ</Link>,
             key: 'profile',
         },
         {
-            label: <Link to={"/account_address"}>Địa chỉ giao hàng</Link>,
+            label: <Link to={"/account/address"}>Địa chỉ giao hàng</Link>,
             key: 'address',
         },
         {
-            label: <Link to={"/account_change_password"}>Đổi mật khẩu</Link>,
+            label: <Link to={"/account/change-password"}>Đổi mật khẩu</Link>,
             key: 'change-password'
 
         },
         {
-            label: <Link to={"/account_orders"}>Đơn hàng</Link>,
+            label: <Link to={"/account/orders"}>Đơn hàng</Link>,
             key: 'orders',
         },
     ];
