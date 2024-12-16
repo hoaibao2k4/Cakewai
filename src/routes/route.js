@@ -11,9 +11,9 @@ import Cart from "~/components/Layouts/components/Cart";
 import AccountPage from "~/pages/Account";
 import AdminDashboard from "~/pages/AdminDashboard";
 import AdminLogin from "~/pages/AdminLogin";
-import AdminProduct from "~/pages/Admin Product/product";
-import AdminOrder from "~/pages/Admin Order/order";
-import AdminCustomer from "~/pages/Admin Customer/customer";
+import AdminProduct from "~/pages/AdminProduct/product";
+import AdminOrder from "~/pages/AdminOrder/order";
+import AdminCustomer from "~/pages/AdminCustomer/customer";
 
 
 const publicRoute = [
