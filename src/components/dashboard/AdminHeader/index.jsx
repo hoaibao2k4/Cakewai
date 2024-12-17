@@ -19,6 +19,7 @@ function AdminHeader() {
       localStorage.removeItem('authToken');
       localStorage.removeItem('refreshToken');
     }
+    localStorage.removeItem('currentKey');
     dispatch(setCart([]));
     persistor.purge()
   };
