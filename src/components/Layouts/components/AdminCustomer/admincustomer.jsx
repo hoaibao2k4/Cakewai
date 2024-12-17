@@ -30,8 +30,8 @@ function AdminCustomer() {
     const handleDelete = async (id) => {
         
         try { 
-            const token = 'your-token-here';         
-            await deleteUsers(token,id,instance);
+                 
+            await deleteUsers(user.access_token,id,instance);
             setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
             alert('Xóa thành công');
         } catch(err) {
