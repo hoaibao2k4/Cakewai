@@ -4,7 +4,6 @@ const AdminCustomer = () => {
         <div>
             <h1>Admin Customer</h1>
         </div>
-    )
+    );
 }
-
 export default AdminCustomer;

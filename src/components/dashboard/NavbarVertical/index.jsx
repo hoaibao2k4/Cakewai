@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const NavbarVertical = () => {
     const [current, setCurrent] = useState(() => {
@@ -20,9 +20,6 @@ const NavbarVertical = () => {
     const onClick = (e) => {
         setCurrent(e.key);
     };
-
-
-
 
     const items = [
         {
