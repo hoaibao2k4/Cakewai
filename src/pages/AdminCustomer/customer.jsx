@@ -3,8 +3,9 @@ import AdminCustomer from "~/components/Layouts/components/AdminCustomer/admincu
 function adminCustomer(){
 
     return(
-        <div>{AdminCustomer()}</div>
+        <div><AdminCustomer></AdminCustomer></div>
     );
 }
 
-export default adminCustomer;
+export default adminCustomer; 
+
