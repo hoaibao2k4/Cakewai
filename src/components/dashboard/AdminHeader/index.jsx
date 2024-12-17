@@ -25,10 +25,6 @@ function AdminHeader() {
   };
   const items = [
     {
-      key: 'edit-profile',
-      label: <Link to="/admin/edit_profile">Chỉnh sửa thông tin</Link>,
-    },
-    {
       key: 'sign-out',
       danger: true,
       label: <button onClick={handleLogout}>Đăng xuất</button>,
