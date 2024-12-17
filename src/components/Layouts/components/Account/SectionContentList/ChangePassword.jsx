@@ -45,7 +45,7 @@ const AccountChangePassword = () => {
                 <Form.Item>
                     <button
                         className="w-full bg-[#664545] text-[white] p-[10px] text-[1rem] border-[none] rounded-[6px] cursor-pointer hover:bg-[#7a4f4f] active:bg-[#523636]"
-                        htmlType="submit"
+                        type="submit"
                     >Đổi mật khẩu</button>
                 </Form.Item>
             </Form>

@@ -9,7 +9,7 @@ import {
   registerStart,
   registerSuccess,
 } from './authSlice';
-import response from '~/services/axios';
+import {response} from '~/services/axios';
 import { toast } from "react-toastify";
 export const loginUser = async (dispatch, user, navigate, redirectPath = '/') => {
   dispatch(loginStart());

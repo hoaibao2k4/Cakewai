@@ -3,7 +3,7 @@ import './index.css';
 import { Pencil } from 'lucide-react';
 import avatar from '~/assets/default_avt.jpg';
 import { useRef, useState } from 'react';
-import { getCurrentUser, updateUser } from '~/api/apiUser';
+import { getCurrentUser, updateImageUser, updateUser } from '~/api/apiUser';
 import { setUser } from '~/redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -24,11 +24,11 @@ const AccountProfile = ({ currentUser, instance }) => {
     if (profile !== currentUser?.user) {
       try {
         await updateUser(currentUser?.access_token, profile, instance);
-        await refreshUser();
         toast.success('Cập nhật thành công!', {
           position: 'bottom-right',
           autoClose: 3000,
         });
+        await refreshUser();
       } catch (err) {
         console.log(err);
       }
@@ -39,7 +39,7 @@ const AccountProfile = ({ currentUser, instance }) => {
         return acc;
       }, {}),
     );
-    setProfile(currentUser?.user);
+    
   };
 
   const handleProfileChange = (e) => {
@@ -53,22 +53,27 @@ const AccountProfile = ({ currentUser, instance }) => {
   const refreshUser = async () => {
     const newUser = await getCurrentUser(instance, currentUser?.access_token);
     if (JSON.stringify(newUser) !== JSON.stringify(currentUser.user)) {
-      //console.log('New user data:', newUser);
+      console.log('New user data:', newUser);
       dispatch(
         setUser({
           ...currentUser, // Giữ lại token, nhưng thay user mới
           user: newUser,
         }),
       );
-      //console.log('Update user: ', currentUser);
+      setProfile(newUser)
+      console.log('Update user: ', currentUser);
     }
   };
 
-  const handleImage = (e) => {
+  const handleImage = async (e) => {
     const file = e.target.files[0];
     setImage(file);
+    const res = await updateImageUser(instance, currentUser?.access_token, file);
+    setProfile({
+      ...profile,
+      profile_picture: res,
+    });
   };
-
   return (
     <>
       <div className="flex-col">

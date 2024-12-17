@@ -1,15 +1,13 @@
 'use client';
-import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import { Dropdown, Tooltip } from 'flowbite-react';
 import avatar from '~/assets/default_avt.jpg';
 import { Link } from 'react-router-dom';
-export function CakeDropdown() {
+export function DropdownLib({label, items, props}) {
   return (
-    <Dropdown label="Bộ lọc" dismissOnClick={false}>
-      <Dropdown.Item>Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
-      <Dropdown.Item>Sign out</Dropdown.Item>
+    <Dropdown {...props} label={label} dismissOnClick={false}>
+      {items?.map((item, index) => (
+        <Dropdown.Item key={index}>{item}</Dropdown.Item>
+      ))}
     </Dropdown>
   );
 }

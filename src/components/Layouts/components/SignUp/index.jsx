@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GoogleIcon } from '~/assets/icons';
 import { registerUser } from '~/redux/apiRequest';
-import response from '~/services/axios'
 function SignUpForm() {
   const [hidden, setHidden] = useState({
     password: true,

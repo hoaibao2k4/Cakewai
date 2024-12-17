@@ -1,4 +1,4 @@
-import { CakeDropdown } from '~/components/clients/client';
+import { DropdownLib } from '~/components/clients/client';
 import Card from '../Card';
 import useCake from '~/hooks/useCake';
 import usePagination from '~/hooks/usePagination';
@@ -39,7 +39,7 @@ function Categories({ params }) {
         </p>
         <div className="">
           <div className="float-right mx-4">
-            <CakeDropdown></CakeDropdown>
+            <DropdownLib></DropdownLib>
           </div>
           <div className="product lg:grid-custom-3 md:grid-custom-2 grid-custom-1 relative grid w-full justify-evenly">
             {cakesPerPage.currentData().map((cake, index) => (

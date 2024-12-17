@@ -137,7 +137,7 @@ function SignInForm() {
               <input type="checkbox" id="checkbox" />
               <label htmlFor="checkbox">Nhớ mật khẩu</label>
             </div>
-            <a href="#" className="text-slate-600 hover:text-black hover:underline">
+            <a href="/email/recovery" className="text-slate-600 hover:text-black hover:underline">
               Quên mật khẩu?
             </a>
           </div>

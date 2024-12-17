@@ -77,19 +77,17 @@ const AccountAddress = ({ currentUser, instance }) => {
         console.log(err);
       }
     }
-    setProfile(currentUser?.user);
   };
   const refreshUser = async () => {
     const newUser = await getCurrentUser(instance, currentUser?.access_token);
     if (JSON.stringify(newUser) !== JSON.stringify(currentUser.user)) {
-      console.log('New user data:', newUser);
       dispatch(
         setUser({
           ...currentUser, // Giữ lại token, nhưng thay user mới
           user: newUser,
         }),
       );
-      console.log('Update user: ', currentUser);
+      setProfile(newUser)
     }
   };
 

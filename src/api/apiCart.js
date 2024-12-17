@@ -1,4 +1,4 @@
-import response from '~/services/axios'
+import {response} from '~/services/axios'
 export const getCart = async (token, instance) => {
     try {
         const res = await instance.get('/api/protected/cart', {
