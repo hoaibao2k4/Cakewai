@@ -38,9 +38,8 @@ function AdminHeader() {
     <div className="relative flex h-16 w-full items-center justify-between bg-[#f3d1dc]">
       {/* e3dcdc */}
       <div className="flex h-full w-60 items-center justify-center">
-        <Link to="/admin/dashboard">
-          <CakewaiAdmin className="mt-2" />
-        </Link>
+        <CakewaiAdmin
+          className="mt-2" />
       </div>
       <div className="flex h-full w-40 items-center justify-between p-3">
         Administrator
