@@ -14,8 +14,7 @@ function AdminCustomer() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        //const token = localStorage.getItem('token');
-        const data = await getListUsers(user.access_token);
+        const data = await getListUsers(user.access_token, instance);
         console.log(data)
         setUsers(data); 
         setLoading(false); 

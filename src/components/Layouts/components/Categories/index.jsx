@@ -12,6 +12,12 @@ function Categories({ params }) {
   const cakesPerPage = usePagination(cakes);
   const {list} = useSelector(state => state.cart)
   //console.log(list)
+  const label = 'Bộ lọc'
+  const items = [
+    'Giá từ thấp đến cao',
+    'Giá từ cao đến thấp',
+    'Mới nhất'
+  ]
   return (
     <div className="mt-16 w-full bg-white">
       <div className="mx-[5rem]">
@@ -39,7 +45,7 @@ function Categories({ params }) {
         </p>
         <div className="">
           <div className="float-right mx-4">
-            <DropdownLib></DropdownLib>
+            <DropdownLib label={label} items={items}></DropdownLib>
           </div>
           <div className="product lg:grid-custom-3 md:grid-custom-2 grid-custom-1 relative grid w-full justify-evenly">
             {cakesPerPage.currentData().map((cake, index) => (
