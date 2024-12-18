@@ -19,7 +19,7 @@ const authSlice = createSlice({
       state.login.isFetching = true;
     },
     loginSuccess: (state, action) => {
-      state.login.currentUser = action.payload.data || action.payload;
+      state.login.currentUser =  action.payload.code ? action.payload.data : action.payload;
       state.login.isFetching = false;
       state.login.error = false;
     },

@@ -18,7 +18,6 @@ function Blog() {
     const fetchBlogApi = async () => {
       try {
         const res = await getBlogs();
-        console.log(res);
         setBlogs(res);
       } catch (err) {
         console.log(err);

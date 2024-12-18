@@ -119,13 +119,13 @@ function AdminOrder() {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order, index) => (
+                        {orders?.map((order, index) => (
                         <tr key={order.id} className="hover:bg-gray-100 transition-all text-gray-800">
                             <td className="border-y border-gray-200 text-center py-3">{index + 1}</td>
                             <td className="border-y border-gray-200 py-3 px-4 text-center">{order.name}</td>
                             <td className="border-y border-gray-200 py-3 px-4 text-center">{order.phone}</td>
                             <td className="border-y border-gray-200 py-3 px-4 text-center">
-                            {order.order_items.map((item, i) => (
+                            {order?.order_items?.map((item, i) => (
                                 <div key={i}>
                                 <p>{item.name} - {item.variant} (x{item.buy_quantity})</p>
                                 </div>

@@ -1,4 +1,4 @@
-import response from '~/services/axios'
+import {response} from '~/services/axios'
 
 export const getListOrders = async (token,instance) => {
     
@@ -101,3 +101,20 @@ export const getListOrders = async (token,instance) => {
 };
 
 
+export const getListOrdersByUserId = async (token,instance, id) => { 
+    try {
+      const res = await instance.get(`/api/protected/order/cus?customer_id=${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log('Response từ API:', res.data);
+      return res.data; 
+    } catch (err) {
+    //   console.error('Lỗi API:', err.response?.data || err.message);
+    //   throw new Error(err.response?.data?.message || 'Lỗi khi lấy danh sách đơn hàng');
+    if(err.response){
+        console.error('Server error: ', err.response.data, err.response.status);
+        console.error('Request error: ', err.message);
+        throw err;
+    }
+    }
+  };
