@@ -69,7 +69,7 @@ export const updateImageUser = async (instance, token, file) => {
 
 export const getListUsers = async (token, instance) => {
     try {
-      const res = await instance.get('/api/public/user/all', {
+      const res = await instance.get('/api/protected/user/all', {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log('Response từ API:', res.data);
@@ -82,7 +82,7 @@ export const getListUsers = async (token, instance) => {
 
   export const deleteUsers = async (token, id, instance) => {
     try{
-        const res = await instance.delete(`/api/public/user/${id}`, {
+        const res = await instance.delete(`/api/protected/user/${id}`, {
             headers: {Authorization: `Bearer ${token}`},
         });
         console.log('Xóa thành công:', res.data);
