@@ -13,13 +13,12 @@ import AdminDashboard from "~/pages/AdminDashboard";
 import AdminLogin from "~/pages/AdminLogin";
 import DefaultLayout from "~/components/Layouts/DefaultLayout";
 import DashBoardLayout from "~/components/Layouts/DashboardLayout";
-import AdminProduct from "~/pages/Admin Product/product";
-import AdminOrder from "~/pages/Admin Order/order";
-import AdminCustomer from "~/pages/Admin Customer/customer";
+import AdminProduct from "~/pages/AdminProduct/product";
+import AdminOrder from "~/pages/AdminOrder/order";
+import AdminCustomer from "~/pages/AdminCustomer/customer";
 import Payment from "~/pages/Payment";
 import EmailRecovery from "~/components/Layouts/components/Forgot Password/EmailRecovery";
 import EmailSent from "~/components/Layouts/components/Forgot Password/EmailSent";
-
 
 const publicRoute = [
   { path: "/", component: Home },
