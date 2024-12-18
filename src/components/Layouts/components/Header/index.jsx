@@ -36,7 +36,7 @@ function Header() {
   const onClose = async () => {
     try {
       console.log(originalList)
-        const itemsToUpdate = list.filter((item, index) => item.buy_quantity !== originalList[index].buy_quantity);
+        const itemsToUpdate = list.filter((item, index) => item?.buy_quantity !== originalList[index].buy_quantity);
         if (itemsToUpdate.length > 0) {
           await Promise.all(
             itemsToUpdate.map((item) => updateCartItem(user.access_token, instance, item))

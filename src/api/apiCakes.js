@@ -1,5 +1,5 @@
 
-import response from '~/services/axios'
+import {response} from '~/services/axios'
 
 export const getCake = (typeId) => {
     return response.get(`/api/public/products/${typeId}`)
