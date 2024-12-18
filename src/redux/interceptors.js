@@ -1,4 +1,4 @@
-import response from '~/services/axios';
+import {response} from '~/services/axios';
 import { jwtDecode } from 'jwt-decode'; // Fix import
 import { refreshToken, renewToken } from './apiRequest';
 

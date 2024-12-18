@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOutUser } from '~/redux/apiRequest';
 import { setCart } from '~/redux/cartSlice';
+import { persistor } from '~/redux/store';
 function LogoutModal({ isLogout }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -17,6 +17,8 @@ import AdminProduct from "~/pages/AdminProduct/product";
 import AdminOrder from "~/pages/AdminOrder/order";
 import AdminCustomer from "~/pages/AdminCustomer/customer";
 import Payment from "~/pages/Payment";
+import EmailRecovery from "~/components/Layouts/components/Forgot Password/EmailRecovery";
+import EmailSent from "~/components/Layouts/components/Forgot Password/EmailSent";
 
 const publicRoute = [
   { path: "/", component: Home },
@@ -30,6 +32,8 @@ const publicRoute = [
   { path: "/condition", component: Condition },
   { path: "/admin/login", component: AdminLogin, layout: null },
   { path: "/payment", component: Payment },
+  { path: "/email/recovery", component: EmailRecovery },
+  { path: "/email/message", component: EmailSent },
 ]
 
 const privateRoute = [

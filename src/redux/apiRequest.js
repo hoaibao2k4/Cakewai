@@ -9,17 +9,31 @@ import {
   registerStart,
   registerSuccess,
 } from './authSlice';
-import response from '~/services/axios';
+import {response} from '~/services/axios';
 import { toast } from "react-toastify";
 export const loginUser = async (dispatch, user, navigate, redirectPath = '/') => {
   dispatch(loginStart());
   try {
     const res = await response.post('/api/public/login', user);
     dispatch(loginSuccess(res));
+    toast.success('Đăng nhập thành công', {
+      position: 'bottom-right',
+    })
     navigate(redirectPath);
   } catch (err) {
     dispatch(loginFail());
-    toast.error('Đăng nhập thất bại')
+    if (err.response) {
+      if (err.response.status === 500) {
+         toast.error('Tài khoản chưa được đăng ký', {
+      position: 'bottom-right',
+      })
+      }
+      else if (err.response.status === 401) {
+        toast.error('Sai mật khẩu', {
+     position: 'bottom-right',
+     })
+     }
+    }
   }
 };
 
@@ -42,12 +56,19 @@ export const registerUser = async (dispatch, user, navigator) => {
     dispatch(registerSuccess());
     navigator('/auth?mode=signin');
   } catch (err) {
-    if (err.response) {
-        console.error('Server error:', err.response.status, err.response.data);
-    } else {
-        console.error('Request error:', err.message);
-    }
     dispatch(registerFail());
+    if (err.response) {
+      if (err.response.status === 400) {
+         toast.error('Tài khoản đã tồn tại', {
+      position: 'bottom-right',
+      })
+      }
+      else if (err.response.status === 401) {
+        toast.error('Sai mật khẩu', {
+     position: 'bottom-right',
+     })
+     }
+    }
 }
 };
 
