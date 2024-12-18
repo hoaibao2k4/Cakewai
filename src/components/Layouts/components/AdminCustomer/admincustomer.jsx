@@ -14,8 +14,9 @@ function AdminCustomer() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const data = await getListUsers(user.access_token, instance);
-        console.log(data)
+        // const token = localStorage.getItem('token');
+        const data = await getListUsers(user.access_token,instance);
+        console.log(data);
         setUsers(data); 
         setLoading(false); 
       } catch (err) {
@@ -67,7 +68,7 @@ function AdminCustomer() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {users?.map((user, index) => (
               <tr key={user.id} className="hover:bg-gray-100 transition-all text-gray-800">
                 <td className="border-y border-gray-200 text-center py-3">{index + 1}</td>
                 <td className="border-y border-gray-200 py-3 px-4 text-center">{user.name}</td>
