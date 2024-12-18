@@ -8,6 +8,7 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
+      if (state.list) {
       const index = state.list.findIndex(
         (cake) => cake.product_id === action.payload.product_id && cake.variant === action.payload.variant,
       );
@@ -16,6 +17,7 @@ const cartSlice = createSlice({
       } else {
         state.list.push(action.payload);
       }
+    }
     },
     increaseItem: (state, action) => {
       const item = state.list.find(

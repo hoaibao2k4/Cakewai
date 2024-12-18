@@ -3,7 +3,8 @@ import useCake from '~/hooks/useCake';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Card from '../Card';
-function Seller({params}) {
+import { FaLongArrowAltRight } from "react-icons/fa";
+function Seller({ params }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -21,16 +22,16 @@ function Seller({params}) {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
- const {cakes, categoryName} = useCake(params)
+  const { cakes, categoryName } = useCake(params);
   return (
     <div className="best-seller w-full">
       <div className="mx-10 my-10 flex flex-col items-center text-primary lg:mx-28 lg:my-20 lg:flex-row">
-        <h1 className="text-center text-3xl font-bold md:text-4xl lg:basis-1/2 lg:text-5xl">Our Best Sellers...</h1>
+        <h1 className="text-center text-3xl font-bold md:text-4xl lg:basis-1/2 lg:text-4xl">Sản phẩm bán chạy...</h1>
         <div className="my-1 h-1 w-28 border-b-2 border-primary lg:my-0 lg:rotate-90 lg:pr-8"></div>
-        <p className="text-base font-medium lg:basis-1/2 lg:text-xl">
-          We proudly present our most beloved creations, universally adored by all. The delectable lightness and
-          sweetness of our cakes will leave you craving for more. Explore our diverse range of cakes, breads, and other
-          delectable offerings.
+        <p className="text-base font-medium lg:basis-1/2 lg:text-lg">
+          Chúng tôi tự hào giới thiệu những tác phẩm được yêu thích nhất của mình, được mọi người trên toàn thế giới yêu
+          mến. Sự nhẹ nhàng và ngọt ngào tuyệt hảo của những chiếc bánh của chúng tôi sẽ khiến bạn không thể cưỡng lại
+          được. Hãy khám phá các loại bánh, bánh mì và những món ngon khác mà chúng tôi mang đến.
         </p>
       </div>
       <div className="Our-product mx-auto w-full overflow-hidden">
@@ -74,13 +75,17 @@ function Seller({params}) {
           className="mx-auto h-auto max-w-[300px] rounded-br-[5rem] rounded-tl-[5rem] shadow-2xl lg:max-w-[500px]"
         />
         <div className="my-8 justify-center gap-4 text-primary lg:my-0 lg:ml-20 lg:flex lg:flex-col">
-          <h2 className="text-2xl font-bold lg:text-4xl">Oven-fresh baked goods, baked just for you</h2>
-          <p className="ml-4 text-lg font-normal lg:text-2xl">
-            We bake delicious treats with the finest ingredients. From warm chocolate chip cookies to flaky croissants,
-            every bite is filled with warmth and flavor. Come experience the magic of our bakery.
+          <h2 className="text-2xl font-bold lg:text-4xl">
+            Những món bánh nướng vừa ra lò, được làm riêng dành cho bạn.
+          </h2>
+          <p className="ml-4 text-lg font-normal lg:text-xl">
+            Chúng tôi làm ra những món bánh thơm ngon từ những nguyên liệu hảo hạng nhất. Từ những chiếc bánh quy sô cô
+            la ấm áp đến những chiếc bánh sừng bò giòn tan, mỗi miếng bánh đều tràn đầy sự ấm áp và hương vị. Hãy đến và
+            trải nghiệm sự kỳ diệu tại tiệm bánh của chúng tôi.
           </p>
-          <a href="#" className="ml-4">
-            Read more
+          <a href="/category" className="ml-4 flex items-center gap-2">
+            <span>Xem thêm</span>
+            <FaLongArrowAltRight className=' translate-y-1/6'/>
           </a>
         </div>
       </div>

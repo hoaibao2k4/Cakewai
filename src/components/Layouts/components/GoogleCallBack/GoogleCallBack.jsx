@@ -13,10 +13,10 @@ export const GoogleCallBack = () => {
     const refreshToken = params.get('refreshToken'); // Refresh token
 
     if (token && refreshToken) {
-      localStorage.setItem('authToken', token);
-      localStorage.setItem('refreshToken', refreshToken);
+      //localStorage.setItem('authToken', token);
+      //localStorage.setItem('refreshToken', refreshToken);
 
-      googleLoginUser(dispatch, refreshToken);
+      googleLoginUser(dispatch, refreshToken, token);
 
       navigate('/', { replace: true });
     } else {

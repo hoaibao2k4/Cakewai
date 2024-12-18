@@ -5,6 +5,7 @@ import addressData from './address.json';
 import { getCurrentUser, updateUser } from '~/api/apiUser';
 import { setUser } from '~/redux/authSlice';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const AccountAddress = ({ currentUser, instance }) => {
   const { TextArea } = Input;
@@ -13,7 +14,7 @@ const AccountAddress = ({ currentUser, instance }) => {
   const [selectedWard, setSelectedWard] = useState(null);
   const [wardPathWithType, setWardPathWithType] = useState('');
   const [profile, setProfile] = useState(currentUser?.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const provinces = Object.keys(addressData)
     .map((key) => ({
       value: key,
@@ -42,44 +43,53 @@ const AccountAddress = ({ currentUser, instance }) => {
   };
 
   const handleHomeChange = (value, name) => {
-    const address = wardPathWithType.includes('Phường') ? wardPathWithType : `Phường ${profile.address.street}, Quận ${profile.address.district}, Thành phố ${profile.address.province}`
+    const address = wardPathWithType.includes('Phường')
+      ? wardPathWithType
+      : `Phường ${profile.address.street}, Quận ${profile.address.district}, Thành phố ${profile.address.province}`;
     const fullAddress = [value, address]
-        .filter(Boolean) // Loại bỏ giá trị null/undefined/rỗng
-        .join(', ');
+      .filter(Boolean) // Loại bỏ giá trị null/undefined/rỗng
+      .join(', ');
     setProfile((prev) => ({
       ...prev,
       address: {
         ...prev.address,
         [name]: value,
-        full_address: name='home_code' ? fullAddress : ''
-      }
+        full_address: (name = 'home_code' ? fullAddress : ''),
+      },
     }));
   };
 
   const handleSubmitAddress = async (e) => {
     e.preventDefault();
-    try {
-      const res = await updateUser(currentUser?.access_token, profile, instance);
-      //console.log(res);
-      setSelectedProvince(null)
-      setSelectedDistrict(null)
-      setSelectedWard(null)
-    } catch (err) {
-      console.log(err);
+    if (profile !== currentUser?.user) {
+      try {
+        const res = await updateUser(currentUser?.access_token, profile, instance);
+        //console.log(res);
+        await refreshUser();
+        setSelectedProvince(null);
+        setSelectedDistrict(null);
+        setSelectedWard(null);
+        toast.success('Cập nhật thành công!', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
-    refreshUser();
   };
   const refreshUser = async () => {
     const newUser = await getCurrentUser(instance, currentUser?.access_token);
     if (JSON.stringify(newUser) !== JSON.stringify(currentUser.user)) {
-      console.log('New user data:', newUser);
-      dispatch(setUser({
-        ...currentUser,   // Giữ lại token, nhưng thay user mới
-        user: newUser,
-      }));
-      console.log('Update user: ', currentUser);
+      dispatch(
+        setUser({
+          ...currentUser, // Giữ lại token, nhưng thay user mới
+          user: newUser,
+        }),
+      );
+      setProfile(newUser)
     }
-  };  
+  };
 
   return (
     <>
@@ -94,7 +104,7 @@ const AccountAddress = ({ currentUser, instance }) => {
               setSelectedWard(null);
               setWardPathWithType('');
               const selectedLabel = provinces.find((province) => province.value === value)?.label;
-              handleHomeChange(selectedLabel, 'province')
+              handleHomeChange(selectedLabel, 'province');
             }}
           >
             {provinces.map((province) => (
@@ -114,7 +124,7 @@ const AccountAddress = ({ currentUser, instance }) => {
               setSelectedWard(null);
               setWardPathWithType('');
               const selectedLabel = getDistricts(selectedProvince).find((district) => district.value === value)?.label;
-              handleHomeChange(selectedLabel, 'district')
+              handleHomeChange(selectedLabel, 'district');
             }}
           >
             {getDistricts(selectedProvince).map((district) => (
@@ -133,8 +143,10 @@ const AccountAddress = ({ currentUser, instance }) => {
               setSelectedWard(value);
               const ward = addressData[selectedProvince]['quan-huyen'][selectedDistrict]['xa-phuong'][value];
               setWardPathWithType(ward.path_with_type);
-              const selectedLabel = getWards(selectedProvince, selectedDistrict).find((ward) => ward.value === value)?.label;
-              handleHomeChange(selectedLabel, 'street')
+              const selectedLabel = getWards(selectedProvince, selectedDistrict).find(
+                (ward) => ward.value === value,
+              )?.label;
+              handleHomeChange(selectedLabel, 'street');
             }}
           >
             {getWards(selectedProvince, selectedDistrict).map((ward) => (
@@ -146,7 +158,11 @@ const AccountAddress = ({ currentUser, instance }) => {
           <div className="p-[10px] text-[#525f7f]">{wardPathWithType && <div>{wardPathWithType}</div>}</div>
         </Form.Item>
         <Form.Item label="Tên đường, Tòa nhà, Số nhà">
-          <TextArea onChange={(e) => handleHomeChange(e.target.value, 'home_code')} value={profile.address.home_code} required />
+          <TextArea
+            onChange={(e) => handleHomeChange(e.target.value, 'home_code')}
+            value={profile.address.home_code}
+            required
+          />
         </Form.Item>
         <Form.Item>
           <button

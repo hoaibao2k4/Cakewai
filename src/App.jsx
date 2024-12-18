@@ -3,6 +3,8 @@ import { publicRoute, privateRoute } from "./routes/route";
 import DefaultLayout from "./components/Layouts/DefaultLayout";
 import PrivateRoute from "./Middleware";
 import { Fragment } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -45,6 +47,7 @@ function App() {
             );
           })}
         </Routes>
+        <ToastContainer/>
       </div>
     </Router>
   );

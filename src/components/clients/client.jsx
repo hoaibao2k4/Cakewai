@@ -1,15 +1,13 @@
 'use client';
-
 import { Dropdown, Tooltip } from 'flowbite-react';
 import avatar from '~/assets/default_avt.jpg';
 import { Link } from 'react-router-dom';
-export function CakeDropdown() {
+export function DropdownLib({label, items, props}) {
   return (
-    <Dropdown label="Bộ lọc" dismissOnClick={false}>
-      <Dropdown.Item>Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
-      <Dropdown.Item>Sign out</Dropdown.Item>
+    <Dropdown {...props} label={label} dismissOnClick={false}>
+      {items?.map((item, index) => (
+        <Dropdown.Item key={index}>{item}</Dropdown.Item>
+      ))}
     </Dropdown>
   );
 }
@@ -42,15 +40,15 @@ export function UserTooltip({ onClick, currentUser }) {
         <div>
           <ul className="">
             <Link to='/account'>
-              <li className="rounded-tl-lg rounded-tr-lg px-3 py-2 hover:bg-slate-100 hover:text-fourth">
+              <li className="rounded-tl-lg rounded-tr-lg px-3 py-2  hover:text-fourth">
                 Tài khoản của tôi
               </li>
             </Link>
             <Link to='/account/orders'>
-              <li className="px-3 py-2 hover:bg-slate-100 hover:text-fourth">Lịch sử mua hàng</li>
+              <li className="px-3 py-2  hover:text-fourth">Lịch sử mua hàng</li>
             </Link>
             <button onClick={() => onClick()}>
-              <li className="rounded-bl-lg rounded-br-lg px-3 py-2 hover:bg-slate-100 hover:text-fourth">Đăng xuất</li>
+              <li className="rounded-bl-lg rounded-br-lg px-3 py-2  hover:text-fourth">Đăng xuất</li>
             </button>
           </ul>
         </div>
@@ -60,4 +58,5 @@ export function UserTooltip({ onClick, currentUser }) {
     </Tooltip>
   );
 }
+
 
