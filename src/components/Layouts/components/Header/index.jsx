@@ -23,9 +23,9 @@ function Header() {
   const { pathname, search } = useLocation();
   const user = useSelector((state) => state.auth.login.currentUser);
   const [open, setOpen] = useState(false);
-  const {list} = useSelector(state => state.cart)
+  const { list } = useSelector((state) => state.cart);
   const [originalList, setOriginalList] = useState([]);
-  const { setIsLogout } = useContext(AddToCartContext)
+  const { setIsLogout } = useContext(AddToCartContext);
 
   let instance = createInstance(user, dispatch, loginSuccess);
 
@@ -34,18 +34,18 @@ function Header() {
   };
 
   const onClose = async () => {
-    try {
-      console.log(originalList)
+    if (list.length > 0) {
+      try {
         const itemsToUpdate = list.filter((item, index) => item?.buy_quantity !== originalList[index].buy_quantity);
         if (itemsToUpdate.length > 0) {
-          await Promise.all(
-            itemsToUpdate.map((item) => updateCartItem(user.access_token, instance, item))
-          );
+          await Promise.all(itemsToUpdate.map((item) => updateCartItem(user.access_token, instance, item)));
         }
-        setOpen(false)
+        setOpen(false);
       } catch (err) {
-        console.error("Failed to update cart items", err);
+        console.error('Failed to update cart items', err);
       }
+    }
+    else setOpen(false)
   };
   const handleLogin = () => {
     navigate('/auth?mode=signin');
@@ -58,7 +58,7 @@ function Header() {
       localStorage.removeItem('authToken');
       localStorage.removeItem('refreshToken');
     }
-    dispatch(setCart([]))
+    dispatch(setCart([]));
     persistor.purge();
   };
 
@@ -66,12 +66,14 @@ function Header() {
     const fetchCart = async () => {
       if (user) {
         const res = await getCart(user?.access_token, instance);
-        dispatch(setCart(res?.items))
-        setOriginalList(res?.items)
+        if (res) {
+          dispatch(setCart(res?.items));
+          setOriginalList(res?.items);
+        }
       }
     };
     fetchCart(user, instance);
-  }, [user]);
+  }, [user, open]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

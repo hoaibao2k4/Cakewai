@@ -87,7 +87,7 @@ const AccountProfile = ({ currentUser, instance }) => {
               />
             ) : (
               <img
-                src={currentUser?.user.profile_picture || avatar}
+                src={currentUser?.user?.profile_picture || avatar}
                 alt="Ảnh đại diện"
                 className="absolute right-0 top-0 size-40 rounded-full"
               />
