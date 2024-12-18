@@ -1,11 +1,27 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { requestPasswordUser } from '~/api/apiUser';
 function EmailRecovery() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
-  const handleRequest = () => {
-    sessionStorage.setItem('recovery', 'true');
-    navigate('/email/message');
+  const handleRequest = async () => {
+    if (email !== '') {
+      try {
+        const res = await requestPasswordUser(email);
+        console.log(res);
+        sessionStorage.setItem('recovery', 'true');
+        navigate('/email/message');
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    else {
+      toast.error('Bạn chưa nhập email', {
+        position: 'bottom-right',
+        onClose: 3000
+      })
+    }
   };
   return (
     <div className="mb-5 mt-16 h-fit w-full bg-slate-50">

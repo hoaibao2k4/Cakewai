@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GoogleIcon } from '~/assets/icons';
 import { registerUser } from '~/redux/apiRequest';
+import { BE_BASE_URL } from '~/services/axios';
 function SignUpForm() {
   const [hidden, setHidden] = useState({
     password: true,
@@ -100,7 +101,7 @@ function SignUpForm() {
   };
 
     const handleRegister = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     setIsSubmitted(true);
 
     let isValid = true;
@@ -128,10 +129,11 @@ function SignUpForm() {
 
     if (isValid) {
       handleSubmit(e);
-      alert('Đăng ký thành công');
     }
   };
-
+  const handleGoogleLogin = () => {
+    window.location.href = `${BE_BASE_URL}/api/public/google/login`;
+  };
   const location = useLocation()
   useEffect(() => {
     if (window.innerWidth >= 1024)
@@ -292,7 +294,7 @@ function SignUpForm() {
           <p className="text-center">Hoặc</p>
           <hr className="border-gray-800" />
         </div>
-        <button className="my-2 flex w-full items-center justify-center rounded-xl border bg-white py-2">
+        <button onClick={handleGoogleLogin} className="my-2 flex w-full items-center justify-center rounded-xl border bg-white py-2">
           <GoogleIcon className='mr-2'/>
           Đăng nhập với Google
         </button>

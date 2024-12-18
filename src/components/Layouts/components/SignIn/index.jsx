@@ -56,8 +56,7 @@ function SignInForm() {
     }
 
     if(isValid){
-      handleSubmit(e);
-      alert('Đăng nhập thành công');
+      handleSubmit(e)
     }
   };
   const location = useLocation()

@@ -8,7 +8,7 @@ export const updateUser = async (token, user, instance) => {
     console.log('Update Ok');
     return res.data;
   } catch (err) {
-    if (err.response) console.error('Server error: ', err.response.message, err.response.code);
+    if (err.response) console.error('Server error: ', err.response.message, err.response.status);
     console.error('Request error: ', err.message);
   }
 };
@@ -19,7 +19,7 @@ export const getCurrentUser = async (instance, token) => {
     });
     return res.data;
   } catch (err) {
-    if (err.response) console.error('Server error: ', err.response.message, err.response.code);
+    if (err.response) console.error('Server error: ', err.response.message, err.response.status);
     console.error('Request error: ', err.message);
   }
 };
@@ -38,10 +38,31 @@ export const updateImageUser = async (instance, token, file) => {
       return res.data;
     } catch (err) {
       if (err.response) {
-        console.error('Server error: ', err.response.data.message, err.response.status);
+        console.error('Server error: ', err.response.message, err.response.status);
       } else {
         console.error('Request error: ', err.message);
       }
     }
   };
   
+  export const requestPasswordUser = async (email) => {
+    try {
+      const res = await response.post('/api/public/request-password-reset', {"email": email})
+      return res.message
+    }
+    catch(err) {
+     console.log(err)
+    }
+  }
+
+  export const changePasswordUser = async (instance, token, data) => {
+    try {
+      const res = await instance.post('/api/protected/account-recover/update-password', data, {
+        headers: {Authorization: `Bearer: ${token}`}
+      })
+      return res.message
+    }
+    catch(err) {
+      console.log(err)
+    }
+  }

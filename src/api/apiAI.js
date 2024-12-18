@@ -1,8 +1,8 @@
 import {response} from '~/services/axios'
-export const translatePromt = async (token, promt, instance) => {
+export const generateImage = async (token, promt, instance) => {
   try {
     const res = await instance.post(
-      '/api/protected/translate',
+      '/api/protected/generate-image',
       { user_input: promt },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -10,16 +10,7 @@ export const translatePromt = async (token, promt, instance) => {
     );
     return res.data;
   } catch (err) {
-    if (err.response) console.error('Server err: ', err.response.message, err.response.code);
-    else console.error('Request err: ', err.message);
-  }
-};
-
-export const generateImage = async (prompt) => {
-  try {
-    
-  } catch (err) {
-    if (err.response) console.error('Server err: ', err);
+    if (err.response) console.error('Server err: ', err.response.message, err.response.status);
     else console.error('Request err: ', err.message);
   }
 };

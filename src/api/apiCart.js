@@ -8,7 +8,7 @@ export const getCart = async (token, instance) => {
     }
     catch(err) {
         if (err.response) 
-            console.error('Server error: ', err.response.message, err.response.code)
+            console.error('Server error: ', err.response.message, err.response.status)
         else
             console.error('Request error: ', err.message)
     }
@@ -24,7 +24,7 @@ export const updateCartItem = async (token, instance, item) => {
     }
     catch(err) {
         if (err.response)
-            console.error('Server error: ', err.response.message, err.response.code)
+            console.error('Server error: ', err.response.message, err.response.status)
         else
             console.error('Request error: ', err.message)    
     }
@@ -38,7 +38,7 @@ export const removeCartItem = async (token, instance, id, size ) => {
     }
     catch(err) {
         if (err.response)
-            console.error('Server error: ', err.response.message, err.response.code)
+            console.error('Server error: ', err.response.message, err.response.status)
         else
             console.error('Request error: ', err.message)
     }
@@ -56,7 +56,7 @@ export const addCartItem = async (token, instance, item) => {
         if (err.response){
             console.log(err)
             console.log(err.response)
-            console.error('Server error: ', err.response.message, err.response.code)
+            console.error('Server error: ', err.response.message, err.response.status)
         }
         else
             console.error('Request error: ', err.message)
@@ -72,7 +72,7 @@ export const createOrder = async (token, instance, invoice) => {
     }
     catch(err) {
         if (err.response)
-            console.error('Server error: ', err.response.message, err.response.code)
+            console.error('Server error: ', err.response.message, err.response.status)
         else
             console.error('Request error: ', err.message)
     }
