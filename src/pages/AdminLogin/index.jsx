@@ -23,7 +23,7 @@ function AdminLogin() {
         email: email,
         password: password,
       };
-      loginUser(dispatch, newUser, navigate, '/admin/dashboard');
+      loginUser(dispatch, newUser, navigate, '/admin/product_management');
     };
 
   return (

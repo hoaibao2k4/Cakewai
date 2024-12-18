@@ -67,9 +67,9 @@ export const updateImageUser = async (instance, token, file) => {
     }
 }
 
-export const getListUsers = async (token) => {
+export const getListUsers = async (token, instance) => {
     try {
-      const res = await response.get('/api/public/user/all', {
+      const res = await instance.get('/api/public/user/all', {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log('Response từ API:', res.data);
