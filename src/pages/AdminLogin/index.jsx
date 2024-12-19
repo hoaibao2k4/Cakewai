@@ -18,13 +18,13 @@ function AdminLogin() {
   };
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      const newUser = {
-        email: email,
-        password: password,
-      };
-      loginUser(dispatch, newUser, navigate, '/admin/product_management');
+    e.preventDefault();
+    const newUser = {
+      email: email,
+      password: password,
     };
+    loginUser(dispatch, newUser, navigate, '/admin/dashboard');
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-[#f3d1dc]">
@@ -40,15 +40,15 @@ function AdminLogin() {
           <div className='relative'>
             <div className="mb-2 block">
               <Label htmlFor="password1" value="Mật khẩu" />
-             
+
             </div>
             <TextInput id="password1" type={hidden ? "password" : "text"} required value={password} onChange={(e) => setPassword(e.target.value)} />
             <i
-                className="absolute right-2 mx-1 top-3/4 -translate-y-2/3 cursor-pointer hover:text-slate-900"
-                onClick={() => hiddenPassword()}
-              >
-                {hidden === true ? <FaEyeSlash className="text-slate-500" /> : <FaEye />}
-              </i>
+              className="absolute right-2 mx-1 top-3/4 -translate-y-2/3 cursor-pointer hover:text-slate-900"
+              onClick={() => hiddenPassword()}
+            >
+              {hidden === true ? <FaEyeSlash className="text-slate-500" /> : <FaEye />}
+            </i>
           </div>
           <Button type="submit" className="bg-cyan-600">
             Đăng nhập
