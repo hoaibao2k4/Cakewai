@@ -1,15 +1,21 @@
 import { createInstance } from '~/redux/interceptors';
-import AccountAddress from './SectionContentList/Addresss';
-import AccountChangePassword from './SectionContentList/ChangePassword';
-import AccountOrders from './SectionContentList/Orders';
-import AccountProfile from './SectionContentList/Profile';
+import AccountAddress from './contents/Addresss';
+import AccountChangePassword from './contents/ChangePassword';
+import AccountOrders from './contents/Orders';
+import AccountProfile from './contents/Profile';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '~/redux/authSlice';
+import { useEffect } from 'react';
 
-const ProfileSectionContent = ({ currentKey }) => {
+const SidebarContent = ({ currentKey, handleUpdateContent }) => {
   const { currentUser } = useSelector((state) => state.auth.login);
   const dispatch = useDispatch();
   let instance = createInstance(currentUser, dispatch, loginSuccess);
+
+  useEffect(() => {
+    handleUpdateContent(currentKey);
+  }, [currentKey, handleUpdateContent]);
+
   let content;
   switch (currentKey) {
     case 'profile':
@@ -37,4 +43,4 @@ const ProfileSectionContent = ({ currentKey }) => {
   );
 };
 
-export default ProfileSectionContent;
+export default SidebarContent;
