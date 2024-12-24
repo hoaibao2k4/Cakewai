@@ -58,26 +58,26 @@ function CartItem({ item, index }) {
       <td className="text-center align-middle">
         <CloseIcon className="hover:cursor-pointer" onClick={() => handleRemoveItem(item)} />
       </td>
-      <td className="m-[20px] flex items-center gap-[20px] space-x-4 text-center align-middle">
+      <td className="lg:m-[20px] p-5 my-1 flex lg:flex-row flex-col items-center justify-center gap-[20px] space-x-4 text-center align-middle">
         <div className="flex-shrink-0">
-          <img src={item.image_link} alt="" width={180} height={180} />
+          <img src={item.image_link} alt="" className='lg:w-[180px] lg:h-[180px] md:w-[120px] md:h-[120px] w-[60px] h-[60px]' />
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="name-of-cake" className="text-center">
+        <div className="flex lg:flex-col">
+          <label htmlFor="name-of-cake" className="text-center lg:block hidden">
             {item?.name}
           </label>
-          <label htmlFor="name-of-cake" className="text-left">
+          <label htmlFor="name-of-cake" className="lg:text-left text-center">
             {item.variant !== 'one-variant' ? item.variant : ''}
           </label>
         </div>
       </td>
-      <td className="text-center align-middle text-[20px] text-primary">
+      <td className="text-center lg:align-middle lg:text-[20px] md:text-base text-sm text-primary">
         {item?.price && item?.price.toLocaleString('vi-VN') + ' VND'}
       </td>
       <td>
         <div className="flex items-center justify-center">
           <button
-            className="h-11 w-11 rounded-bl-lg rounded-tl-lg border border-primary"
+            className="lg:w-11 w-8 p-1 lg:p-2 rounded-bl-lg rounded-tl-lg border border-primary"
             onClick={() => setQuantity(Math.max(quantity - 1, 1))}
             onMouseLeave={() => handleUpdate(item)}
           >
@@ -87,11 +87,11 @@ function CartItem({ item, index }) {
             type="text"
             value={quantity}
             onChange={(e) => e.target.value}
-            className="h-11 w-11 border-b border-t border-primary text-center"
+            className=" lg:w-11 w-8 p-2 lg:p-3 border-b border-t border-primary text-center text-xs"
             disabled
           />
           <button
-            className="h-11 w-11 rounded-br-lg rounded-tr-lg border border-primary"
+            className="lg:w-11 w-8 p-1 lg:p-2 rounded-br-lg rounded-tr-lg border border-primary"
             onClick={() => setQuantity(Math.max(1, quantity + 1))}
             onMouseLeave={() => handleUpdate(item)}
           >
@@ -99,7 +99,7 @@ function CartItem({ item, index }) {
           </button>
         </div>
       </td>
-      <td className="text-center align-middle text-[20px] text-primary">
+      <td className="text-center align-middle lg:text-[20px] md:text-base text-sm text-primary">
         {(item.buy_quantity * item?.price).toLocaleString('vi-VN') + ' VND'}
       </td>
     </tr>

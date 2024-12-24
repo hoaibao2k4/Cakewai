@@ -11,15 +11,23 @@ import {
 } from './authSlice';
 import { response } from '~/services/axios';
 import { toast } from 'react-toastify';
-export const loginUser = async (dispatch, user, navigate, redirectPath = '/') => {
+export const loginUser = async (dispatch, user, expectedRole, navigate, redirectPath = '/') => {
   dispatch(loginStart());
   try {
     const res = await response.post('/api/public/login', user);
-    dispatch(loginSuccess(res));
-    toast.success('Đăng nhập thành công', {
-      position: 'bottom-right',
-    });
-    navigate(redirectPath);
+    const role = res.data.user.is_admin
+    if (expectedRole === role || role) {
+      toast.success('Đăng nhập thành công', {
+        position: 'bottom-right',
+      });
+      dispatch(loginSuccess(res));
+      navigate(redirectPath);
+    }
+    else {
+      toast.error('Truy cập bị từ chối', {
+        position: 'bottom-right',
+      });
+    }
   } catch (err) {
     dispatch(loginFail());
     if (err.response) {
@@ -31,7 +39,7 @@ export const loginUser = async (dispatch, user, navigate, redirectPath = '/') =>
         toast.error('Sai mật khẩu', {
           position: 'bottom-right',
         });
-      }
+      } 
     }
   }
 };

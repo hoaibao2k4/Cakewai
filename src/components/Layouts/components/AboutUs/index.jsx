@@ -4,7 +4,7 @@ import about_3 from '~/assets/images/about_3.jpg';
 import { Link } from 'react-router-dom';
 function AboutUs() {
   return (
-    <div className="mx-full font-inter mt-28 w-full items-center overflow-hidden text-black text-primary">
+    <div className="mx-full font-inter mt-28 w-full items-center overflow-hidden text-primary">
       <div className="mx-4 sm:mx-10 lg:mx-28">
         <Link to="/">Trang chủ </Link>
         <span>&gt;&gt;</span>
