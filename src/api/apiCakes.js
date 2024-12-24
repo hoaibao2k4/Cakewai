@@ -43,3 +43,27 @@ export const updateCake = (_id, product_name, image_link, description, product_t
 export const fetchBestSeller = () => {
     return response.get('/api/public/products/')
 }
+
+export const sortCakes = async (order) => {
+    try {
+        const res = await response.get(`/api/public/products/sort?field=variant.price&order=${order}`)
+        return res.data
+    }
+    catch(err) {
+        if (err.response)
+            console.error('Server error:', err.response, err.response.status)
+        console.error('Request error: ', err.message)
+    }
+}
+
+export const searchCakes = async (query) => {
+    try {
+        const res = await response.get(`/api/public/product/search?query=${query}`)
+        return res.data
+    }
+    catch(err) {
+        if (err.response)
+            console.error('Server error:', err.response, err.response.status)
+        console.error('Request error: ', err.message)
+    }
+}
