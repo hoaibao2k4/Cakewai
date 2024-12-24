@@ -2,7 +2,7 @@
 function GeneralPolicy(){
 
     return(
-        <div className="mx-28 my-28 items-center text-primary text-black" >
+        <div className="lg:m-28 md:mx-20 my-28 mx-12 items-center text-primary" >
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold  text-center">CHÍNH SÁCH VÀ QUY ĐỊNH CHUNG</h2>
             <hr className=" h-1 bg-black w-1/2 my-4 mx-auto"/> <br />
             <ol className="text-lg list-decimal pl-6 sm:pl-8 text-left text-black ">

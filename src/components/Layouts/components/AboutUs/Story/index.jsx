@@ -10,14 +10,14 @@ function Info1() {
         <span>&gt;&gt;</span>
         <a href="/about"> Về chúng tôi </a>
         <span>&gt;&gt;</span>
-        <span>Nội dung</span>
+        <span>Câu chuyện</span>
       </div>
       <div
         className="mt-5 flex h-auto w-auto items-center bg-cover bg-center pt-[50%] duration-500"
         style={{ backgroundImage: `url(${about_1})` }}
       ></div>
-      <div className="my-10 flex flex-row space-x-20">
-        <div className="my-5 ml-20 max-w-4xl text-left">
+      <div className="my-10 flex lg:flex-row flex-col space-x-20">
+        <div className="my-5 lg:ml-20 mx-10 max-w-4xl text-left">
           <h1 className="text-5xl font-bold text-black">CÂU CHUYỆN</h1>
           <div className="text-bg my-5 text-black">
             Cakewai được thành lập vào năm 2024, bắt nguồn từ tình yêu dành cho đất Việt cùng với bánh ngọt và cộng đồng
@@ -33,22 +33,23 @@ function Info1() {
         </div>
 
         <div className="flex flex-col space-y-5">
-         
-            <div
-              style={{ backgroundImage: `url(${about_2})` }}
-              className="img-scale flex h-64 w-80 items-start justify-center rounded-lg bg-cover bg-center"
-            >
-              <Link to="/about?mode=info2" className="mt-3 text-5xl font-bold text-white hover:text-yellow-500">DỊCH VỤ</Link>
-            </div>
-          
-          
-            <div
-              style={{ backgroundImage: `url(${about_3})` }}
-              className="img-scale flex h-64 w-80 items-start justify-center rounded-lg bg-cover bg-center"
-            >
-              <Link to="/about?mode=info3" className="mt-3 text-5xl font-bold text-white hover:text-yel">LỜI CAM KẾT</Link>
-            </div>
-          
+          <div
+            style={{ backgroundImage: `url(${about_2})` }}
+            className="img-scale flex h-64 w-80 items-start justify-center rounded-lg bg-cover bg-center"
+          >
+            <Link to="/about?mode=info2" className="mt-3 text-5xl font-bold text-white hover:text-yellow-500">
+              DỊCH VỤ
+            </Link>
+          </div>
+
+          <div
+            style={{ backgroundImage: `url(${about_3})` }}
+            className="img-scale flex h-64 w-80 items-start justify-center rounded-lg bg-cover bg-center"
+          >
+            <Link to="/about?mode=info3" className="hover:text-yel mt-3 text-5xl font-bold text-white">
+              LỜI CAM KẾT
+            </Link>
+          </div>
         </div>
       </div>
     </div>

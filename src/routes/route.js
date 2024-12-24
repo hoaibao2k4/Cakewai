@@ -19,7 +19,7 @@ import AdminCustomer from "~/pages/AdminCustomer/customer";
 import Payment from "~/pages/Payment";
 import EmailRecovery from "~/components/Layouts/components/Forgot Password/EmailRecovery";
 import EmailSent from "~/components/Layouts/components/Forgot Password/EmailSent";
-
+import TextEditor from "~/pages/TextEditor";
 const publicRoute = [
   { path: "/", component: Home },
   { path: "/generator", component: GenImage },
@@ -49,6 +49,7 @@ const privateRoute = [
   { path: "/admin/product_management", component: AdminProduct, layout: DashBoardLayout },
   { path: "/admin/order_management", component: AdminOrder, layout: DashBoardLayout },
   { path: "/admin/register_customer", component: AdminCustomer, layout: DashBoardLayout },
+  { path: "/admin/text-editor", component: TextEditor, layout: DashBoardLayout },
 ];
 
 export { publicRoute, privateRoute };

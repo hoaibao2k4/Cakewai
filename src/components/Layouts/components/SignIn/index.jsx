@@ -28,7 +28,7 @@ function SignInForm() {
       email: email,
       password: password,
     };
-    loginUser(dispatch, newUser, navigate);
+    loginUser(dispatch, newUser, false, navigate);
   };
 
   const handleGoogleLogin = () => {
