@@ -8,11 +8,11 @@ const ProductDetails = ({ selectedProduct, productVariant, setProductVariant }) 
     useEffect(() => {
         if (selectedProduct && selectedProduct.product_variant) {
             const variants = selectedProduct.product_variant.map((variant) => ({
-                key: variant.variant_features, // Dùng variant_features làm key duy nhất
-                variant_features: variant.variant_features || 'N/A',
-                price: variant.price || 0,
-                num_in_store: variant.num_in_store || 0,
-                discount: variant.discount || 0,
+                key: variant?.variant_features, // Dùng variant_features làm key duy nhất
+                variant_features: variant?.variant_features || 'N/A',
+                price: variant?.price || 0,
+                num_in_store: variant?.num_in_store || 0,
+                discount: variant?.discount || 0,
                 quantity: 1,
             }));
             setDataSource(variants);
@@ -61,7 +61,7 @@ const ProductDetails = ({ selectedProduct, productVariant, setProductVariant }) 
             title: 'Size',
             dataIndex: 'variant_features',
             render: (text) => {
-                const sizes = selectedProduct.product_variant.map((variant) => variant.variant_features);
+                const sizes = selectedProduct?.product_variant.map((variant) => variant?.variant_features);
                 return (
                     <Select
                         value={text}

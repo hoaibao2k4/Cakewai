@@ -106,6 +106,7 @@ function AdminOrder() {
     };
 
     const handleAddOrder = (newOrder) => {
+        console.log('New orders: ', newOrder)
         setOrders((prevOrders) => [...prevOrders, newOrder]); // Thêm đơn hàng mới vào danh sách
     };
 
@@ -116,7 +117,7 @@ function AdminOrder() {
     if (error) {
         return <p>Lỗi: {error}</p>;
     }
-
+    //console.log(orders)
     return (
         <div className="p-4">
             <div className='p-3 flex justify-between items-end'>
