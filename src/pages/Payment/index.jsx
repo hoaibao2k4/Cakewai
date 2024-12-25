@@ -74,7 +74,7 @@ function Payment() {
               id="base"
               type="text"
               sizing="md"
-              value={profile.name}
+              value={profile?.name}
               name="name"
               onChange={handleProfileChange}
             />
@@ -86,7 +86,7 @@ function Payment() {
               id="base"
               type="text"
               sizing="md"
-              value={profile.address.full_address}
+              value={profile?.address.full_address}
               name="address"
               onChange={handleProfileChange}
             />
@@ -98,7 +98,7 @@ function Payment() {
               id="base"
               type="text"
               sizing="md"
-              value={profile.phone}
+              value={profile?.phone}
               name="phone"
               onChange={handleProfileChange}
             />
@@ -110,7 +110,7 @@ function Payment() {
               id="base"
               type="text"
               sizing="md"
-              value={profile.email}
+              value={profile?.email}
               name="email"
               onChange={handleProfileChange}
             />
