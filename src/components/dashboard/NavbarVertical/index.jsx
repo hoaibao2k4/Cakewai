@@ -65,7 +65,7 @@ const NavbarVertical = () => {
         },
     ];
     return (
-        <div className="w-60 h-screen">
+        <div className="w-60 min-h-screen">
             <Menu
                 onClick={onClick}
                 selectedKeys={[current]}
