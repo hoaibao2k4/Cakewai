@@ -27,13 +27,13 @@ Cakewai is an online bakery website, serving as the final project for the IE104 
 git clone https://github.com/hoaibao2k4/Cakewai.git
 ```
 
-1. Navigate to the project directory:
+2. Navigate to the project directory:
 
 ```bash
 cd Cakewai
 ```
 
-1. Install dependencies:
+3. Install dependencies:
 
 ```bash
 npm install
