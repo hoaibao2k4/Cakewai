@@ -108,13 +108,12 @@ const AddOrderModal = ({ isModalOpen, handleCloseModal, fetchOrders, handleAddOr
                 total_price: totalPrice,
                 order_status: 'Đang xử lý', // Giả sử trạng thái mặc định
                 shipping_status: 'Đang xử lý', // Giả sử trạng thái mặc định
-            };
-    
+            };    
             notification.success({
                 message: "Add Order",
                 description: "Thêm đơn hàng thành công"
             });
-    
+        
             // Gọi handleAddOrder để cập nhật đơn hàng
             handleAddOrder(newOrder);
             resetAndCloseModal(); // Đóng modal và reset các giá trị form
