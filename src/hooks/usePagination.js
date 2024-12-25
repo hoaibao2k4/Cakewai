@@ -15,11 +15,11 @@ function usePagination(data) {
     useEffect(() => {
         setCurrentPage(1)
     }, [params])
-    // Đồng bộ hóa currentPage với query parameters
+
     useEffect(() => {
-        const params = Object.fromEntries(searchParams.entries()); // Lấy tất cả query params hiện có
-        params.page = currentPage; // Cập nhật giá trị "page"
-        setSearchParams(params); // Merge params
+        const params = Object.fromEntries(searchParams.entries());
+        params.page = currentPage; 
+        setSearchParams(params);
     }, [currentPage, searchParams, setSearchParams]);
 
     const currentData = () => {
@@ -41,7 +41,7 @@ function usePagination(data) {
         setCurrentPage((prev) => Math.min(pageNumber, maxPage));
     };
 
-    return { currentPage, maxPage, currentData, next, previous, jump };
+    return { currentPage, maxPage, currentData, next, previous, jump, setCurrentPage };
 }
 
 export default usePagination;

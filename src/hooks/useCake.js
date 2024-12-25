@@ -42,7 +42,6 @@ const useCake = (params) => {
   }, [params]);
 
   const index = getTypeOfCakes(params);
-  return { cakes, categoryName: categories[index]?.name };
+  return { cakes, categoryName: categories[index]?.name, setCakes, getTypeOfCakes, categories };
 };
-
 export default useCake;

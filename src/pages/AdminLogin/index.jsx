@@ -23,7 +23,7 @@ function AdminLogin() {
       email: email,
       password: password,
     };
-    loginUser(dispatch, newUser, navigate, '/admin/dashboard');
+    loginUser(dispatch, newUser, true, navigate, '/admin/dashboard');
   };
 
   return (
@@ -42,7 +42,7 @@ function AdminLogin() {
               <Label htmlFor="password1" value="Mật khẩu" />
 
             </div>
-            <TextInput id="password1" type={hidden ? "password" : "text"} required value={password} onChange={(e) => setPassword(e.target.value)} />
+            <TextInput id="password1" type={hidden ? "password" : "text"} placeholder='Nhập mật khẩu của bạn' required value={password} onChange={(e) => setPassword(e.target.value)} />
             <i
               className="absolute right-2 mx-1 top-3/4 -translate-y-2/3 cursor-pointer hover:text-slate-900"
               onClick={() => hiddenPassword()}
@@ -56,6 +56,6 @@ function AdminLogin() {
         </form>
       </Card>
     </div>
-  );
+  )
 }
 export default AdminLogin;

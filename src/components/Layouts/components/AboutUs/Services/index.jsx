@@ -10,14 +10,14 @@ function Info2() {
         <span>&gt;&gt;</span>
         <a href="/about"> Về chúng tôi </a>
         <span>&gt;&gt;</span>
-        <span>Nội dung</span>
+        <span>Dịch vụ</span>
       </div>
       <div
         className="mt-5 flex h-auto w-auto items-center bg-cover bg-center pt-[50%] duration-500"
         style={{ backgroundImage: `url(${about_2})` }}
       ></div>
-      <div className="my-10 flex flex-row space-x-20">
-        <div className="my-5 ml-20 max-w-4xl text-left">
+      <div className="my-10 flex lg:flex-row flex-col space-x-20">
+        <div className="my-5 lg:ml-20 mx-10 max-w-4xl text-left">
           <h1 className="text-5xl font-bold text-black">DỊCH VỤ</h1>
           <div className="text-bg mb-2 mt-5 text-black">
             Cakewai là không gian của chúng mình nên mọi thứ ở đây đều vì sự thoải mái của chúng mình. Đừng giữ trong

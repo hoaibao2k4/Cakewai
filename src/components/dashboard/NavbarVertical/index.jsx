@@ -2,7 +2,8 @@ import {
     BarChartOutlined,
     FormOutlined,
     ProductOutlined,
-    UserAddOutlined
+    UserAddOutlined,
+    FileWordOutlined
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useEffect, useState } from 'react';
@@ -62,6 +63,11 @@ const NavbarVertical = () => {
             key: 'register-customer',
             icon: <UserAddOutlined />,
             label: (<Link to="/admin/register_customer">Khách hàng thành viên</Link>),
+        },
+        {
+            key: 'text-editor',
+            icon: <FileWordOutlined />,
+            label: (<Link to="/admin/text-editor">Bài viết</Link>),
         },
     ];
     return (
