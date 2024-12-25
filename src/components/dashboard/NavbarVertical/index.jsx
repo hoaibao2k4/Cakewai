@@ -1,25 +1,40 @@
-import {
-    BarChartOutlined,
-    FormOutlined,
-    ProductOutlined,
-    UserAddOutlined,
-    FileWordOutlined
-} from '@ant-design/icons';
+import { BarChartOutlined, FormOutlined, ProductOutlined, UserAddOutlined, FileWordOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const NavbarVertical = () => {
     const [current, setCurrent] = useState(() => {
-        return localStorage.getItem("currentKey") || "dashboard";
+        return localStorage.getItem("adminCurrentKey") || "dashboard";
     });
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
-        localStorage.setItem("currentKey", current);
+        const storedKey = localStorage.getItem("adminCurrentKey") || "dashboard";
+        setCurrent(storedKey);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("adminCurrentKey", current);
     }, [current]);
+    useEffect(() => {
+        const path = location.pathname;
+        if (path === "/admin") {
+            setCurrent("dashboard");
+        } else {
+            const selectedItem = items.find(item => item.label.props.to === path);
+            if (selectedItem && selectedItem.key !== current) {
+                setCurrent(selectedItem.key);
+            }
+        }
+    }, [location.pathname]);
 
     const onClick = (e) => {
         setCurrent(e.key);
+        const selectedItem = items.find(item => item.key === e.key);
+        handleUpdateContent(e.key);
+        navigate(selectedItem.label.props.to);
     };
 
     const items = [
@@ -50,7 +65,7 @@ const NavbarVertical = () => {
         },
     ];
     return (
-        <div className="w-60 h-screen">
+        <div className="w-60 min-h-screen">
             <Menu
                 onClick={onClick}
                 selectedKeys={[current]}

@@ -118,3 +118,36 @@ export const getListOrdersByUserId = async (token,instance, id) => {
     }
     }
   };
+
+  export const createOrders = async (token, instance, name, phone, product_type_id, product_variant, payment_info, total_price) => {
+    try {
+        const res = await instance.post(`/api/protected/order`, {
+            name: name,
+            phone: phone,
+            product_type_id: product_type_id,
+            product_variant: Array.isArray(product_variant) ? product_variant : [product_variant],
+            payment_info: payment_info,
+            total_price: total_price,
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log('Response từ API:', res.data);
+        return res.data;
+    } catch (err) {
+        if (err.response) {
+            console.error('Server error: ', err.response.data, err.response.status);
+            console.error('Request error: ', err.message);
+            throw err;
+        }
+    }
+};
+
+export const getProductsByType = async (typeId) => {
+    try {
+        const res = await response.get(`/api/public/products/${typeId}`);
+        console.log('Products by type:', res.data); 
+        return res.data; 
+    } catch (err) {
+        console.error('Error fetching products by type:', err.message);
+        throw err;
+    }
+}; 
