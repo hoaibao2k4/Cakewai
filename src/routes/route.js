@@ -49,7 +49,7 @@ const privateRoute = [
   { path: "/admin/order_management", component: AdminOrder, layout: DashBoardLayout },
   { path: "/admin/register_customer", component: AdminCustomer, layout: DashBoardLayout },
   { path: "/admin/text-editor", component: TextEditor, layout: DashBoardLayout },
-  { path: "/payment", component: Payment },
+  { path: "/payment", component: Payment, layout: DefaultLayout },
 ];
 
 export { publicRoute, privateRoute };

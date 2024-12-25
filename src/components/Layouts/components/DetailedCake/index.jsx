@@ -9,6 +9,7 @@ import { AddToCartContext } from '../../DefaultLayout';
 import { loginSuccess } from '~/redux/authSlice';
 import { createInstance } from '~/redux/interceptors';
 import { addCartItem } from '~/api/apiCart';
+import { toast } from 'react-toastify';
 function DetailedCake() {
   const [cake, setCake] = useState({});
   const [alikeCake, setAlikeCake] = useState([]);
@@ -46,40 +47,80 @@ function DetailedCake() {
   };
 
   const handleAddToCart = async (cake) => {
-    if (user) {
-      const variant = selected ? selected : cake.product_variant[0];
-      const newItem = {
-        product_id: cake._id,
-        type_id: cake.product_type_id,
-        name: cake.product_name,
-        variant: variant.variant_features,
-        discount: variant.discount,
-        price: variant.price,
-        image_link: cake.image_link,
-        buy_quantity: quantity,
-      };
-      dispatch(addToCart(newItem));
+    if (!user) {
+      navigate('/auth?mode=signin');
+      return;
+    }
+  
+    let variant;
+    
+    if (cake.product_variant?.length > 1) {
+      if (!selected) {
+        toast.info('Vui lòng chọn kích thước!', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
+        return;
+      }
+      variant = selected;
+    } else {
+      variant = cake.product_variant[0];
+    }
+  
+    const newItem = {
+      product_id: cake._id,
+      type_id: cake.product_type_id,
+      name: cake.product_name,
+      variant: variant.variant_features,
+      discount: variant.discount,
+      price: variant.price,
+      image_link: cake.image_link,
+      buy_quantity: quantity,
+    };
+  
+    dispatch(addToCart(newItem));
+    try {
       await addCartItem(user.access_token, instance, newItem);
       triggerSuccessPopup();
-    } else navigate('/auth?mode=signin');
+    } catch (error) {
+      console.error('Lỗi khi thêm vào giỏ hàng:', error);
+    }
   };
+  
 
   const handleBuyNow = (cake) => {
-    if (user) {
-      const variant = selected ? selected : cake.product_variant[0];
-      const newItem = {
-        product_id: cake._id,
-        type_id: cake.product_type_id,
-        name: cake.product_name,
-        variant: variant.variant_features,
-        discount: variant.discount,
-        price: variant.price,
-        image_link: cake.image_link,
-        buy_quantity: quantity,
-      };
-      navigate('/payment', { state: { newItem } });
-    } else navigate('/auth?mode=signin');
+    if (!user) {
+      navigate('/auth?mode=signin');
+      return;
+    }
+    let variant;
+    
+    if (cake.product_variant?.length > 1) {
+      if (!selected) {
+        toast.info('Vui lòng chọn kích thước!', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
+        return;
+      }
+      variant = selected;
+    } else {
+      variant = cake.product_variant[0];
+    }
+  
+    const newItem = {
+      product_id: cake._id,
+      type_id: cake.product_type_id,
+      name: cake.product_name,
+      variant: variant.variant_features,
+      discount: variant.discount,
+      price: variant.price,
+      image_link: cake.image_link,
+      buy_quantity: quantity,
+    };
+    navigate('/payment', { state: { newItem } });
   };
+  
   const selectVariant = (value) => {
     setSelected(value);
   };
@@ -91,7 +132,7 @@ function DetailedCake() {
   return (
     <div className="mt-16 w-full bg-white">
       <div className="mx-[5rem]">
-        <div className="flex items-center text-primary py-4">
+        <div className="flex items-center py-4 text-primary">
           <div className="text-sm capitalize lg:text-base">
             <NavLink to="/">Trang chủ </NavLink>
             <span>&gt;&gt;</span>
@@ -110,7 +151,7 @@ function DetailedCake() {
           />
           <div className="flex flex-col justify-center">
             <h2 className="pb-4 text-4xl font-bold capitalize">{cake.product_name}</h2>
-            <span className={`lg:text-3xl md:text-2xl text-xl font-semibold text-primary`}>
+            <span className={`text-xl font-semibold text-primary md:text-2xl lg:text-3xl`}>
               {selected ? `${selected.price.toLocaleString('vi-VN')} VND` : message}
             </span>
             <h4 className={`my-4 text-2xl font-semibold text-black`}>{size} </h4>
@@ -155,14 +196,14 @@ function DetailedCake() {
             <div className="mt-10 flex gap-4">
               <button
                 onClick={() => handleAddToCart(cake)}
-                className="lg:h-[65px] h-[40px] w-[220px] lg:w-[260px] md:h-[40px] md:w-[180px] rounded-lg border border-primary lg:text-2xl md:text-lg font-semibold text-primary"
+                className="h-[40px] w-[220px] rounded-lg border border-primary font-semibold text-primary md:h-[40px] md:w-[180px] md:text-lg lg:h-[65px] lg:w-[260px] lg:text-2xl"
               >
                 Thêm vào giỏ hàng
               </button>
 
               <button
                 onClick={() => handleBuyNow(cake)}
-                className="lg:h-[65px] h-[40px] w-[220px] lg:w-[260px] md:h-[40px] md:w-[180px] rounded-lg border bg-primary lg:text-2xl md:text-lg font-semibold text-slate-100"
+                className="h-[40px] w-[220px] rounded-lg border bg-primary font-semibold text-slate-100 md:h-[40px] md:w-[180px] md:text-lg lg:h-[65px] lg:w-[260px] lg:text-2xl"
               >
                 Mua ngay
               </button>
@@ -170,8 +211,10 @@ function DetailedCake() {
           </div>
         </div>
         <h4 className="text-2xl font-semibold text-primary">Mô tả</h4>
-        <p className="my-5 lg:text-xl text-md font-normal">{cake.description}</p>
-        <h2 className="my-5 text-center lg:text-[40px] text-2xl font-bold leading-[48px] text-primary">Sản phẩm tương tự</h2>
+        <p className="text-md my-5 font-normal lg:text-xl">{cake.description}</p>
+        <h2 className="my-5 text-center text-2xl font-bold leading-[48px] text-primary lg:text-[40px]">
+          Sản phẩm tương tự
+        </h2>
         <div className="lg:grid-custom-3 md:grid-custom-2 grid-custom-1 grid w-full justify-between">
           {alikeCake.slice(1, 4).map((cake, index) => (
             <Card
