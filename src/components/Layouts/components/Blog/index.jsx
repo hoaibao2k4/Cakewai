@@ -31,7 +31,7 @@ function Blog() {
       <div className="Our-product lg:grid-custom-3 md:grid-custom-2 grid-custom-1 relative grid w-full justify-center gap-16 lg:gap-4">
         {blogs?.map((blog, index) => (
           <div className="img-scale my-10 h-[400px] w-[340px]" key={index}>
-            <a href="#">
+            <a href={`/news?mode=news${index+1}`}>
               <img src={blog.image_link} alt="" width="100%" height="100%" className="h-auto w-full rounded-t-xl" />
             </a>
             <div className="rounded-b-xl bg-slate-100">

@@ -31,7 +31,6 @@ const publicRoute = [
   { path: "/detailed/:id", component: DetailedCake },
   { path: "/condition", component: Condition },
   { path: "/admin/login", component: AdminLogin, layout: null },
-  { path: "/payment", component: Payment },
   { path: "/email/recovery", component: EmailRecovery },
   { path: "/email/message", component: EmailSent },
 ]
@@ -50,6 +49,7 @@ const privateRoute = [
   { path: "/admin/order_management", component: AdminOrder, layout: DashBoardLayout },
   { path: "/admin/register_customer", component: AdminCustomer, layout: DashBoardLayout },
   { path: "/admin/text-editor", component: TextEditor, layout: DashBoardLayout },
+  { path: "/payment", component: Payment },
 ];
 
 export { publicRoute, privateRoute };
