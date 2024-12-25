@@ -89,21 +89,38 @@ function DetailedCake() {
   
 
   const handleBuyNow = (cake) => {
-    if (user) {
-      const variant = selected ? selected : cake.product_variant[0];
-      const newItem = {
-        product_id: cake._id,
-        type_id: cake.product_type_id,
-        name: cake.product_name,
-        variant: variant.variant_features,
-        discount: variant.discount,
-        price: variant.price,
-        image_link: cake.image_link,
-        buy_quantity: quantity,
-      };
-      navigate('/payment', { state: { newItem } });
-    } else navigate('/auth?mode=signin');
+    if (!user) {
+      navigate('/auth?mode=signin');
+      return;
+    }
+    let variant;
+    
+    if (cake.product_variant?.length > 1) {
+      if (!selected) {
+        toast.info('Vui lòng chọn kích thước!', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
+        return;
+      }
+      variant = selected;
+    } else {
+      variant = cake.product_variant[0];
+    }
+  
+    const newItem = {
+      product_id: cake._id,
+      type_id: cake.product_type_id,
+      name: cake.product_name,
+      variant: variant.variant_features,
+      discount: variant.discount,
+      price: variant.price,
+      image_link: cake.image_link,
+      buy_quantity: quantity,
+    };
+    navigate('/payment', { state: { newItem } });
   };
+  
   const selectVariant = (value) => {
     setSelected(value);
   };
